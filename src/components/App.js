@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Header from './Header'
 import Footer from './Footer'
@@ -11,6 +12,7 @@ import Home from './Home'
 
 class App extends React.Component{
     render(){
+        console.log(this.props.testStore)
         return (
             <div>
                 <Header/>
@@ -25,4 +27,9 @@ class App extends React.Component{
     }
 }
 
-export default App;
+export default connect(
+    state=> ({
+        testStore: state
+    }),
+    dispatch => ({})   
+)(App);

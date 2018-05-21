@@ -52,6 +52,17 @@ export default class Login extends React.Component {
         this.setState({ password: event.target.value })
     }
 
+    componentWillMount(){
+        console.log("willMount "+Date.now());
+    }
+    componentDidMount(){
+        console.log("didMount "+Date.now());
+    }
+    componentWillUnmount(){
+        console.log("Unmount "+Date.now());
+    }
+
+
     render() {
         return (
             <div>
