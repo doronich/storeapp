@@ -1,4 +1,42 @@
+html,body,#app{
+    margin:0;
+    padding: 0;
+    height: 100%;
+}
+.container{
+    width: 960px;
+}
+
+.nav .link {
+    color:black;
+    padding: 0 30px;
+}
+
 .link{
-    display: inline-block;
-    padding-right: 5px;
+    text-decoration: none;
+    color: white;
+    font-family: "Roboto";
+}
+
+.navbar{
+    width:100%;
+    box-shadow: 0px 0px 3px black;
+}
+
+.nav{
+    padding:0 0 0 10px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer{
+    flex: 0 0 auto;
 }

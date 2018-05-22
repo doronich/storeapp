@@ -15,23 +15,44 @@ function login(username, password){
 
         userService.login(username, password)
             .then(user =>{
+                console.log('success');
                 dispatch(success(user));
                 history.push('/');
             },
             error => {
+                console.log('failure');
                 dispatch(failure(error));
                 //dispatch(alertActions.error(error));
             }
         )
     }
 
-    function request(user) { return {type:userConstants.LOGIN_REQUEST, user}}
+    function request(user) { return {type: userConstants.LOGIN_REQUEST, user}}
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
-function register(email, login, paswword){
+function register(creds){
+    return dispatch => {
+        dispatch(request(creds));
 
+        userService.register(creds)
+            .then( user => {
+                console.log('success');
+                dispatch(success(user));
+                history.push('/');
+            },
+            error => {
+                console.log('failure');
+                dispatch(failure(error));
+                //dispatch(alertActions.error(error));
+            }
+        )
+    }
+
+    function request(user) { return {type:userConstants.REGISTER_REQUEST, user}}
+    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
 function logout(){
