@@ -1,37 +1,63 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
+import { userActions } from '../actions';
 
-export default class Header extends React.Component{
+class Header extends React.Component {
+    logout = () => {
+        console.log('header', this.props)
+        this.props.logOut();
+    }
 
-    render(){
+    render() {
+        const { loggedIn } = this.props;
         return (
-            <div style={{marginBottom:"30px"}}> 
-                    <Grid className="navbar" container>
-                        <Grid className="nav" container item  direction="row" justify="center" alignItems="center">
-                            <Grid item><Button><Link className="link" to="/">Home</Link></Button></Grid>
-                            <Grid item><Button><Link className="link" to="/register">Sign up</Link></Button></Grid>
-                            <Grid item><Button><Link className="link" to="/login">Sign in</Link></Button></Grid>
-                        </Grid>
+            <div className="navbar">
+                <Grid className="nav" container direction="row" justify="space-between">
+                    <Grid item>
+                        <Link className="link" to="/">
+                            <Button fullWidth>Home</Button>
+                        </Link>
                     </Grid>
-                {/* <Paper>
-                    <Tabs
-                        value="Home"
-                        textColor="primary"
-                        centered
-                    >
-                    
-                    <Tab label="Home"><Link className="link" to="/">Home</Link></Tab>
-                    <Tab label="Sign up"><Link className="link" to="/register">Sign up</Link></Tab>
-                    <Tab label="Sign in"/>
-                    </Tabs>
-                </Paper> */}
+                    {
+                        loggedIn ? (
+                            <Grid item>
+                                <Link to="/" className="link"><Button fullWidth onClick={this.logout}>Logout</Button></Link>
+                            </Grid>)
+                            : (
+                                <Grid item>
+                                    <Grid container  direction="row" justify="center">
+                                        <Grid item>
+                                            <Link className="link" to="/login">
+                                                <Button fullWidth>Sign in</Button>
+                                            </Link>
+                                        </Grid>
+                                        <Grid item>
+                                            <Link className="link" to="/register"><Button fullWidth>Sign up</Button></Link>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            )
+                    }
+                </Grid>
+
             </div>
         );
     }
 
 }
+
+const mapDispatchToProps = dispatch => ({
+    logOut: () => dispatch(userActions.logout())
+})
+
+function mapStateToProps(state) {
+    const { loggedIn } = state.authentication;
+    return {
+        loggedIn
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

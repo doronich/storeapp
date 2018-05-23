@@ -10,6 +10,8 @@ import Circular from '../styles/Circular';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography'
 
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
+
 class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
@@ -30,13 +32,14 @@ class RegisterPage extends React.Component {
         this.setState({ [name]: event.target.value });
     }
 
+
     handleSubmit = event => {
         event.preventDefault();
 
         this.setState({ submitted: true });
-        const { username, password, submitted, email, firstName, lastName, confirmPassword } = this.state;
+        const { username, password, email, firstName, lastName } = this.state;
         const { dispatch } = this.props;
-        if (username && password && email && firstName) {
+        if (username && password && email) {
             const obj = {
                 login: username,
                 email: email,
@@ -45,111 +48,104 @@ class RegisterPage extends React.Component {
                 lastName: lastName
             }
             dispatch(userActions.register(obj));
+            
         }
+        this.setState({password:'', confirmPassword:''});
+    }
+
+    componentWillMount() {
+        // custom rule will have name 'isPasswordMatch'
+        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+            if (value !== this.state.password) {
+                return false;
+            }
+            return true;
+        });
     }
 
     render() {
-        const { loggingIn, error } = this.props;
-        const { username, password, submitted, email, firstName, lastName, confirmPassword } = this.state;
+        const { loggingIn } = this.props;
+        const { username, password, email, firstName, lastName, confirmPassword } = this.state;
         return (
             <div>
                 <Grid container
-                    //alignItems="center"
                     justify="center"
-                    direction="row"
-                >
-
-
-
-                    <Grid item xs={2}>
+                    >
+                    <Grid item sm={4} lg={3} xl={2}>
+                        <ValidatorForm onSubmit={this.handleSubmit}>
                                 <Grid 
                                 direction="column"
-                                alignContent="row"
-                                container >
-                                    
-                                    
+                                container
+                                >
                                     <Grid item>
                                         <Typography align="center" variant='display3' color="primary">Sign Up</Typography>
-                                        <Link to="/login"><Typography align="center" variant='caption'>Have an account?</Typography></Link></Grid>
+                                        <Link className="link" to="/login"><Typography align="center" variant='caption'>Have an account?</Typography></Link></Grid>
                                     <Grid item>
-                                        <TextField
-                                            fullWidth
+                                        <TextValidator
                                             required
+                                            fullWidth
                                             label="E-mail"
-                                            type="text"
-                                            value={email}
                                             onChange={this.handleChange("email")}
-                                            autoFocus
+                                            type="email"
+                                            name="email"
+                                            value={email}
+                                            validators={['required', 'isEmail']}
+                                            errorMessages={['this field is required', 'email is not valid']}
                                             margin="dense"
                                         />
-                                        {
-                                            submitted && !username &&
-                                            <Typography variant="caption" color="error">Username is required</Typography>
-                                        }
                                     </Grid>
                                     <Grid item>
-                                        <TextField
-                                            fullWidth
-                                            required
-                                            label="Login"
-                                            type="text"
-                                            value={username}
-                                            onChange={this.handleChange("username")}
-                                            margin="dense"
+                                        <TextValidator
+                                                fullWidth
+                                                required
+                                                label="Login"
+                                                onChange={this.handleChange("username")}
+                                                type="text"
+                                                name="username"
+                                                value={username}
+                                                validators={['required','minStringLength:6']}
+                                                errorMessages={['this field is required','login must have atleast 6 characters']}
+                                                margin="dense"
                                         />
-                                        {
-                                            submitted && !username &&
-                                            <Typography variant="caption" color="error">Username is required</Typography>
-                                        }
                                     </Grid>
                                     <Grid item>
-                                        <TextField
-                                            fullWidth
+                                        <TextValidator
                                             required
+                                            fullWidth
                                             label="Password"
-                                            type="password"
-                                            value={password}
                                             onChange={this.handleChange("password")}
-                                            margin="dense"
-                                        />
-                                        {
-                                            submitted && !password &&
-                                            <Typography variant="caption" color="error">Password is required</Typography>
-                                        }
-                                    </Grid>
-                                    <Grid item>
-                                        <TextField
-                                            fullWidth
-                                            required
-                                            label="Confirm password"
+                                            name="password"
                                             type="password"
-                                            value={confirmPassword}
+                                            margin="dense"
+                                            value={password}
+                                            validators={['required','matchRegexp:(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}']}
+                                            errorMessages={['this field is required', 'Password must have contains at least 6 characters; one lowercase character; one upperrcase character; one digit from 0-9.']}
+                                        />
+                                    </Grid>
+                                    <Grid item>
+                                        <TextValidator
+                                            required
+                                            fullWidth
+                                            label="Repeat password"
                                             onChange={this.handleChange("confirmPassword")}
+                                            name="repeatPassword"
+                                            type="password"
+                                            validators={['isPasswordMatch', 'required']}
+                                            errorMessages={['password mismatch', 'this field is required']}
+                                            value={confirmPassword}
                                             margin="dense"
                                         />
-                                        {
-                                            submitted && !password &&
-                                            <Typography variant="caption" color="error">Password is required</Typography>
-                                        }
-                                        {
-                                            submitted && !password === confirmPassword &&
-                                            <Typography variant="caption" color="error">Your password don't match.<br /> Please retype your password to confirm it.</Typography>
-                                        }
                                     </Grid>
                                     <Grid item>
                                         <TextField
                                             fullWidth
-                                            required
                                             label="First name"
                                             type="text"
                                             value={firstName}
                                             onChange={this.handleChange("firstName")}
                                             margin="dense"
                                         />
-                                        {
-                                            submitted && !username &&
-                                            <Typography variant="caption" color="error">First name is required</Typography>
-                                        }
+
                                     </Grid>
                                     <Grid item>
                                         <TextField
@@ -161,24 +157,15 @@ class RegisterPage extends React.Component {
                                             margin="dense"
                                         />
                                     </Grid>
-                                    <Grid item xs={12} style={{marginTop:"20px"}}>
-                                        <Grid container direction="columns" justify="center">
-                                            <Grid item>
-                                                {
-                                                loggingIn? <Circular/>:
-                                                <Button variant="raised" size="large" color="primary" onClick={this.handleSubmit}>
-                                                Sign in
-                                                </Button>
-                                                }
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    {/* error && <Grid item>
-                                        <Typography variant='display3' color="error">Error</Typography>
-                                    </Grid> */}
+                                    {
+                                    loggingIn? <Grid item align="center"><Circular /></Grid>:
+                                    <Button type="submit" xs={12} variant="raised" size="large" color="primary" style={{margin:"10px auto"}}>
+                                    Sign up
+                                    </Button>
+                                    }
                                 </Grid>
                         
-
+                        </ValidatorForm>
                     </Grid>
                 </Grid>
             </div>
@@ -187,9 +174,9 @@ class RegisterPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn, error } = state.authentication;
+    const { loggedIn } = state.authentication;
     return {
-        loggingIn, error
+        loggedIn
     };
 }
 

@@ -1,5 +1,5 @@
 import { userConstants } from '../constants'
-import { userActions } from '../actions';
+//import { userActions } from '../actions';
 
 let user = JSON.parse(localStorage.getItem('user'));
 const initialState = user ? { loggedIn: true, user} : {};
@@ -37,7 +37,9 @@ export function authentication(state = initialState, action){
                 error:true
             };
         case userConstants.LOGOUT: 
-            return {};
+            return {
+                loggedIn:false
+            };
         default:
             return state;
     }

@@ -22,33 +22,26 @@ function login(username, password){
             return response.data;
         })
         .then(user=> {
-            console.log('answer', user)
             if (user && user["acces_token"]){
                 localStorage.setItem('user', JSON.stringify(user));
             }
-
             return user;
         });
         
 }
 
 function register(creds){
-
-
     return axios.post(`${api.url}/api/Register`, creds)
         .catch(err=>{
             console.log('error', err);
         })
-        .then(response => {
-            console.log(response);    
+        .then(response => {    
             return response.data;
         })
         .then(user=> {
-            console.log('answer', user)
             if (user && user["acces_token"]){
                 localStorage.setItem('user', JSON.stringify(user));
             }
-
             return user;
         });
 }
@@ -56,4 +49,3 @@ function register(creds){
 function logout() {
     localStorage.removeItem('user');
 }
-//
