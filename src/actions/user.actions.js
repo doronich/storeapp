@@ -1,6 +1,5 @@
 import { userConstants } from '../constants'
 import { userService} from '../services'
-//import { alertActions } from './'
 import { history } from '../helpers'
 
 export const userActions = {
@@ -8,6 +7,7 @@ export const userActions = {
     logout,
     register
 }
+
 
 function login(username, password){
     return dispatch => {
@@ -48,7 +48,7 @@ function register(creds){
         )
     }
 
-    function request(user) { return {type:userConstants.REGISTER_REQUEST, user}}
+    function request(user) { return { type: userConstants.REGISTER_REQUEST, user}}
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }

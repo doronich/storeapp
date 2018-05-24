@@ -1,8 +1,9 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { userActions } from '../../actions';
+
+import { userConstants } from '../../constants'
+import { userService } from '../../services'
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -12,10 +13,24 @@ import Typography from '@material-ui/core/Typography'
 
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 
+const mapStateToProps = state => {
+    const { inProgress } = state.authentication;
+    return {
+        inProgress
+    };
+}
+const mapDispatchToProps = dispatch => ({
+    logOut: () => dispatch({type:userConstants.LOGOUT}),
+    reg:() => dispatch({type:userConstants.REGISTER}),
+    success: (user) => dispatch({ type: userConstants.SUCCESS, user }),
+    error: () => dispatch({ type: userConstants.ERROR })
+});
+
 class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
-        this.props.dispatch(userActions.logout());
+        console.log('register ',this.props);
+        this.props.logOut();
 
         this.state = {
             email: '',
@@ -36,9 +51,8 @@ class RegisterPage extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        this.setState({ submitted: true });
+        this.props.reg();
         const { username, password, email, firstName, lastName } = this.state;
-        const { dispatch } = this.props;
         if (username && password && email) {
             const obj = {
                 login: username,
@@ -47,7 +61,16 @@ class RegisterPage extends React.Component {
                 firstName: firstName,
                 lastName: lastName
             }
-            dispatch(userActions.register(obj));
+            userService.register(obj)
+                .then(user => {
+                    if (user && user["acces_token"]) {
+                        this.props.success(user)
+                        this.props.history.push('/')
+                    } else {
+                        this.props.error();
+                    }
+                    
+                });
             
         }
         this.setState({password:'', confirmPassword:''});
@@ -64,7 +87,7 @@ class RegisterPage extends React.Component {
     }
 
     render() {
-        const { loggingIn } = this.props;
+        const { inProgress } = this.props;
         const { username, password, email, firstName, lastName, confirmPassword } = this.state;
         return (
             <div>
@@ -158,7 +181,7 @@ class RegisterPage extends React.Component {
                                         />
                                     </Grid>
                                     {
-                                    loggingIn? <Grid item align="center"><Circular /></Grid>:
+                                    inProgress? <Grid item align="center"><Circular /></Grid>:
                                     <Button type="submit" xs={12} variant="raised" size="large" color="primary" style={{margin:"10px auto"}}>
                                     Sign up
                                     </Button>
@@ -173,12 +196,6 @@ class RegisterPage extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    const { loggedIn } = state.authentication;
-    return {
-        loggedIn
-    };
-}
 
-const connectedLoginPage = connect(mapStateToProps)(RegisterPage);
+const connectedLoginPage = connect(mapStateToProps,mapDispatchToProps)(RegisterPage);
 export { connectedLoginPage as RegisterPage };

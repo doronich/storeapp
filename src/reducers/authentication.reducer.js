@@ -2,45 +2,41 @@ import { userConstants } from '../constants'
 //import { userActions } from '../actions';
 
 let user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ? { loggedIn: true, user} : {};
+const initialState = { loggedIn: false, currentUser: user, token: null, inProgress: false };
 
-export function authentication(state = initialState, action){
+export function authentication(state = initialState, action) {
     switch (action.type) {
-        case userConstants.LOGIN_REQUEST:
+        case userConstants.LOGIN:
+        case userConstants.REGISTER:
+
             return {
-                loggingIn: true
-                //user: action.user
-            };
-        case userConstants.REGISTER_REQUEST:
+                ...state,
+                inProgress: true
+            }
+        case userConstants.SUCCESS:
+            localStorage.setItem('user', JSON.stringify(action.user));
+
             return {
-                loggingIn: true,
-                //user: action.user
-            };
-        case userConstants.LOGIN_SUCCESS:
-            return {
+                ...state,
                 loggedIn: true,
-                user: action.user,
-                error:false
-            };
-        case userConstants.REGISTER_SUCCESS:
+                inProgress: false,
+                currentUser: action.user
+            }
+        case userConstants.ERROR:
             return {
-                loggedIn: true,
-                user: action.user,
-                error:false
-            };
-        case userConstants.LOGIN_FAILURE:
+                ...state,
+                inProgress: false,
+            }
+        case userConstants.LOGOUT:
+            localStorage.removeItem('user')
             return {
-                error:true
-            };
-        case userConstants.REGISTER_FAILURE:
-            return {
-                error:true
-            };
-        case userConstants.LOGOUT: 
-            return {
-                loggedIn:false
+                ...state,
+                loggedIn: false,
+                currentUser: null
             };
         default:
             return state;
     }
+
+    return state;
 }
