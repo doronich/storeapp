@@ -8,14 +8,11 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
+import Typography from '@material-ui/core/Typography'
+import Person from '@material-ui/icons/Person'
+
+
+import { ListMenu } from './List'
 
 const mapDispatchToProps = dispatch => ({
     logOut: () => dispatch({ type: userConstants.LOGOUT })
@@ -34,26 +31,12 @@ class Header extends React.Component {
         super()
         this.state = {
             left: false,
-            choosedM:true
+            choosedM: true
         };
     }
     logout = () => {
-        console.log('header', this.props)
         this.props.logOut();
     }
-
-/*     toggleSex = (sex)=>{
-        if(sex==='man'){
-            this.setState({
-                choosedM:true
-            })
-        } else {
-            this.setState({
-                choosedM:false
-            })
-        }
-
-    } */
 
     toggleDrawer = (open) => () => {
         this.setState({
@@ -67,54 +50,73 @@ class Header extends React.Component {
 
         const list = (
             <div style={{ width: "250px" }}>
-                <List disablePadding={true}
-                    component='nav'>
-                    <ListItem button>
-                        <ListItemText inset primary="Sent mail" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText inset primary="Drafts" />
-                    </ListItem>
-                </List>
-                <Divider />
-                <List>
-
-                </List>
+                <ListMenu />
             </div>
         );
-        const border = {borderBottom:"2px solid black"};
         return (
             <div className="navbar">
                 <Grid className="nav" container direction="row" justify="space-between" alignItems="center">
-                    <Grid item className="nav_item">
+                    <Grid item className="nav_item not_mobile">
                         <IconButton onClick={this.toggleDrawer(true)} color="inherit" aria-label="Menu">
                             <MenuIcon />
                         </IconButton>
+                    </Grid>
+                    <Grid item className="nav_item">
+                        <Link className="link" to="/">
+                            <Button fullWidth><Typography color="primary" variant="display1">Title</Typography></Button>
+                        </Link>
                     </Grid>
 
                     <Grid item className="nav_item">
                         <Grid container>
                             <Grid item className="nav_item">
+
+                            </Grid>
+                            <Grid item className="nav_item mobile600" >
                                 <Link className="link" to="/">
-                                    <Button fullWidth >Home</Button>
+                                    <Button fullWidth >Women</Button>
                                 </Link>
                             </Grid>
-{/*                             <Grid item className="nav_item" style={!this.state.choosedM ? border:{}}>
-                                <Button fullWidth  onClick={this.toggleSex('wooman')}>WOMEN</Button>
+                            <Grid item className="nav_item mobile600" >
+                                <Link className="link" to="/">
+                                    <Button fullWidth >Men</Button>
+                                </Link>
                             </Grid>
-                            <Grid item className="nav_item" style={this.state.choosedM ? border:{}} >
-                                <Button fullWidth onClick={this.toggleSex('man')} >MAN</Button>
-                            </Grid> */}
+                            <Grid item className="nav_item mobile900" >
+                                <Link className="link" to="/">
+                                    <Button fullWidth >Clothing</Button>
+                                </Link>
+                            </Grid>
+                            <Grid item className="nav_item mobile900" >
+                                <Link className="link" to="/">
+                                    <Button fullWidth >Shoes</Button>
+                                </Link>
+                            </Grid>
+                            <Grid item className="nav_item mobile900" >
+                                <Link className="link" to="/contacts">
+                                    <Button fullWidth >Contacts</Button>
+                                </Link>
+                            </Grid>
                         </Grid>
 
                     </Grid>
                     {
                         loggedIn ? (
-                            <Grid item className="nav_item">
-                                <Link to="/" className="link"><Button fullWidth onClick={this.logout}>Logout</Button></Link>
-                            </Grid>)
+                            <Grid item className="nav_item mobile900">
+                                <Grid container direction="row" justify="center">
+                                    <Grid item className="nav_item">
+                                        <Link to="/profile" className="link">
+                                            <Button><Person /></Button>
+                                        </Link>
+                                    </Grid>
+                                    <Grid item className="nav_item">
+                                        <Link to="/" className="link"><Button fullWidth onClick={this.logout}>Logout</Button></Link>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        )
                             : (
-                                <Grid item className="nav_item">
+                                <Grid item className="nav_item mobile900">
                                     <Grid container direction="row" justify="center">
                                         <Grid item className="nav_item">
                                             <Link className="link" to="/login">
@@ -133,7 +135,7 @@ class Header extends React.Component {
                         <div
                             tabIndex={0}
                             role="button"
-                            onClick={this.toggleDrawer(false)}
+                            //onClick={this.toggleDrawer(false)}
                             onKeyDown={this.toggleDrawer(false)}
                         >
                             {list}

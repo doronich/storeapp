@@ -9,7 +9,7 @@ html,body,#app{
 }
 
 .link{
-    text-decoration: none;
+
     height: auto;
 }
 
@@ -17,6 +17,8 @@ html,body,#app{
 .navbar{
     width:100%;
     box-shadow: 0px 0px 3px black;
+    background-color:  #ffffff;
+    margin-bottom: 2px;
 }
 
 .nav{
@@ -26,6 +28,10 @@ html,body,#app{
 
 .nav_item{
     height: 48px;
+}
+
+.nav_item>.link:hover{
+    border-bottom: 1px solid black;
 }
 
 .nav_item .link, .nav_item button{
@@ -42,6 +48,7 @@ html,body,#app{
 .content {
     flex: 1 0 auto;
     display: flex;
+    background-color: rgb(240, 240, 240)
 }
 
 .content>div{
@@ -51,6 +58,43 @@ html,body,#app{
     align-items: center;
 }
 
+a,a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+aside{
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid rgb(192, 192, 192);
+    /* box-shadow: 0px 5px 10px black; */
+}
+
+
 .footer{
     flex: 0 0 auto;
+}
+
+.not_mobile{
+    display: none;
+}
+
+@media all and (max-width:900px){
+    .mobile900{
+        display: none;
+    }
+
+    .not_mobile{
+        display: block;
+    }
+}
+
+@media all and (max-width:600px){
+    .mobile600{
+        display: none;
+    }
+
+    .not_mobile{
+        display: block;
+    }
 }
