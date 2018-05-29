@@ -9,7 +9,6 @@ class HomePage extends React.Component {
 
     render() {
         const { currentUser, loggedIn } = this.props;
-        console.log('home ',this.props)
         return (
             <div style={{overflow:"hidden"}}>
                 <Grid container

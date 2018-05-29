@@ -12,7 +12,7 @@ import { Aside } from '../Aside'
 import Header from '../Header.jsx'
 import Footer from '../Footer.jsx'
 import { ContactsPage } from '../ContactsPage'
-
+import { AddItemPage} from '../AddItemPage'
 
 
 class App extends React.Component {
@@ -27,8 +27,9 @@ class App extends React.Component {
                     <div className="content">
                         <Aside />
                         <Route exact path='/' component={HomePage} />
-                        <Route className="content_authitem" path='/login' component={LoginPage} />
-                        <Route className="content_authitem" path='/register' component={RegisterPage} />
+                        <PrivateRoute path="/additem" component={AddItemPage} />
+                        <Route path='/login' component={LoginPage} />
+                        <Route path='/register' component={RegisterPage} />
                         <Route path='/contacts' component={ContactsPage} />
                     </div>
                     <div className="footer">

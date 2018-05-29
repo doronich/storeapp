@@ -14,7 +14,7 @@ class ContactsPage extends React.Component{
         return(
             <div style={{overflow:"hidden"}}>
                     <Typography variant="display4">Contacts</Typography>
-
+                    
                 
             </div>
         );

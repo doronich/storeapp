@@ -3,11 +3,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from './helpers';
 import { App } from './components/App';
-import style from './index.css'
+import  './index.css'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-import red from '@material-ui/core/colors/red';
+//import red from '@material-ui/core/colors/red';
 
 
 const theme = createMuiTheme({
@@ -15,7 +15,9 @@ const theme = createMuiTheme({
         primary: {
             main: '#000'
         },
-        secondary: red,
+        secondary:{
+            main: "#5890bc"
+        },
     }
 });
 

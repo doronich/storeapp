@@ -79,7 +79,7 @@ aside{
     display: none;
 }
 
-@media all and (max-width:900px){
+@media all and (max-width:960px){
     .mobile900{
         display: none;
     }

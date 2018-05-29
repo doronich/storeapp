@@ -2,7 +2,6 @@ import { userConstants } from '../constants'
 //import { userActions } from '../actions';
 
 let user = JSON.parse(localStorage.getItem('user'));
-console.log('user', user);
 const initialState = { loggedIn: user? true: false, currentUser: user, token: null, inProgress: false };
 
 export function authentication(state = initialState, action) {

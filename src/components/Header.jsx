@@ -45,7 +45,7 @@ class Header extends React.Component {
     };
 
     render() {
-        console.log('header', this.props)
+        //console.log('header', this.props)
         const { loggedIn } = this.props;
 
         const list = (
@@ -54,7 +54,7 @@ class Header extends React.Component {
             </div>
         );
         return (
-            <div className="navbar">
+            <header className="navbar">
                 <Grid className="nav" container direction="row" justify="space-between" alignItems="center">
                     <Grid item className="nav_item not_mobile">
                         <IconButton onClick={this.toggleDrawer(true)} color="inherit" aria-label="Menu">
@@ -143,7 +143,7 @@ class Header extends React.Component {
                     </Drawer>
                 </Grid>
 
-            </div>
+            </header>
         );
     }
 

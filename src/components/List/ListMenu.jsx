@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
 class ListMenu extends React.Component {
     constructor(props) {
         super(props);
-        console.log('listmenu ', this.props);
+        //console.log('listmenu ', this.props);
         this.state = {
             openAcc: false,
             openClothing: false,
@@ -52,7 +52,7 @@ class ListMenu extends React.Component {
             <List
                 component="nav"
             >
-                <ListSubheader>КАТЕГОРИИ</ListSubheader>
+                <ListSubheader disableSticky>КАТЕГОРИИ</ListSubheader>
                 <ListItem button onClick={this.handleClick('openShoes')}>
                     <ListItemText><Typography variant="button">Обувь</Typography></ListItemText>
                     {this.state.openShoes ? <ExpandLess /> : <ExpandMore />}
@@ -196,6 +196,12 @@ class ListMenu extends React.Component {
                             </div> :
                                 <div>
                                     <Divider />
+                                    <Link to='/additem'>
+                                        <ListItem button>
+                                            <ListItemText primary="Добавить предмет"/>
+                                        </ListItem>
+                                    </Link>
+                                    <Divider />
                                     <ListItem button onClick={this.logout}>
                                         <ListItemText primary="Выйти" />
                                     </ListItem>
@@ -204,6 +210,7 @@ class ListMenu extends React.Component {
                         }
                     </List>
                 </Collapse>
+
                 <Divider />
                 <Link to='/contacts'>
                     <ListItem button>
