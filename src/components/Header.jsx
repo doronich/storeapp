@@ -69,8 +69,10 @@ class Header extends React.Component {
 
                     <Grid item className="nav_item">
                         <Grid container>
-                            <Grid item className="nav_item">
-
+                            <Grid item className="nav_item mobile900" >
+                                <Link className="link" to="/allitems">
+                                    <Button fullWidth >All</Button>
+                                </Link>
                             </Grid>
                             <Grid item className="nav_item mobile600" >
                                 <Link className="link" to="/">

@@ -202,6 +202,12 @@ class ListMenu extends React.Component {
                                         </ListItem>
                                     </Link>
                                     <Divider />
+                                    <Link to='/allitems'>
+                                        <ListItem button>
+                                            <ListItemText primary="Все предметы"/>
+                                        </ListItem>
+                                    </Link>
+                                    <Divider />
                                     <ListItem button onClick={this.logout}>
                                         <ListItemText primary="Выйти" />
                                     </ListItem>
