@@ -11,7 +11,7 @@ export const itemService = {
 
 function addItem(obj){
     const user = getUser();
-    return axios.post(`${api.url}/api/item`, obj,user&&{headers:{"Authorization":"Bearer "+user.acces_token}});
+    return axios.post(`${api.url}/api/item`, obj,user&&{headers:{"Authorization":"Bearer "+user.acces_token}})
 }
 
 function getItem(id){
@@ -20,7 +20,6 @@ function getItem(id){
 
 function updateItem(obj){
     const user = getUser();
-    console.log(obj);
     return axios.put(`${api.url}/api/item`, obj,user&&{headers:{"Authorization":"Bearer "+user.acces_token}});
 }
 
@@ -35,5 +34,5 @@ function getUser(){
 
 function deleteItem(id){
     const user = getUser();
-    return axios.delete(`${api.url}/api/item/${id}`,user&&{headers:{"Authorization":"Bearer "+user.acces_token}});
+    return axios.delete(`${api.url}/api/item/${id}`,user&&{headers:{"Authorization":"Bearer "+user.acces_token}})
 }

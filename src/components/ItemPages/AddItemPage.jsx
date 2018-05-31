@@ -1,5 +1,5 @@
 import React from 'react'
-import {itemService} from '../../services'
+import { itemService } from '../../services'
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -31,9 +31,12 @@ export class AddItemPage extends React.Component {
         status: 0,
         amount: 0,
         size: "",
-        selectedFile: null,
-        errorMessage:"",
-        okMessage:"",
+        image: "",
+        image1: "",
+        image2: "",
+        image3: "",
+        errorMessage: "",
+        okMessage: "",
         loading: false
     }
 
@@ -46,9 +49,9 @@ export class AddItemPage extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.setState({loading:true})
-        const { name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size,selectedFile } = this.state;
-        const obj={
+        this.setState({ loading: true })
+        const { image, image1, image2, image3, name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size } = this.state;
+        const obj = {
             name,
             description,
             Active: checkedActive,
@@ -62,47 +65,61 @@ export class AddItemPage extends React.Component {
             status,
             amount,
             size,
-            image: selectedFile,
-            
+            previewImagePath: image !== null ? image : null,
+            imagePath1: image1 !== null ? image1 : null,
+            imagePath2: image2 !== null ? image2 : null,
+            imagePath3: image3 !== null ? image3 : null
+
         }
         console.log(obj);
- 
+
         itemService.addItem(obj)
-        .catch(err => {
-            this.setState({errorMessage:err.toString(),loading:false})
-            setTimeout(()=>{
-                this.setState({errorMessage:""})
-            },5000);
-            
-            return err;
-        })
-        .then(response => {
-            console.log('resp',response)
-            this.setState({okMessage:response.statusText,loading:false})
-            setTimeout(()=>{
-                this.setState({okMessage:""})
-            },5000);
-            
-            return response.data;
-        })
+            .catch(err => {
+                this.setState({ errorMessage: err.toString(), loading: false })
+                setTimeout(() => {
+                    this.setState({ errorMessage: "" })
+                }, 5000);
+
+            })
+            .then(response => {
+                if(response){
+                    this.setState({okMessage: response.statusText})
+                }
+                console.log('resp', response)
+                this.setState({ loading: false })
+                setTimeout(() => {
+                    this.setState({ okMessage: "" })
+                }, 5000);
+            })
 
     }
 
-    encodeImageFileAsURL = (event)=>{
+    encodeImageFileAsURL = (number) => (event) => {
 
         const file = event.target.files[0];
-        
-        console.log('file',file);
+
+        console.log('file', file);
         var reader = new FileReader();
-        reader.onloadend = ()=> {
-            this.setState({selectedFile:reader.result})
+        reader.onloadend = () => {
+            switch (number) {
+                case 0: this.setState({ image: reader.result });
+                    break;
+                case 1: this.setState({ image1: reader.result })
+                    break;
+                case 2: this.setState({ image2: reader.result })
+                    break;
+                case 3: this.setState({ image3: reader.result })
+                    break;
+                default:
+                    break;
+            }
         }
         reader.readAsDataURL(file);
 
     }
 
     render() {
-        const { name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size, errorMessage,okMessage, loading } = this.state;
+        const { name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size, errorMessage, okMessage, loading } = this.state;
         const styles = {
             exampleImageInput: {
                 cursor: 'pointer',
@@ -236,9 +253,27 @@ export class AddItemPage extends React.Component {
                         />
 
                         <Button color="primary" variant="outlined" size="large">
-                            <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL} accept="image/*" id="imageButton" />
-                            Выбрать изображение
-                        </Button>
+                            <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(0)} accept="image/*" id="imageButton" />
+                            Выбрать главное изображение
+                                </Button>
+                        <br />
+
+                        <Button color="primary" variant="outlined" size="large">
+                            <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(1)} accept="image/*" id="imageButton" />
+                            Выбрать 1 изображение
+                                </Button>
+                        <br />
+
+                        <Button color="primary" variant="outlined" size="large">
+                            <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(2)} accept="image/*" id="imageButton" />
+                            Выбрать 2 изображение
+                                </Button>
+                        <br />
+
+                        <Button color="primary" variant="outlined" size="large">
+                            <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(3)} accept="image/*" id="imageButton" />
+                            Выбрать 3 изображение
+                                </Button>
                         <br />
                         <FormControlLabel
                             control={
@@ -255,21 +290,32 @@ export class AddItemPage extends React.Component {
 
                         <Grid align="center">
                             {
-                                loading?<Circular />
-                                    :<Button type="submit" xs={12} variant="raised" size="large" color="primary" style={{ margin: "10px auto" }}>
+                                loading ? <Circular />
+                                    : <Button type="submit" xs={12} variant="raised" size="large" color="primary" style={{ margin: "10px auto" }}>
                                         Добавить
                                     </Button>
 
                             }
-                            
-                            
+
+
                         </Grid>
-                        
+
                         {
                             errorMessage && <Typography align="center" variant="caption" color="error">{errorMessage}</Typography>
                         }
                         {
-                            okMessage && <Typography align="center" variant="caption" style={{color:"#84d175"}}>{okMessage}</Typography>
+                            okMessage && <Typography align="center" variant="caption" style={{ color: "#84d175" }}>{okMessage}</Typography>
+                        }
+
+                        <img src={this.state.image} alt="item" style={{ width: "400px" }} />
+                        {
+                            this.state.image1 && <img src={this.state.image1} alt="item" style={{ width: "400px" }} />
+                        }
+                        {
+                            this.state.image2 && <img src={this.state.image2} alt="item" style={{ width: "400px" }} />
+                        }
+                        {
+                            this.state.image3 && <img src={this.state.image3} alt="item" style={{ width: "400px" }} />
                         }
                     </ValidatorForm>
                 </Grid>

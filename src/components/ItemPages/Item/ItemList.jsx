@@ -1,13 +1,21 @@
 import React from 'react'
 import { itemService } from '../../../services'
+import { connect } from 'react-redux';
+import { userConstants } from '../../../constants';
 
 import { Item } from './Item'
 
 import { Grid } from '@material-ui/core'
 
-export class ItemList extends React.Component{
+const mapDispatchToProps = dispatch => ({
+    logOut: () => dispatch({ type: userConstants.LOGOUT })
+})
+
+
+
+class ItemList extends React.Component{
     state = {
-        list :null
+        list :[]
     }
 
     componentWillMount(){
@@ -16,20 +24,25 @@ export class ItemList extends React.Component{
                 console.log("ItemList error:",err);
             })
             .then(response=>{
+                console.log(response)
                 if(response) this.setState({list:response.data})
             })
     }
 
-    handleDeleteItem = (id)=>{
+    handleDeleteItem = (id,index)=>{
         itemService.deleteItem(id)
             .catch(err=>{
-                console.log("Item error:", err);
+                if(err.message.indexOf("401")>=0){
+                    this.props.logOut();
+                }
             })
             .then(response=>{
-                this.componentWillMount();
+                if(response){
+                    const list = Object.assign([], this.state.list)
+                    list.splice(index,1);
+                    this.setState({list:list});
+                }
             })
-
-        
     }
 
 
@@ -37,8 +50,8 @@ export class ItemList extends React.Component{
         const list = this.state.list;
         let listItems=null;
         if(list){
-            listItems = this.state.list.map(item=>{
-                return<Item key={item.id.toString()} data={item} handleDeleteItem={this.handleDeleteItem} />
+            listItems = this.state.list.map((item, index)=>{
+                return<Item key={item.id} data={item} index={index} handleDeleteItem={this.handleDeleteItem} />
             });
         }
 
@@ -49,3 +62,6 @@ export class ItemList extends React.Component{
         )
     }
 }
+
+const connectedItemList = connect(mapDispatchToProps)(ItemList);
+export { connectedItemList as ItemList};

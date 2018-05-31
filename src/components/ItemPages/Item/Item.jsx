@@ -19,9 +19,10 @@ const styles = {
         margin: "0 15px 15px 15px"
     },
     media: {
-        height: 0,
-        paddingTop: '350px', // 16:9
-        paddingRight: '300px'
+        height: "350px",
+        width:"auto"
+        //paddingTop: '350px', // 16:9
+        //paddingRight: '300px'
     },
 };
 
@@ -32,7 +33,6 @@ class Item extends React.Component {
         name: this.props.data.name,
         price: this.props.data.price,
         id: this.props.data.id,
-        imagePath: this.props.imagePath,
         open: false
     }
 
@@ -45,7 +45,7 @@ class Item extends React.Component {
     };
 
     DeleteItem = () =>{
-        this.props.handleDeleteItem(this.state.id);
+        this.props.handleDeleteItem(this.state.id,this.props.index);
         this.handleClose();
     }
 
@@ -58,11 +58,12 @@ class Item extends React.Component {
         const { loggedIn } = this.props;
         return (
             <div>
+                <Link to={"/item/"+id}>
                 <Card style={styles.card} className="card"  >
                     <CardMedia
                         onClick={this.handleClick}
                         style={styles.media}
-                        image={this.props.data.imagePath}
+                        image={this.props.data.previewImagePath}
                         title="Image"
                     />
 
@@ -91,7 +92,7 @@ class Item extends React.Component {
                     }
 
                 </Card>
-
+                </Link>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

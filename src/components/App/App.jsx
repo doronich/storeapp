@@ -12,7 +12,7 @@ import { Aside } from '../Aside'
 import Header from '../Header.jsx'
 import Footer from '../Footer.jsx'
 import { ContactsPage } from '../ContactsPage'
-import { AddItemPage, UpdateItemPage, Items} from '../ItemPages'
+import { AddItemPage, UpdateItemPage, Items,ItemPage } from '../ItemPages'
 import { ToUpButton } from '../ToUpButton/ToUpButton';
 
 
@@ -31,6 +31,7 @@ class App extends React.Component {
                         <Route exact path='/' component={HomePage} />
                         <PrivateRoute exact path="/additem" component={AddItemPage} />
                         <PrivateRoute exact path="/updateitem/:number" component={UpdateItemPage}/>
+                        <Route exact path="/item/:number" component={ItemPage}/>
                         {/* <PrivateRoute exact path="/allitems" component={Items}/> */}
                         <Route exact path="/allitems" component={Items}/>
                         <Route path='/login' component={LoginPage} />

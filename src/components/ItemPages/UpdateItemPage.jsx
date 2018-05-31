@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { itemService } from '../../services'
-
+import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Circular from '../styles/Circular';
@@ -17,9 +17,17 @@ import { ValidatorForm } from 'react-material-ui-form-validator'
 import { FormControlLabel } from '@material-ui/core';
 
 
-export class UpdateItemPage extends React.Component {
+function mapStateToProps(state) {
+    const { currentUser } = state.authentication;
+    return {
+        currentUser
+    };
+}
+
+ class UpdateItemPage extends React.Component {
 
     state = {
+        data:null,
         id: null,
         name: "",
         description: "",
@@ -34,12 +42,14 @@ export class UpdateItemPage extends React.Component {
         status: 0,
         amount: 0,
         size: "",
-        selectedFile: null,
         found: true,
         errorMessage: "",
         okMessage: "",
         loading: false,
-        image:""
+        image: "",
+        image1: "",
+        image2: "",
+        image3: "",
     }
 
     componentWillMount() {
@@ -52,10 +62,11 @@ export class UpdateItemPage extends React.Component {
             })
             .then(response => {
                 if (response) {
-                    console.log("response Update",response)
+                    console.log("response Update", response)
                     const data = response.data;
-
+                    
                     this.setState({
+                        data:response.data,
                         id: data.id,
                         checkedActive: data.active,
                         name: data.name,
@@ -70,7 +81,10 @@ export class UpdateItemPage extends React.Component {
                         size: data.size,
                         status: data.status,
                         subkind: data.subkind,
-                        image: data.imagePath
+                        image: data.previewImagePath,
+                        image1:data.imagePath1,
+                        image2:data.imagePath2,
+                        image3:data.imagePath3
                     });
                 }
             })
@@ -86,8 +100,9 @@ export class UpdateItemPage extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         this.setState({ loading: true })
-        const { id,name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size, selectedFile } = this.state;
+        const { id, name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size, image, image1, image2, image3,data } = this.state;
         const obj = {
+            Username:this.props.currentUser.username,
             id,
             name,
             description,
@@ -102,10 +117,12 @@ export class UpdateItemPage extends React.Component {
             status,
             amount,
             size,
-            image: selectedFile && selectedFile,
-
+            previewImagePath: image!==data.previewImagePath ? image:null,
+            imagePath1: image1!==data.imagePath1 ? image1: null,
+            imagePath2: image2!==data.imagePath2 ? image2: null,
+            imagePath3: image3!==data.imagePath3 ? image3: null
         }
-        //console.log(obj);
+        console.log(obj);
 
         itemService.updateItem(obj)
             .catch(err => {
@@ -128,14 +145,26 @@ export class UpdateItemPage extends React.Component {
 
     }
 
-    encodeImageFileAsURL = (event) => {
+    encodeImageFileAsURL = (number) => (event) => {
 
         const file = event.target.files[0];
 
         console.log('file', file);
         var reader = new FileReader();
         reader.onloadend = () => {
-            this.setState({ selectedFile: reader.result })
+            switch (number) {
+                case 0: this.setState({ image: reader.result });
+                    break;
+                case 1: this.setState({ image1: reader.result })
+                    break;
+                case 2: this.setState({ image2: reader.result })
+                    break;
+                case 3: this.setState({ image3: reader.result })
+                    break;
+                default:
+                    break;
+            }
+
         }
         reader.readAsDataURL(file);
 
@@ -280,10 +309,29 @@ export class UpdateItemPage extends React.Component {
                                 />
 
                                 <Button color="primary" variant="outlined" size="large">
-                                    <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL} accept="image/*" id="imageButton" />
-                                    Выбрать изображение
-                        </Button>
+                                    <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(0)} accept="image/*" id="imageButton" />
+                                    Выбрать главное изображение
+                                </Button>
                                 <br />
+
+                                <Button color="primary" variant="outlined" size="large">
+                                    <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(1)} accept="image/*" id="imageButton" />
+                                    Выбрать 1 изображение
+                                </Button>
+                                <br />
+
+                                <Button color="primary" variant="outlined" size="large">
+                                    <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(2)} accept="image/*" id="imageButton" />
+                                    Выбрать 2 изображение
+                                </Button>
+                                <br />
+
+                                <Button color="primary" variant="outlined" size="large">
+                                    <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(3)} accept="image/*" id="imageButton" />
+                                    Выбрать 3 изображение
+                                </Button>
+                                <br />
+
                                 <FormControlLabel
                                     control={
                                         <Switch
@@ -315,14 +363,26 @@ export class UpdateItemPage extends React.Component {
                                 {
                                     okMessage && <Typography align="center" variant="caption" style={{ color: "#84d175" }}>{okMessage}</Typography>
                                 }
-                                <img src={this.state.image} alt="item" width="250px" height="auto"/>
+                                <img src={this.state.image} alt="item" style={{ width: "400px" }} />
+                                {
+                                    this.state.image1 && <img src={this.state.image1} alt="item" style={{ width: "400px" }} />
+                                }
+                                {
+                                    this.state.image2 && <img src={this.state.image2} alt="item" style={{ width: "400px" }} />
+                                }
+                                {
+                                    this.state.image3 && <img src={this.state.image3} alt="item" style={{ width: "400px" }} />
+                                }
+
                             </ValidatorForm>
-                            
+
                         </Grid>
                 }
-                
+
             </Grid>
         );
     }
 }
 
+const connectedUpdateItemPage = connect(mapStateToProps)(UpdateItemPage);
+export { connectedUpdateItemPage as UpdateItemPage };
