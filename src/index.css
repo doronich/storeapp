@@ -48,7 +48,8 @@ html,body,#app{
 .content {
     flex: 1 0 auto;
     display: flex;
-    background-color: rgb(240, 240, 240)
+    background-color: rgb(240, 240, 240);
+    overflow: hidden;
 }
 
 .content>div{

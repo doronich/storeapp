@@ -15,16 +15,17 @@ const mapDispatchToProps = dispatch => ({
 
 class ItemList extends React.Component{
     state = {
-        list :[]
+        list :null
     }
 
     componentWillMount(){
+
         itemService.getAllItems()
             .catch(err=>{
                 console.log("ItemList error:",err);
             })
             .then(response=>{
-                console.log(response)
+                //console.log(response)
                 if(response) this.setState({list:response.data})
             })
     }

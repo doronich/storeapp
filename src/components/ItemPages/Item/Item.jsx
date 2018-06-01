@@ -20,7 +20,7 @@ const styles = {
     },
     media: {
         height: "350px",
-        width:"auto"
+        width: "auto"
         //paddingTop: '350px', // 16:9
         //paddingRight: '300px'
     },
@@ -44,39 +44,38 @@ class Item extends React.Component {
         this.setState({ open: false });
     };
 
-    DeleteItem = () =>{
-        this.props.handleDeleteItem(this.state.id,this.props.index);
+    DeleteItem = () => {
+        this.props.handleDeleteItem(this.state.id, this.props.index);
         this.handleClose();
     }
 
-    handleClick = () =>{
-        console.log("click")
-    }
 
     render() {
         const { name, price, id } = this.state;
         const { loggedIn } = this.props;
         return (
             <div>
-                <Link to={"/item/"+id}>
-                <Card style={styles.card} className="card"  >
-                    <CardMedia
-                        onClick={this.handleClick}
-                        style={styles.media}
-                        image={this.props.data.previewImagePath}
-                        title="Image"
-                    />
 
-                    <CardContent
-                        onClick={this.handleClick}
-                    >
-                        <Typography gutterBottom variant="title" >
-                            {name}
-                        </Typography>
-                        <Typography gutterBottom variant="subheading">
-                            {price} р.
+                <Card style={styles.card} className="card"  >
+                    <Link to={"/item/" + id}>
+                        <CardMedia
+                            style={styles.media}
+                            image={this.props.data.previewImagePath}
+                            title="Image"
+                        />
+                    </Link>
+                    <Link to={"/item/" + id}>
+                        <CardContent
+
+                        >
+                            <Typography gutterBottom variant="title" >
+                                {name}
+                            </Typography>
+                            <Typography gutterBottom variant="subheading">
+                                {price} р.
                          </Typography>
-                    </CardContent>
+                        </CardContent>
+                    </Link>
                     {
                         loggedIn &&
                         <CardActions>
@@ -92,7 +91,7 @@ class Item extends React.Component {
                     }
 
                 </Card>
-                </Link>
+
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

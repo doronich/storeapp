@@ -14,8 +14,11 @@ import Person from '@material-ui/icons/Person'
 
 import { ListMenu } from './List'
 
+
+
 const mapDispatchToProps = dispatch => ({
-    logOut: () => dispatch({ type: userConstants.LOGOUT })
+    logOut: () => dispatch({ type: userConstants.LOGOUT }),
+    logIn: () => dispatch({type: userConstants.SUCCESS})
 })
 
 function mapStateToProps(state) {
@@ -43,6 +46,14 @@ class Header extends React.Component {
             left: open,
         });
     };
+
+    componentWillMount(){
+        window.addEventListener('storage', (event)=>{
+            if(!event.newValue){
+                this.props.logOut();
+            }
+        })
+    }
 
     render() {
         //console.log('header', this.props)

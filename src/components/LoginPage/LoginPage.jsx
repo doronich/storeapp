@@ -55,6 +55,8 @@ class LoginPage extends React.Component {
                     response => {
                         if (response && response["acces_token"]) {
                             this.props.success(response)
+
+
                             this.props.history.push('/')
                         } else {
                             

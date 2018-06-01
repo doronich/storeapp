@@ -1,7 +1,16 @@
 import { userConstants } from '../constants'
 //import { userActions } from '../actions';
+import { userService } from '../services/'
 
-let user = JSON.parse(localStorage.getItem('user'));
+userService.checkToken().catch(err=>{
+    if(err.message.indexOf("401")>=0){
+        localStorage.removeItem('user');
+    }
+})
+
+
+
+const user = JSON.parse(localStorage.getItem('user'));            
 const initialState = { loggedIn: user? true: false, currentUser: user, token: null, inProgress: false };
 
 export function authentication(state = initialState, action) {
@@ -15,7 +24,6 @@ export function authentication(state = initialState, action) {
             }
         case userConstants.SUCCESS:
             localStorage.setItem('user', JSON.stringify(action.user));
-
             return {
                 ...state,
                 loggedIn: true,
