@@ -33,7 +33,8 @@ class Item extends React.Component {
         name: this.props.data.name,
         price: this.props.data.price,
         id: this.props.data.id,
-        open: false
+        open: false,
+        active:this.props.data.active
     }
 
     handleClickOpen = () => {
@@ -51,7 +52,7 @@ class Item extends React.Component {
 
 
     render() {
-        const { name, price, id } = this.state;
+        const { name, price, id, active } = this.state;
         const { loggedIn } = this.props;
         return (
             <div>
@@ -73,7 +74,13 @@ class Item extends React.Component {
                             </Typography>
                             <Typography gutterBottom variant="subheading">
                                 {price} р.
-                         </Typography>
+                            </Typography>
+                         {
+                            !active&&
+                            <Typography gutterBottom variant="caption" color="error">
+                            Не доступен
+                            </Typography>
+                         }
                         </CardContent>
                     </Link>
                     {

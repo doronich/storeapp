@@ -76,7 +76,7 @@ export class AddItemPage extends React.Component {
         itemService.addItem(obj)
             .catch(err => {
                 this.setState({ errorMessage: err.toString(), loading: false })
-                setTimeout(() => {
+                this.loadTimeout=setTimeout(() => {
                     this.setState({ errorMessage: "" })
                 }, 5000);
 
@@ -87,11 +87,17 @@ export class AddItemPage extends React.Component {
                 }
                 console.log('resp', response)
                 this.setState({ loading: false })
-                setTimeout(() => {
+                this.loadTimeout=setTimeout(() => {
                     this.setState({ okMessage: "" })
                 }, 5000);
             })
 
+    }
+
+    loadTimeout;//задержка сообщения ответа от сервера
+    componentWillUnmount(){
+
+        this.loadTimeout && clearTimeout(this.loadTimeout);
     }
 
     encodeImageFileAsURL = (number) => (event) => {
@@ -199,7 +205,7 @@ export class AddItemPage extends React.Component {
                                 <MenuItem value={2}>Одежда</MenuItem>
                                 <MenuItem value={1}>Обувь</MenuItem>
                                 <MenuItem value={3}>Аксесуары</MenuItem>
-                                <MenuItem value={4}>Другое</MenuItem>
+                                <MenuItem value={0}>Другое</MenuItem>
                             </Select>
                             <FormHelperText>Вид</FormHelperText>
                         </FormControl>

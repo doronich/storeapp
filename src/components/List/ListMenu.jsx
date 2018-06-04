@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
 class ListMenu extends React.Component {
     constructor(props) {
         super(props);
-        //console.log('listmenu ', this.props);
+        console.log('listmenu ', this.props);
         this.state = {
             openAcc: false,
             openClothing: false,

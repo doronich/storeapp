@@ -15,7 +15,8 @@ export class ItemPage extends React.Component {
         price: 0,
         color: "",
         size: "",
-        description: ""
+        description: "",
+        brand:""
     }
 
     componentDidMount() {
@@ -37,6 +38,7 @@ export class ItemPage extends React.Component {
                         price: data.price,
                         color: data.color,
                         size: data.size,
+                        brand: data.brand,
                         description: data.description,
                         mainImage: data.previewImagePath,
                     });
@@ -45,8 +47,6 @@ export class ItemPage extends React.Component {
     }
 
     handleClickImage = (number) => (event) => {
-        //let target = event.target;
-        //target.style.border="2px solid black";
         const { image, image1, image2, image3 } = this.state;
         switch (number) {
             case 0: this.setState({ mainImage: image })
@@ -63,7 +63,7 @@ export class ItemPage extends React.Component {
 
     render() {
 
-        const { name, price, color, size, description } = this.state;
+        const { name, price, color, size, description, brand } = this.state;
 
         return (
             <Grid container>
@@ -108,8 +108,10 @@ export class ItemPage extends React.Component {
                                 <Grid item>
                                     <Typography variant="display1" gutterBottom>{name}</Typography>
                                     <Typography variant="title" gutterBottom>{price}р.</Typography>
+                                    <Typography variant="button" color="primary" gutterBottom>Бренд: {brand}</Typography>
                                     <Typography variant="button" color="primary" gutterBottom>Цвет: {color}</Typography>
                                     <Typography variant="button" color="primary" gutterBottom>Размер: {size}</Typography>
+                                    
                                     <Typography variant="headline" color="primary" gutterBottom>Описание: <br /> {description}</Typography>
                                     <Button variant="raised" color="primary">Добавить в корзину</Button>
                                 </Grid>

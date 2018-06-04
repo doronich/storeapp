@@ -6,7 +6,8 @@ export const itemService = {
     updateItem,
     getItem,
     getAllItems,
-    deleteItem
+    deleteItem,
+    getReqItems
 }
 
 function addItem(obj){
@@ -27,6 +28,10 @@ function getAllItems(){
     return axios.get(`${api.url}/api/item/all`)
 }
 
+function getReqItems(str){
+    
+    return axios.get(`${api.url}/api/item/q?${str}`)
+}
 
 function getUser(){
     return JSON.parse(localStorage.getItem("user"));

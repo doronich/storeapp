@@ -12,8 +12,8 @@ import { Aside } from '../Aside'
 import Header from '../Header.jsx'
 import Footer from '../Footer.jsx'
 import { ContactsPage } from '../ContactsPage'
-import { AddItemPage, UpdateItemPage, Items,ItemPage } from '../ItemPages'
-import { ToUpButton } from '../ToUpButton/ToUpButton';
+import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage } from '../ItemPages'
+import { ToUpButton } from '../TopButton';
 
 
 class App extends React.Component {
@@ -23,7 +23,7 @@ class App extends React.Component {
         return (
             <Router history={history}>
                 <div className="wrapper">
-                    <Header />
+                    <Header/>
                     <ToUpButton/>
                     <div className="content">
                         <Aside />
@@ -37,6 +37,7 @@ class App extends React.Component {
                         <Route path='/login' component={LoginPage} />
                         <Route path='/register' component={RegisterPage} />
                         <Route path='/contacts' component={ContactsPage} />
+                        <Route strict path='/items/:sex?/:kind?/:subkind?' component={ItemsPage}/>
                     </div>
                     <div className="footer">
                         <Footer />

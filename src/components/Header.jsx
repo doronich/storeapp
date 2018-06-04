@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { userConstants } from '../constants';
+import { userConstants, itemConstants } from '../constants';
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button';
@@ -18,23 +18,26 @@ import { ListMenu } from './List'
 
 const mapDispatchToProps = dispatch => ({
     logOut: () => dispatch({ type: userConstants.LOGOUT }),
-    logIn: () => dispatch({type: userConstants.SUCCESS})
+    logIn: () => dispatch({ type: userConstants.SUCCESS }),
+    toMale: () => dispatch({ type: itemConstants.MALE }),
+    toFemale: () => dispatch({ type: itemConstants.FEMALE })
 })
 
 function mapStateToProps(state) {
     const { loggedIn } = state.authentication;
+    const { sex } = state.item;
     return {
-        loggedIn
+        loggedIn, sex
     };
 }
 
 
 class Header extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             left: false,
-            choosedM: true
+            choosedM: true,
         };
     }
     logout = () => {
@@ -47,17 +50,28 @@ class Header extends React.Component {
         });
     };
 
-    componentWillMount(){
-        window.addEventListener('storage', (event)=>{
-            if(!event.newValue){
+    componentWillMount() {
+        window.addEventListener('storage', (event) => {
+            if (!event.newValue) {
                 this.props.logOut();
             }
         })
     }
 
+    toMaleChange = () => {
+        this.props.toMale();
+    }
+    toFemaleChange = () => {
+        this.props.toFemale();
+    }
+
     render() {
         //console.log('header', this.props)
-        const { loggedIn } = this.props;
+        const { loggedIn, sex } = this.props;
+
+        const border = {
+            borderBottom: "3px solid black"
+        }
 
         const list = (
             <div style={{ width: "250px" }}>
@@ -66,7 +80,7 @@ class Header extends React.Component {
         );
         return (
             <header className="navbar">
-                <Grid className="nav" container direction="row" justify="space-between" alignItems="center">
+                <Grid className="nav" component="nav" container direction="row" justify="space-between" alignItems="center">
                     <Grid item className="nav_item not_mobile">
                         <IconButton onClick={this.toggleDrawer(true)} color="inherit" aria-label="Menu">
                             <MenuIcon />
@@ -81,33 +95,28 @@ class Header extends React.Component {
                     <Grid item className="nav_item">
                         <Grid container>
                             <Grid item className="nav_item mobile900" >
-                                <Link className="link" to="/allitems">
-                                    <Button fullWidth >All</Button>
+                                <Link className="link" to="/items">
+                                    <Button fullWidth >Все товары</Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile600" >
-                                <Link className="link" to="/">
-                                    <Button fullWidth >Women</Button>
-                                </Link>
+
+                                <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border:{}}>Женские</Button>
+
                             </Grid>
                             <Grid item className="nav_item mobile600" >
-                                <Link className="link" to="/">
-                                    <Button fullWidth >Men</Button>
-                                </Link>
-                            </Grid>
-                            <Grid item className="nav_item mobile900" >
-                                <Link className="link" to="/">
-                                    <Button fullWidth >Clothing</Button>
-                                </Link>
-                            </Grid>
-                            <Grid item className="nav_item mobile900" >
-                                <Link className="link" to="/">
-                                    <Button fullWidth >Shoes</Button>
-                                </Link>
+
+                                <Button fullWidth onClick={this.toMaleChange} style={sex === "M"? border:{}}>Мужские</Button>
+
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/contacts">
-                                    <Button fullWidth >Contacts</Button>
+                                    <Button fullWidth >Контакты</Button>
+                                </Link>
+                            </Grid>
+                            <Grid item className="nav_item mobile900" >
+                                <Link className="link" to="/">
+                                    <Button fullWidth >Доставка</Button>
                                 </Link>
                             </Grid>
                         </Grid>
@@ -123,7 +132,7 @@ class Header extends React.Component {
                                         </Link>
                                     </Grid>
                                     <Grid item className="nav_item">
-                                        <Link to="/" className="link"><Button fullWidth onClick={this.logout}>Logout</Button></Link>
+                                        <Link to="/" className="link"><Button fullWidth onClick={this.logout}>Выйти</Button></Link>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -133,11 +142,11 @@ class Header extends React.Component {
                                     <Grid container direction="row" justify="center">
                                         <Grid item className="nav_item">
                                             <Link className="link" to="/login">
-                                                <Button fullWidth>Sign in</Button>
+                                                <Button fullWidth>Войти</Button>
                                             </Link>
                                         </Grid>
                                         <Grid item className="nav_item">
-                                            <Link className="link" to="/register"><Button fullWidth>Sign up</Button></Link>
+                                            <Link className="link" to="/register"><Button fullWidth>Регистрация</Button></Link>
                                         </Grid>
                                     </Grid>
                                 </Grid>

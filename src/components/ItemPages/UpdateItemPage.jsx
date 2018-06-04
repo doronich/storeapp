@@ -52,7 +52,7 @@ function mapStateToProps(state) {
         image3: "",
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const id = parseInt(this.props.match.params.number, 10);
         itemService.getItem(id)
             .catch(err => {
@@ -127,7 +127,7 @@ function mapStateToProps(state) {
         itemService.updateItem(obj)
             .catch(err => {
                 this.setState({ errorMessage: err.toString(), loading: false })
-                setTimeout(() => {
+                this.loadTimeout=setTimeout(() => {
                     this.setState({ errorMessage: "" })
                 }, 5000);
 
@@ -136,13 +136,19 @@ function mapStateToProps(state) {
             .then(response => {
                 console.log('resp', response)
                 this.setState({ okMessage: response.statusText, loading: false })
-                setTimeout(() => {
+                this.loadTimeout=setTimeout(() => {
                     this.setState({ okMessage: "" })
                 }, 5000);
 
                 return response.data;
             })
 
+    }
+
+    loadTimeout;//задержка сообщения ответа от сервера
+    componentWillUnmount(){
+
+        this.loadTimeout && clearTimeout(this.loadTimeout);
     }
 
     encodeImageFileAsURL = (number) => (event) => {

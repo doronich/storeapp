@@ -13,7 +13,7 @@ class Aside extends React.Component{
 
         return(
             <aside className="mobile900">
-                <ListMenu/>
+                <ListMenu {...this.props}/>
             </aside>
         );
     }
