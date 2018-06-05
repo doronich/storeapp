@@ -8,8 +8,6 @@ userService.checkToken().catch(err=>{
     }
 })
 
-
-
 const user = JSON.parse(localStorage.getItem('user'));            
 const initialState = { loggedIn: user? true: false, currentUser: user, token: null, inProgress: false };
 

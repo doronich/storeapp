@@ -1,4 +1,6 @@
 export const itemConstants={
     FEMALE:"FEMALE",
-    MALE:"MALE"
+    MALE:"MALE",
+    KIND: "KIND",
+    SUBKIND:"SUBKIND"
 }

@@ -72,7 +72,7 @@ export class ItemPage extends React.Component {
                         <Grid item >
                             <Grid container direction="row" justify="center" alignItems="stretch">
                                 <Grid item className="mobile600">
-                                    <Grid container direction="column" justify="space-between" alignItems="stretch" style={{ height: "250px", marginRight: "20px" }}>
+                                    <Grid container direction="column" justify="flex-start" alignItems="stretch" style={{ height: "250px", marginRight: "20px" }}>
                                         {
                                             this.state.image &&
                                             <Grid item>

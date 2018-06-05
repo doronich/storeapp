@@ -3,7 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { history } from '../../helpers';
-//import { alertActions } from '../../actions';
+
 import { PrivateRoute } from '../';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
@@ -12,7 +12,7 @@ import { Aside } from '../Aside'
 import Header from '../Header.jsx'
 import Footer from '../Footer.jsx'
 import { ContactsPage } from '../ContactsPage'
-import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage } from '../ItemPages'
+import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage, MItems, FItems } from '../ItemPages'
 import { ToUpButton } from '../TopButton';
 
 
@@ -37,6 +37,8 @@ class App extends React.Component {
                         <Route path='/login' component={LoginPage} />
                         <Route path='/register' component={RegisterPage} />
                         <Route path='/contacts' component={ContactsPage} />
+                        <Route strict path='/f/items/:kind?/:subkind?' component={FItems}/>
+                        <Route strict path='/m/items/:kind?/:subkind?' component={MItems}/>
                         <Route strict path='/items/:sex?/:kind?/:subkind?' component={ItemsPage}/>
                     </div>
                     <div className="footer">

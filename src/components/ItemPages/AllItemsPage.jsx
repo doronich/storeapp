@@ -15,7 +15,7 @@ export class Items extends React.Component {
                     <Typography align="center" gutterBottom variant="display2" color="primary">Список предметов</Typography>
                 </Grid>
                 <Grid item>
-                    <ItemList/>
+                    <ItemList all={true}/>
                 </Grid>
             </Grid>
         )

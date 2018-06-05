@@ -37,7 +37,6 @@ class Header extends React.Component {
         super(props)
         this.state = {
             left: false,
-            choosedM: true,
         };
     }
     logout = () => {
@@ -60,13 +59,13 @@ class Header extends React.Component {
 
     toMaleChange = () => {
         this.props.toMale();
+
     }
     toFemaleChange = () => {
         this.props.toFemale();
     }
 
     render() {
-        //console.log('header', this.props)
         const { loggedIn, sex } = this.props;
 
         const border = {
@@ -94,20 +93,20 @@ class Header extends React.Component {
 
                     <Grid item className="nav_item">
                         <Grid container>
-                            <Grid item className="nav_item mobile900" >
-                                <Link className="link" to="/items">
-                                    <Button fullWidth >Все товары</Button>
+                            <Grid item className="nav_item mobile600" >
+                                <Link to="/allitems">
+                                    <Button fullWidth>Все</Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile600" >
-
-                                <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border:{}}>Женские</Button>
-
+                                <Link to="/f/items">
+                                    <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}>Девушкам</Button>
+                                </Link>
                             </Grid>
                             <Grid item className="nav_item mobile600" >
-
-                                <Button fullWidth onClick={this.toMaleChange} style={sex === "M"? border:{}}>Мужские</Button>
-
+                                <Link to="/m/items">
+                                    <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}>Парням</Button>
+                                </Link>
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/contacts">

@@ -9,25 +9,27 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
-
+import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { userConstants } from '../../constants';
+import { userConstants, itemConstants } from '../../constants';
 
 const mapStateToProps = state => {
     const { loggedIn } = state.authentication;
+    const { sex } = state.item;
     return {
-        loggedIn
+        loggedIn, sex
     };
 }
 
 const mapDispatchToProps = dispatch => ({
-    logOut: () => dispatch({ type: userConstants.LOGOUT })
+    logOut: () => dispatch({ type: userConstants.LOGOUT }),
+    toMale: () => dispatch({ type: itemConstants.MALE }),
+    toFemale: () => dispatch({ type: itemConstants.FEMALE })
 })
 
 class ListMenu extends React.Component {
     constructor(props) {
         super(props);
-        console.log('listmenu ', this.props);
         this.state = {
             openAcc: false,
             openClothing: false,
@@ -44,15 +46,35 @@ class ListMenu extends React.Component {
         this.setState({ [open]: !this.state[open] });
     };
 
+    toMaleChange = () => {
+        this.props.toMale();
+
+    }
+    toFemaleChange = () => {
+        this.props.toFemale();
+    }
+
     render() {
 
-        const { loggedIn } = this.props;
+        const { loggedIn, sex } = this.props;
+        const border = {
+            border: "2px solid black"
+        }
 
         return (
             <List
                 component="nav"
             >
                 <ListSubheader disableSticky>КАТЕГОРИИ</ListSubheader>
+                <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}>Девушкам</Button>
+                <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}>Парням</Button>
+
+                <Link to='/items'>
+                    <ListItem button>
+                        <ListItemText><Typography variant="button">товары</Typography></ListItemText>
+                    </ListItem>
+                </Link>
+                <Divider />
                 <ListItem button onClick={this.handleClick('openShoes')}>
                     <ListItemText><Typography variant="button">Обувь</Typography></ListItemText>
                     {this.state.openShoes ? <ExpandLess /> : <ExpandMore />}
@@ -198,13 +220,13 @@ class ListMenu extends React.Component {
                                     <Divider />
                                     <Link to='/additem'>
                                         <ListItem button>
-                                            <ListItemText primary="Добавить предмет"/>
+                                            <ListItemText primary="Добавить предмет" />
                                         </ListItem>
                                     </Link>
                                     <Divider />
                                     <Link to='/allitems'>
                                         <ListItem button>
-                                            <ListItemText primary="Все предметы"/>
+                                            <ListItemText primary="Все предметы" />
                                         </ListItem>
                                     </Link>
                                     <Divider />

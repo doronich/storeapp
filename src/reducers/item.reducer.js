@@ -1,18 +1,30 @@
 import { itemConstants } from '../constants'
+const sex = localStorage.getItem('sex');
+const initialState = { sex: sex ? sex : "F",kind:2, subkind:"" };
 
-const initialState = {sex:"F" };
-
-export function item(state=initialState,action){
-    switch(action.type){
+export function item(state = initialState, action) {
+    switch (action.type) {
         case itemConstants.FEMALE:
-            return{
+            localStorage.setItem('sex', "F");
+            return {
                 ...state,
-                sex:"F"
+                sex: "F"
             }
         case itemConstants.MALE:
-            return{
+            localStorage.setItem('sex', "M");
+            return {
                 ...state,
-                sex:"M"
+                sex: "M"
+            }
+        case itemConstants.KIND:
+            return {
+                ...state,
+                kind: action.kind
+            }
+        case itemConstants.SUBKIND:
+            return {
+                ...state,
+                subkind: action.subkind
             }
         default: return state
     }

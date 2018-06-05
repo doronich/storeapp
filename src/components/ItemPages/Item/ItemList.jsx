@@ -11,42 +11,47 @@ const mapDispatchToProps = dispatch => ({
     logOut: () => dispatch({ type: userConstants.LOGOUT })
 })
 
+function mapStateToProps(state) {
+    const { sex } = state.item;
+    return {
+        sex
+    };
+}
+
 
 class ItemList extends React.Component {
 
-        state = {
-            list: null,
-        }
-
-
+    state = {
+        list: null,
+    }
 
 
     componentDidMount() {
-        let reqString = {};
-        if(this.props.match){
-            const params = this.props.match.params;
-            console.log(params)
-            
-            if (params) {
-                const sex = params.sex, kind = params.kind, subkind = params.subkind;
-                if (sex) reqString = "&sex=" + sex;
-                if (kind) reqString = reqString + "&kind=" + kind;
-                if (subkind) reqString = reqString+ "&subkind="+subkind;
-    
-            }
-        }
 
-        console.log("string", reqString)
-        if (!reqString) {
+        if (this.props.all) {
             itemService.getAllItems()
                 .catch(err => {
                     console.log("ItemList error:", err);
                 })
                 .then(response => {
-                    //console.log(response)
+
                     if (response) this.setState({ list: response.data })
                 })
         } else {
+
+            let reqString = "";
+            let sex = ""
+            if (this.props.sex === "F") sex = "female";
+            else sex = "male";
+            reqString = "&sex=" + sex;
+            if (this.props.match.params.kind) {
+
+                reqString += "&kind=" + this.props.match.params.kind;
+            }
+            if (this.props.match.params.subkind) {
+
+                reqString += "&subkind=" + this.props.match.params.subkind;
+            }
             itemService.getReqItems(reqString)
                 .catch(err => {
                     console.log("reqItemList:", err)
@@ -57,6 +62,7 @@ class ItemList extends React.Component {
         }
 
     }
+    
 
     handleDeleteItem = (id, index) => {
         itemService.deleteItem(id)
@@ -76,8 +82,7 @@ class ItemList extends React.Component {
 
 
     render() {
-        const {list} = this.state;
-        console.log(this.state)
+        const { list } = this.state;
         let listItems = null;
         if (list) {
             listItems = this.state.list.map((item, index) => {
@@ -93,5 +98,5 @@ class ItemList extends React.Component {
     }
 }
 
-const connectedItemList = connect(() => ({}), mapDispatchToProps)(ItemList);
+const connectedItemList = connect(mapStateToProps, mapDispatchToProps)(ItemList);
 export { connectedItemList as ItemList };
