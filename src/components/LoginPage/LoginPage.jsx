@@ -29,7 +29,6 @@ const mapDispatchToProps = dispatch => ({
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
-        console.log('login', this.props);
         this.props.logOut();
         
         this.state = {

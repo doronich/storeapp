@@ -37,8 +37,8 @@ class App extends React.Component {
                         <Route path='/login' component={LoginPage} />
                         <Route path='/register' component={RegisterPage} />
                         <Route path='/contacts' component={ContactsPage} />
-                        <Route strict path='/f/items/:kind?/:subkind?' component={FItems}/>
-                        <Route strict path='/m/items/:kind?/:subkind?' component={MItems}/>
+                        <Route strict path='/f/items/:kind?/:subkind?/:brand?/:color?' component={FItems}/>
+                        <Route strict path='/m/items/:kind?/:subkind?/:brand?/:color?' component={MItems}/>
                         <Route strict path='/items/:sex?/:kind?/:subkind?' component={ItemsPage}/>
                     </div>
                     <div className="footer">

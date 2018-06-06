@@ -14,22 +14,25 @@ import { Link } from 'react-router-dom';
 import { userConstants, itemConstants } from '../../constants';
 
 const mapStateToProps = state => {
-    const { loggedIn } = state.authentication;
+    const { loggedIn, currentUser } = state.authentication;
     const { sex } = state.item;
     return {
-        loggedIn, sex
+        loggedIn, sex, currentUser
     };
 }
 
 const mapDispatchToProps = dispatch => ({
     logOut: () => dispatch({ type: userConstants.LOGOUT }),
     toMale: () => dispatch({ type: itemConstants.MALE }),
-    toFemale: () => dispatch({ type: itemConstants.FEMALE })
+    toFemale: () => dispatch({ type: itemConstants.FEMALE }),
+    changeKind: (kind) => dispatch({ type: itemConstants.KIND, kind }),
+    changeSubkind: (subkind) => dispatch({ type: itemConstants.SUBKIND, subkind })
 })
 
 class ListMenu extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             openAcc: false,
             openClothing: false,
@@ -54,9 +57,19 @@ class ListMenu extends React.Component {
         this.props.toFemale();
     }
 
+    changeKind = (n) => (event) => {
+        this.props.changeKind(n)
+    }
+
+
+    changeSubkind = (n) => (event) => {
+        this.props.changeSubkind(n)
+    }
+
+
     render() {
 
-        const { loggedIn, sex } = this.props;
+        const { loggedIn, sex, currentUser } = this.props;
         const border = {
             border: "2px solid black"
         }
@@ -82,23 +95,23 @@ class ListMenu extends React.Component {
                 </ListItem>
 
                 <Collapse in={this.state.openShoes} timeout="auto" unmountOnExit>
-                    <List component='div'>
+                    <List component='div' onClick={this.changeKind(1)}>
                         <Divider />
-                        <Link to="/">
+                        <Link to={`/${sex}/items/1/кроссовки`}>
                             <ListItem button>
                                 <ListItemText primary="Кроссовки" />
                             </ListItem>
                         </Link>
 
                         <Divider />
-                        <Link to="/">
+                        <Link to={`/${sex}/items/1/кеды`}>
                             <ListItem button>
                                 <ListItemText primary="Кеды" />
                             </ListItem>
                         </Link>
 
                         <Divider />
-                        <Link to="/">
+                        <Link to={`/${sex}/items/1/туфли`}>
                             <ListItem button>
                                 <ListItemText primary="Туфли" />
                             </ListItem>
@@ -115,41 +128,61 @@ class ListMenu extends React.Component {
 
                 <Collapse in={this.state.openClothing} timeout="auto" unmountOnExit>
 
-                    <List component='div'>
-                        <div>
-                            <Divider />
+                    <List component='div' onClick={this.changeKind(2)}>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/верхняя одежда`}>
                             <ListItem button>
                                 <ListItemText primary="Верхняя одежда"></ListItemText>
                             </ListItem>
-                            <Divider />
+                        </Link>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/свитшоты`}>
+                            <ListItem button>
+                                <ListItemText primary="Свитшоты"></ListItemText>
+                            </ListItem>
+                        </Link>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/брюки`}>
                             <ListItem button>
                                 <ListItemText primary="Брюки" />
                             </ListItem>
-                            <Divider />
+                        </Link>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/джинсы`}>
                             <ListItem button>
                                 <ListItemText primary="Джинсы" />
                             </ListItem>
-                            <Divider />
+                        </Link>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/футболки и поло`}>
                             <ListItem button>
                                 <ListItemText primary="Футболки и поло" />
                             </ListItem>
-                            <Divider />
+                        </Link>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/нижнее бельё`}>
                             <ListItem button>
                                 <ListItemText primary="Нижнее бельё" />
                             </ListItem>
-                            <Divider />
+                        </Link>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/толстовки`}>
                             <ListItem button>
                                 <ListItemText primary="Толстовки" />
                             </ListItem>
-                            <Divider />
+                        </Link>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/шорты`}>
                             <ListItem button>
                                 <ListItemText primary="Шорты" />
                             </ListItem>
-                            <Divider />
+                        </Link>
+                        <Divider />
+                        <Link to={`/${sex}/items/2/костюмы`}>
                             <ListItem button>
                                 <ListItemText primary="Костюмы" />
                             </ListItem>
-                        </div>
+                        </Link>
                     </List>
                 </Collapse>
 
@@ -164,30 +197,27 @@ class ListMenu extends React.Component {
 
                 <Collapse in={this.state.openAccessory} timeout="auto" unmountOnExit>
 
-                    <List component='div'>
-                        <div>
-                            <Divider />
-                            <ListItem button>
-                                <ListItemText primary="Очки"></ListItemText>
-                            </ListItem>
-                            <Divider />
-                            <ListItem button>
-                                <ListItemText primary="Часы" />
-                            </ListItem>
-                            <Divider />
-                            <ListItem button>
-                                <ListItemText primary="Чехлы" />
-                            </ListItem>
-                            <Divider />
-                            <ListItem button>
-                                <ListItemText primary="Сумки" />
-                            </ListItem>
-                            <Divider />
-                            <ListItem button>
-                                <ListItemText primary="Рюкзаки" />
-                            </ListItem>
-
-                        </div>
+                    <List component='div' onClick={this.changeKind(3)}>
+                        <Divider />
+                        <ListItem button>
+                            <ListItemText primary="Очки"></ListItemText>
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <ListItemText primary="Часы" />
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <ListItemText primary="Чехлы" />
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <ListItemText primary="Сумки" />
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <ListItemText primary="Рюкзаки" />
+                        </ListItem>
                     </List>
                 </Collapse>
 
@@ -217,12 +247,19 @@ class ListMenu extends React.Component {
                                 </Link>
                             </div> :
                                 <div>
-                                    <Divider />
-                                    <Link to='/additem'>
-                                        <ListItem button>
-                                            <ListItemText primary="Добавить предмет" />
-                                        </ListItem>
-                                    </Link>
+
+                                    {
+                                        currentUser.role==="Admin"&&
+                                        <div>
+                                            <Divider />
+                                            <Link to='/additem'>
+                                                <ListItem button>
+                                                    <ListItemText primary="Добавить предмет" />
+                                                </ListItem>
+                                            </Link>
+                                        </div>
+                                    }
+
                                     <Divider />
                                     <Link to='/allitems'>
                                         <ListItem button>

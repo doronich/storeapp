@@ -76,25 +76,25 @@ export class ItemPage extends React.Component {
                                         {
                                             this.state.image &&
                                             <Grid item>
-                                                <img onClick={this.handleClickImage(0)} src={this.state.image} alt="1" width="37.5px" height="50px" style={{ cursor: "pointer" }} />
+                                                <img onClick={this.handleClickImage(0)} src={this.state.image} alt="1" width="37.5px" height="auto" style={{ cursor: "pointer" }} />
                                             </Grid>
                                         }
                                         {
                                             this.state.image1 &&
                                             <Grid item>
-                                                <img onClick={this.handleClickImage(1)} src={this.state.image1} alt="2" width="37.5px" height="50px" style={{ cursor: "pointer" }} />
+                                                <img onClick={this.handleClickImage(1)} src={this.state.image1} alt="2" width="37.5px" height="auto" style={{ cursor: "pointer" }} />
                                             </Grid>
                                         }
                                         {
                                             this.state.image2 &&
                                             <Grid item>
-                                                <img onClick={this.handleClickImage(2)} src={this.state.image2} alt="3" width="37.5px" height="50px" style={{ cursor: "pointer" }} />
+                                                <img onClick={this.handleClickImage(2)} src={this.state.image2} alt="3" width="37.5px" height="auto" style={{ cursor: "pointer" }} />
                                             </Grid>
                                         }
                                         {
                                             this.state.image3 &&
                                             <Grid item >
-                                                <img onClick={this.handleClickImage(3)} src={this.state.image3} alt="4" width="37.5px" height="50px" style={{ cursor: "pointer" }} />
+                                                <img onClick={this.handleClickImage(3)} src={this.state.image3} alt="4" width="37.5px" height="auto" style={{ cursor: "pointer" }} />
                                             </Grid>
 
                                         }

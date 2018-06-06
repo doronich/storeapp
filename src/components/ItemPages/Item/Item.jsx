@@ -53,7 +53,7 @@ class Item extends React.Component {
 
     render() {
         const { name, price, id, active } = this.state;
-        const { loggedIn } = this.props;
+        const { currentUser } = this.props;
         return (
             <div>
 
@@ -84,7 +84,7 @@ class Item extends React.Component {
                         </CardContent>
                     </Link>
                     {
-                        loggedIn &&
+                        currentUser? currentUser.role==="Admin" &&
                         <CardActions>
                             <Link to={"/updateitem/" + id}>
                                 <Button size="small" color="primary">
@@ -95,6 +95,7 @@ class Item extends React.Component {
                                 Удалить
                             </Button>
                         </CardActions>
+                        :null
                     }
 
                 </Card>
@@ -121,9 +122,9 @@ class Item extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const { loggedIn } = state.authentication;
+    const { currentUser } = state.authentication;
     return {
-        loggedIn
+        currentUser
     };
 }
 

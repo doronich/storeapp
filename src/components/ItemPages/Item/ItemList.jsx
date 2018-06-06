@@ -8,13 +8,13 @@ import { Item } from './Item'
 import { Grid } from '@material-ui/core'
 
 const mapDispatchToProps = dispatch => ({
-    logOut: () => dispatch({ type: userConstants.LOGOUT })
+    logOut: () => dispatch({ type: userConstants.LOGOUT }),
 })
 
 function mapStateToProps(state) {
-    const { sex } = state.item;
+    const { sex, kind, subkind, brand, color,priceEnd, priceStart } = state.item;
     return {
-        sex
+        sex, kind, subkind, brand, color, priceEnd, priceStart
     };
 }
 
@@ -23,11 +23,25 @@ class ItemList extends React.Component {
 
     state = {
         list: null,
+        changed: this.props.changed
     }
 
+    static getDerivedStateFromProps(props, state) {
+        return {
+            changed: props.changed
+        }
+    }
+
+    componentDidUpdate() {
+        this.listHandler()
+    }
 
     componentDidMount() {
+        this.listHandler()
+    }
 
+    listHandler = () => {
+        if (this.state.changed === true) return;
         if (this.props.all) {
             itemService.getAllItems()
                 .catch(err => {
@@ -35,7 +49,7 @@ class ItemList extends React.Component {
                 })
                 .then(response => {
 
-                    if (response) this.setState({ list: response.data })
+                    if (response) this.setState({ list: response.data, changed: true })
                 })
         } else {
 
@@ -43,26 +57,37 @@ class ItemList extends React.Component {
             let sex = ""
             if (this.props.sex === "F") sex = "female";
             else sex = "male";
-            reqString = "&sex=" + sex;
-            if (this.props.match.params.kind) {
+            reqString = `sex=${sex}`;
+            if (this.props.kind !== "none") {
 
-                reqString += "&kind=" + this.props.match.params.kind;
+                reqString += "&kind=" + this.props.kind;
             }
-            if (this.props.match.params.subkind) {
+            if (this.props.subkind !== "none") {
 
-                reqString += "&subkind=" + this.props.match.params.subkind;
+                reqString += "&subkind=" + this.props.subkind;
             }
+            if (this.props.brand !== "none") {
+                reqString += "&brand=" + this.props.brand
+            }
+            if (this.props.color !== "none") {
+                reqString += "&color=" + this.props.color
+            }
+
+            reqString += "&startPrice="+this.props.priceStart;
+            reqString += "&endPrice="+this.props.priceEnd;
+
+            console.log("string", reqString)
+
             itemService.getReqItems(reqString)
                 .catch(err => {
                     console.log("reqItemList:", err)
                 })
                 .then(response => {
-                    if (response) this.setState({ list: response.data })
+                    if (response) this.setState({ list: response.data, changed: true })
                 })
         }
-
     }
-    
+
 
     handleDeleteItem = (id, index) => {
         itemService.deleteItem(id)

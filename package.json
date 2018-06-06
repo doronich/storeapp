@@ -5,11 +5,13 @@
   "dependencies": {
     "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "^1.0.0",
+    "@material-ui/lab": "^1.0.0-alpha.4",
     "axios": "^0.18.0",
     "history": "^4.7.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-material-ui-form-validator": "^2.0.0-beta.10",
+    "react-popper": "^1.0.0-beta.6",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
