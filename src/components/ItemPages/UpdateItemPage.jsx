@@ -104,15 +104,15 @@ function mapStateToProps(state) {
         const obj = {
             Username:this.props.currentUser.username,
             id,
-            name,
-            description,
+            name: name.trim(),
+            description:description.trim(),
             Active: checkedActive,
-            color,
-            brand,
+            color:color.trim(),
+            brand:brand.trim(),
             price,
             discount,
             kind,
-            subkind,
+            subkind:subkind.trim(),
             sex,
             status,
             amount,
@@ -134,7 +134,6 @@ function mapStateToProps(state) {
                 return err;
             })
             .then(response => {
-                console.log('resp', response)
                 this.setState({ okMessage: response.statusText, loading: false })
                 this.loadTimeout=setTimeout(() => {
                     this.setState({ okMessage: "" })

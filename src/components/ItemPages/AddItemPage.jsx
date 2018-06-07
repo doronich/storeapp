@@ -52,15 +52,15 @@ export class AddItemPage extends React.Component {
         this.setState({ loading: true })
         const { image, image1, image2, image3, name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size } = this.state;
         const obj = {
-            name,
-            description,
+            name: name.trim(),
+            description:description.trim(),
             Active: checkedActive,
-            color,
-            brand,
+            color:color.trim(),
+            brand:brand.trim(),
             price,
             discount,
             kind,
-            subkind,
+            subkind:subkind.trim(),
             sex,
             status,
             amount,

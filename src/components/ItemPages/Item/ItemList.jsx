@@ -12,9 +12,9 @@ const mapDispatchToProps = dispatch => ({
 })
 
 function mapStateToProps(state) {
-    const { sex, kind, subkind, brand, color,priceEnd, priceStart } = state.item;
+    const { sex, kind, subkind, brand, color,priceEnd, priceStart, name } = state.item;
     return {
-        sex, kind, subkind, brand, color, priceEnd, priceStart
+        sex, kind, subkind, brand, color, priceEnd, priceStart, name
     };
 }
 
@@ -71,6 +71,9 @@ class ItemList extends React.Component {
             }
             if (this.props.color !== "none") {
                 reqString += "&color=" + this.props.color
+            }
+            if(this.props.name){
+                reqString +="&name="+this.props.name;
             }
 
             reqString += "&startPrice="+this.props.priceStart;

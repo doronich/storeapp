@@ -1,6 +1,6 @@
 import { itemConstants } from '../constants'
 const sex = localStorage.getItem('sex');
-const initialState = { sex: sex ? sex : "F", kind: "none", subkind: "none", brand: "none", color: "none", priceEnd:300,priceStart:0 };
+const initialState = { sex: sex ? sex : "F", kind: "none", subkind: "none", brand: "none", color: "none", priceEnd: 300, priceStart: 0, name:"" };
 
 export function item(state = initialState, action) {
     switch (action.type) {
@@ -15,6 +15,11 @@ export function item(state = initialState, action) {
             return {
                 ...state,
                 sex: "M"
+            }
+        case itemConstants.NAME:
+            return {
+                ...state,
+                name:action.name
             }
         case itemConstants.KIND:
             return {
@@ -37,14 +42,25 @@ export function item(state = initialState, action) {
                 color: action.color
             }
         case itemConstants.PRICESTART:
-            return{
+            return {
                 ...state,
-                priceStart:action.priceStart
+                priceStart: action.priceStart
             }
         case itemConstants.PRICEEND:
-            return{
+            return {
                 ...state,
-                priceEnd:action.priceEnd
+                priceEnd: action.priceEnd
+            }
+        case itemConstants.RESET:
+            return {
+                ...state,
+                kind: "none",
+                subkind: "none",
+                brand: "none",
+                color: "none",
+                priceEnd: 300,
+                priceStart: 0,
+                name:""
             }
         default: return state
     }

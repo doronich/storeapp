@@ -6,5 +6,7 @@ export const itemConstants={
     COLOR:"COLOR",
     BRAND:"BRAND",
     PRICESTART:"PRICESTART",
-    PRICEEND:"PRICEEND"
+    PRICEEND:"PRICEEND",
+    RESET:"RESET",
+    NAME:"NAME"
 }

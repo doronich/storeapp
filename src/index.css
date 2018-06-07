@@ -86,6 +86,22 @@ aside{
     transition: box-shadow 0.4s;
 }
 
+.input-range__slider {
+    background: #000;
+    border: 1px solid #000;
+    height: 0.6rem;
+    width: 0.6rem;
+    margin-top: -0.4rem;
+}
+
+.input-range__track--active {
+    background: #000; }
+
+.input-range__track {
+    height: 2px;
+    background: #000;
+}
+
 
 @media all and (max-width:960px){
     .mobile900{

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { history } from '../../helpers';
 
-import { PrivateRoute } from '../';
+import { AdminRoute } from '../';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage'
@@ -14,7 +14,7 @@ import Footer from '../Footer.jsx'
 import { ContactsPage } from '../ContactsPage'
 import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage, MItems, FItems } from '../ItemPages'
 import { ToUpButton } from '../TopButton';
-
+import { Chat } from '../Chat'
 
 class App extends React.Component {
 
@@ -29,8 +29,8 @@ class App extends React.Component {
                         <Aside />
                         
                         <Route exact path='/' component={HomePage} />
-                        <PrivateRoute exact path="/additem" component={AddItemPage} />
-                        <PrivateRoute exact path="/updateitem/:number" component={UpdateItemPage}/>
+                        <AdminRoute exact path="/additem" component={AddItemPage} />
+                        <AdminRoute exact path="/updateitem/:number" component={UpdateItemPage}/>
                         <Route exact path="/item/:number" component={ItemPage}/>
                         {/* <PrivateRoute exact path="/allitems" component={Items}/> */}
                         <Route exact path="/allitems" component={Items}/>
@@ -43,6 +43,7 @@ class App extends React.Component {
                     </div>
                     <div className="footer">
                         <Footer />
+                        <Chat/>
                     </div>
                 </div>
             </Router>

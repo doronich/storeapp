@@ -1,24 +1,25 @@
 import React from 'react'
 
-import { Manager, Reference, Popper } from 'react-popper';
-
-import Slider from '@material-ui/lab/Slider'
+//import { Manager, Reference, Popper } from 'react-popper';
 
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import InputRange from 'react-input-range'
+import TextField from '@material-ui/core/TextField';
+import 'react-input-range/lib/css/index.css'
+
 import { connect } from 'react-redux';
 
 import { itemConstants } from '../../constants';
 
 function mapStateToProps(state) {
-    const { sex, kind, subkind, brand, color, priceEnd } = state.item;
+    const { sex, kind, subkind, brand, color, priceEnd, priceStart, name } = state.item;
     return {
-        sex, kind, subkind, brand, color, priceEnd
+        sex, kind, subkind, brand, color, priceEnd, priceStart, name
     };
 }
 
@@ -27,7 +28,10 @@ const mapDispatchToProps = dispatch => ({
     changeSubkind: (subkind) => dispatch({ type: itemConstants.SUBKIND, subkind }),
     changeBrand: (brand) => dispatch({ type: itemConstants.BRAND, brand }),
     changeColor: (color) => dispatch({ type: itemConstants.COLOR, color }),
-    changePriceEnd: (priceEnd) => dispatch({type: itemConstants.PRICEEND, priceEnd})
+    changePriceEnd: (priceEnd) => dispatch({ type: itemConstants.PRICEEND, priceEnd }),
+    changePriceStart: (priceStart) => dispatch({ type: itemConstants.PRICESTART, priceStart }),
+    changeName: (name)=> dispatch({type:itemConstants.NAME, name}),
+    reset: () => dispatch({ type: itemConstants.RESET })
 });
 
 class Filters extends React.Component {
@@ -38,21 +42,35 @@ class Filters extends React.Component {
             subkind: this.props.subkind,
             brand: this.props.brand,
             color: this.props.color,
-            priceEnd: this.props.priceEnd
+            value: {
+                min: this.props.priceStart,
+                max: this.props.priceEnd
+            },
+            name:this.props.name
         }
     }
 
-    dragEnd = () =>{
-        this.props.changePriceEnd(this.state.priceEnd)
+    dragEnd = () => {
+        this.props.changePriceEnd(this.state.value.max)
+        this.props.changePriceStart(this.state.value.min)
     }
 
-    handleChangeSlider = (event, value) => {
-        this.setState({ priceEnd: value })
+    reset = async () => {
+        await this.props.reset()
+        this.setState({
+            kind: this.props.kind,
+            subkind: this.props.subkind,
+            brand: this.props.brand,
+            color: this.props.color,
+            value: {
+                min: this.props.priceStart,
+                max: this.props.priceEnd
+            },
+            name: this.props.name
+        })
     }
-
     handleChange = name => event => {
-        this.setState({ [name]: parseInt(event.target.value, 10) });
-
+        this.setState({ [name]: event.target.value });
         switch (name) {
             case "kind": this.props.changeKind(event.target.value);
                 break;
@@ -62,19 +80,37 @@ class Filters extends React.Component {
                 break;
             case "color": this.props.changeColor(event.target.value);
                 break;
+            default:
+                break;
         }
     }
 
+    timerId=null;
+
+    searchByName = async (event) =>{
+        const value = event.target.value;
+        await this.setState({ name: value })
+        clearTimeout(this.timerId)
+            this.timerId = setTimeout(()=>{
+                this.props.changeName(value) 
+            }
+            ,700)
+    }
+
+    changeRange = (value) => {
+        if (value.min >= 0 && value.max <= 500) this.setState({ value })
+
+    }
+
     render() {
-        const { kind, subkind, brand, color, priceEnd } = this.state;
+        const { kind, subkind, brand, color, name } = this.state;
         return (
             <div>
                 <hr />
                 <form >
-                    <Grid container direction="row" justify="space-around" alignItems="center">
+                    <Grid container direction="row" justify="space-around" alignItems="baseline">
 
                         <Grid item>
-
                             <FormControl>
                                 <Select
                                     value={kind}
@@ -93,8 +129,6 @@ class Filters extends React.Component {
                             </FormControl>
                         </Grid>
                         <Grid item>
-
-
                             <FormControl>
                                 {
                                     kind === 2 &&
@@ -102,6 +136,7 @@ class Filters extends React.Component {
                                         value={subkind}
                                         onChange={this.handleChange("subkind")}
                                         name="subkind"
+                                        
                                     >
                                         <MenuItem value="none">
                                             <em>None</em>
@@ -180,10 +215,31 @@ class Filters extends React.Component {
                                 <FormHelperText>Цвет</FormHelperText>
                             </FormControl>
                         </Grid>
+                        <Grid item>
+                            <TextField
+                                fullWidth
+                                value={name}
+                                onChange={this.searchByName}
+                                margin="normal"
+                                helperText="поиск по названию"
+                            />
+                        </Grid>
 
                         <Grid item style={{ width: "150px" }}>
-                            <Slider aria-labelledby="label" onChange={this.handleChangeSlider} value={priceEnd} min={0} step={1} max={999} onDragEnd={this.dragEnd}/>
-                            <Typography>Цена до {priceEnd} р.</Typography>
+                            <InputRange
+                                formatLabel={value => `${value}р.`}
+                                step={1}
+                                minValue={0}
+                                maxValue={500}
+                                value={this.state.value}
+                                onChange={this.changeRange}
+                                onChangeComplete={this.dragEnd}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <Button onClick={this.reset} variant="raised">
+                                Сбросить
+                            </Button>
                         </Grid>
                     </Grid>
                 </form>

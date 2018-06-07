@@ -67,7 +67,7 @@ export class ItemPage extends React.Component {
 
         return (
             <Grid container>
-                <Grid item style={{ height: "100%" }} xs={12}>
+                <Grid item style={{ height: "100%" ,marginTop:"20px"}} xs={12}>
                     <Grid container direction="column" justify="flex-start" alignItems="stretch" style={{ height: "100%" }}>
                         <Grid item >
                             <Grid container direction="row" justify="center" alignItems="stretch">
