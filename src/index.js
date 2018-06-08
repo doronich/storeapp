@@ -7,8 +7,6 @@ import  './index.css'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-//import red from '@material-ui/core/colors/red';
-
 
 const theme = createMuiTheme({
     palette: {
@@ -16,7 +14,7 @@ const theme = createMuiTheme({
             main: '#000'
         },
         secondary:{
-            main: "#5890bc"
+            main: "#808999"
         },
     }
 });

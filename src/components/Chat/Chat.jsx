@@ -1,69 +1,159 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { chatService } from '../../services'
+import { connection } from '../../services'
+import { Link } from 'react-router-dom'
+
+import { IconButton, Input, Grid, Typography } from '@material-ui/core'
+import { Send } from '@material-ui/icons'
 
 function mapStateToProps(state) {
-    const { currentUser } = state.authenticate;
+    const { currentUser, loggedIn } = state.authentication;
     return {
-        currentUser
+        currentUser, loggedIn
     };
 }
 
 class Chat extends React.Component {
     constructor(props) {
         super(props);
-        console.log("chatprops", this.props)
-        console.log("chatConnection", chatService.connection)
         this.state = {
-            nick: "",
+            username: "",
             message: "",
             messages: [],
-            hubConnection: null
+            hubConnection: null,
+            typing:false,
+            users:[]
         }
     }
 
     componentDidMount() {
-        const nick = this.props.currentUser.username;
+        //if (!this.props.currentUser) return;
+        const username = this.props.currentUser?this.props.currentUser.username:""
 
-
-        this.setState({ hubConnection: chatService.connection, nick }, () => {
+        this.setState({ hubConnection: connection, username }, () => {
             this.state.hubConnection
                 .start()
                 .then(() => console.log("connection started"))
-                .catch(err => console.log('Error while establishing connection'))
+                .catch(err => console.log('Error while establishing connection',err))
 
-            this.state.hubConnection.on('Send', (message, nick) => {
-                const text = `${nick}: ${message}`;
+            this.state.hubConnection.on('Send', (username, message) => {
+                const time = new Date();
+                const text = (<Typography variant="subheading"
+                                color="primary"
+                                >
+                                <span style={{fontSize:"12px"}}>{time.getHours() + ":" + time.getMinutes()}</span>
+                                <span style={{color:"#000",fontWeight:"600"}}> {username}</span>
+                                <span>: {message}</span></Typography>);
                 const messages = this.state.messages.concat([text]);
                 this.setState({ messages });
+                const elem = document.getElementById("chatDisplay");
+                elem.scrollTop = elem.scrollHeight;
+
+            });
+            
+            this.state.hubConnection.on('StartTyping', (username)=>{
+                if(this.state.users.indexOf(username)<0){
+                    const users = this.state.users.concat([username]);
+                    const typing = this.state.users.length>0;
+                    this.setState({users,typing});
+                }else{
+                    const typing = this.state.users.length>0;
+                    this.setState({typing});
+                }
+            
             });
 
+            this.state.hubConnection.on('StopTyping', (username)=>{
+                const users = this.state.users.splice(this.state.users.indexOf(username),1);
+                const typing = this.state.users.length>0;
+                this.setState({users,typing});
+            });
         });
     }
 
-    sendMessage = () => {
-        this.state.hubConnection
-            .invoke('Send', this.state.nick, this.state.message)
-            .catch(err=> console.error(err));
-
-        this.setState({message:''});
+    static getDerivedStateFromProps(props, state) {
+        return {
+            username: props.currentUser?props.currentUser.username:""
+        }
     }
 
+    sendMessage = (event) => {
+        event.preventDefault();
+        if (!this.state.message) return;
+
+        this.state.hubConnection
+            .invoke('SendMessage', this.state.username, this.state.message)
+            .catch(err => console.error(err));
+
+        this.setState({ message: '' });
+    }
+
+    timerId=null;
+    
+    changeInput = async (e)=>{
+        
+        this.state.hubConnection
+            .invoke("SendTyping",this.props.currentUser.username)
+            .catch(err => console.error(err));
+        await this.setState({ message: this.state.message.length<=150 ? e.target.value:this.state.message })
+        clearTimeout(this.timerId)
+        this.timerId = setTimeout(()=>{
+            this.state.hubConnection.invoke("DeleteTyping", this.props.currentUser.username)
+                .catch(err=>console.error(err));
+            
+        },1000)
+
+    }
 
     render() {
-        return (
-            <div>
-                <br/>
-                <input type="text" value={this.state.message}
-                    onChange={e=>this.setState({message:e.target.value})}/>
 
-                    <button onClick={this.sendMessage}>Send</button>
-                    <div>
-                        {this.state.messages.map((message,index)=>(
-                            <span style={{display:"block"}} key={index}>{message}</span>
-                        ))}
-                    </div>
-            </div>
+        return (
+            <Grid container direction="column" >
+                <Grid item id="chatDisplay" style={{ height: "400px",width:"100%", overflowY: "scroll", overflowX: "hidden",paddingLeft:"10px" }}>
+                    <Typography variant="subheading" color="textSecondary">Приветствуем!</Typography>
+                    {
+                        this.state.messages.map((message, index) => (
+                            <span className="wordWrap" key={index}>{message}</span>
+                        ))
+                    }
+                    {
+                        this.state.typing ? <Typography variant="caption" style={{overflow:"hidden"}}>
+                        {
+                            this.state.users.map((user, index) =>( <span key={index}>{user} </span>))
+                        }
+                     набирает сообщение...</Typography>:null
+
+                    }
+                </Grid>
+
+                {
+                    this.props.loggedIn ? <Grid item style={{ border: "1px solid #ddd" }}>
+                        <form onSubmit={this.sendMessage}>
+                            <Grid container direction="row" justify="space-between">
+                                <Grid item xs={9} style={{ paddingLeft:"10px", paddingTop: "10px" }}>
+                                    <Input
+                                        placeholder="Отправить сообщение"
+                                        type="text"
+                                        value={this.state.message}
+                                        onChange={this.changeInput}
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item >
+                                    <IconButton type="submit">
+                                        <Send />
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </Grid>
+                    :
+                    <Grid item style={{ border: "1px solid #ddd" }}> 
+                        <Link to="/login" style={{ textDecoration:"underline",height:"40px" }}> <Typography align="center">Необходимо авторизироваться </Typography></Link>
+                    </Grid>
+                }
+
+            </Grid>
         )
     }
 }

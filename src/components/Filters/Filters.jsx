@@ -107,7 +107,6 @@ class Filters extends React.Component {
         return (
             <div>
                 <hr />
-                <form >
                     <Grid container direction="row" justify="space-around" alignItems="baseline">
 
                         <Grid item>
@@ -242,7 +241,6 @@ class Filters extends React.Component {
                             </Button>
                         </Grid>
                     </Grid>
-                </form>
                 <hr />
             </div>
 

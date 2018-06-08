@@ -23,12 +23,6 @@ class HomePage extends React.Component {
                     <Grid item><Typography variant="display4">Актуально</Typography></Grid>
                     <Divider />
                     <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
-                    <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
-                    <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
-                    <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
-                    <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
-                    <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
-                    <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
 
                 </Grid>
             </div>

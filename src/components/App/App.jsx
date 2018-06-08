@@ -14,7 +14,7 @@ import Footer from '../Footer.jsx'
 import { ContactsPage } from '../ContactsPage'
 import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage, MItems, FItems } from '../ItemPages'
 import { ToUpButton } from '../TopButton';
-import { Chat } from '../Chat'
+import { ChatContainer } from '../Chat'
 
 class App extends React.Component {
 
@@ -43,7 +43,7 @@ class App extends React.Component {
                     </div>
                     <div className="footer">
                         <Footer />
-                        <Chat/>
+                        <ChatContainer/>
                     </div>
                 </div>
             </Router>

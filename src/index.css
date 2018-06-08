@@ -102,6 +102,12 @@ aside{
     background: #000;
 }
 
+.wordWrap{
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
 
 @media all and (max-width:960px){
     .mobile900{

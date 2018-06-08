@@ -20,8 +20,9 @@ export class ToUpButton extends React.Component{
         const styles={
             button:{
                 position:"fixed",
-                bottom:"20px",
+                bottom:"5px",
                 right:"10px",
+                zIndex:"999"
             }
         }
 
@@ -34,3 +35,4 @@ export class ToUpButton extends React.Component{
 
     }
 }
+
