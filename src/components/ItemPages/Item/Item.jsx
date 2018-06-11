@@ -16,7 +16,8 @@ import { Link } from 'react-router-dom';
 const styles = {
     card: {
         width: 300,
-        margin: "0 15px 15px 15px"
+        margin: "0 15px 15px 15px",
+        borderRadius:"5px"
     },
     media: {
         height: "350px",

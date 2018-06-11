@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Circular from '../styles/Circular';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography'
+import {Loc} from 'redux-react-i18n'
 
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 
@@ -85,14 +86,14 @@ class LoginPage extends React.Component {
                                 container
                             >
                                 <Grid item>
-                                    <Typography align="center" variant='display3' color="primary">Sign In</Typography>
-                                    <Link to="/register"><Typography align="center" variant='caption'>Need an account?</Typography></Link>
+                                    <Typography align="center" variant='display3' color="primary"><Loc locKey="account.signin"/></Typography>
+                                    <Link to="/register"><Typography align="center" variant='caption'><Loc locKey="account.needReg"/></Typography></Link>
                                 </Grid>
                                 <Grid item >
                                     <TextValidator
                                         fullWidth
                                         required
-                                        label="Login"
+                                        label={<Loc locKey="account.login"/>}
                                         onChange={this.handleChange("username")}
                                         type="text"
                                         name="username"
@@ -106,7 +107,7 @@ class LoginPage extends React.Component {
                                     <TextValidator
                                         required
                                         fullWidth
-                                        label="Password"
+                                        label={<Loc locKey="account.pass"/>}
                                         onChange={this.handleChange("password")}
                                         name="password"
                                         type="password"
@@ -119,11 +120,11 @@ class LoginPage extends React.Component {
                                 {
                                     inProgress ? <Grid item align="center"><Circular /></Grid> :
                                         <Button type="submit" xs={12} variant="raised" size="large" color="primary" style={{ margin: "10px auto" }}>
-                                            Sign in
+                                            {<Loc locKey="account.signin"/>}
                                     </Button>
                                 }
                                 {
-                                    reqError && <Typography align="center" variant="caption" color="error">Incorrect login or password.</Typography>
+                                    reqError && <Typography align="center" variant="caption" color="error"><Loc locKey="account.errsignin"/></Typography>
                                 }
                             </Grid>
                         </ValidatorForm>

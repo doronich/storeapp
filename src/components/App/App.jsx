@@ -16,6 +16,12 @@ import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage, MItems, FItems 
 import { ToUpButton } from '../TopButton';
 import { ChatContainer } from '../Chat'
 
+
+
+const mapStateToProps = ( state ) => {
+    return {}
+};
+
 class App extends React.Component {
 
     render() {
@@ -24,6 +30,7 @@ class App extends React.Component {
             <Router history={history}>
                 <div className="wrapper">
                     <Header/>
+
                     <ToUpButton/>
                     <div className="content">
                         <Aside />
@@ -52,5 +59,5 @@ class App extends React.Component {
 }
 
 
-const connectedApp = connect()(App);
+const connectedApp = connect(mapStateToProps)(App);
 export { connectedApp as App };

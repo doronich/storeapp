@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Circular from '../styles/Circular';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography'
+import {Loc} from 'redux-react-i18n'
 
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 
@@ -101,8 +102,8 @@ class RegisterPage extends React.Component {
                                 container
                                 >
                                     <Grid item>
-                                        <Typography align="center" variant='display3' color="primary">Sign Up</Typography>
-                                        <Link className="link" to="/login"><Typography align="center" variant='caption'>Have an account?</Typography></Link></Grid>
+                                        <Typography align="center" variant='display3' color="primary"><Loc locKey="account.signup"/></Typography>
+                                        <Link className="link" to="/login"><Typography align="center" variant='caption'><Loc locKey="account.needLog"/></Typography></Link></Grid>
                                     <Grid item>
                                         <TextValidator
                                             required
@@ -112,8 +113,8 @@ class RegisterPage extends React.Component {
                                             type="email"
                                             name="email"
                                             value={email}
-                                            validators={['required', 'isEmail']}
-                                            errorMessages={['this field is required', 'email is not valid']}
+                                            validators={[ 'isEmail']}
+                                            errorMessages={[<Loc locKey="account.emailreq"/>]}
                                             margin="dense"
                                         />
                                     </Grid>
@@ -121,13 +122,13 @@ class RegisterPage extends React.Component {
                                         <TextValidator
                                                 fullWidth
                                                 required
-                                                label="Login"
+                                                label={<Loc locKey="account.login"/>}
                                                 onChange={this.handleChange("username")}
                                                 type="text"
                                                 name="username"
                                                 value={username}
-                                                validators={['required','minStringLength:6']}
-                                                errorMessages={['this field is required','login must have atleast 6 characters']}
+                                                validators={['minStringLength:6']}
+                                                errorMessages={[<Loc locKey="account.loginreq"/>]}
                                                 margin="dense"
                                         />
                                     </Grid>
@@ -135,26 +136,26 @@ class RegisterPage extends React.Component {
                                         <TextValidator
                                             required
                                             fullWidth
-                                            label="Password"
+                                            label={<Loc locKey="account.pass"/>}
                                             onChange={this.handleChange("password")}
                                             name="password"
                                             type="password"
                                             margin="dense"
                                             value={password}
-                                            validators={['required','matchRegexp:(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}']}
-                                            errorMessages={['this field is required', 'Password must have contains at least 6 characters; one lowercase character; one upperrcase character; one digit from 0-9.']}
+                                            validators={['matchRegexp:(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}']}
+                                            errorMessages={[<Loc locKey="account.passreq"/>]}
                                         />
                                     </Grid>
                                     <Grid item>
                                         <TextValidator
                                             required
                                             fullWidth
-                                            label="Repeat password"
+                                            label={<Loc locKey="account.confpass"/>}
                                             onChange={this.handleChange("confirmPassword")}
                                             name="repeatPassword"
                                             type="password"
-                                            validators={['isPasswordMatch', 'required']}
-                                            errorMessages={['password mismatch', 'this field is required']}
+                                            validators={['isPasswordMatch']}
+                                            errorMessages={[<Loc locKey="account.passmism"/>]}
                                             value={confirmPassword}
                                             margin="dense"
                                         />
@@ -162,7 +163,7 @@ class RegisterPage extends React.Component {
                                     <Grid item>
                                         <TextField
                                             fullWidth
-                                            label="First name"
+                                            label={<Loc locKey="account.fname"/>}
                                             type="text"
                                             value={firstName}
                                             onChange={this.handleChange("firstName")}
@@ -173,7 +174,7 @@ class RegisterPage extends React.Component {
                                     <Grid item>
                                         <TextField
                                             fullWidth
-                                            label="Last name"
+                                            label={<Loc locKey="account.lname"/>}
                                             type="text"
                                             value={lastName}
                                             onChange={this.handleChange("lastName")}
@@ -183,7 +184,7 @@ class RegisterPage extends React.Component {
                                     {
                                     inProgress? <Grid item align="center"><Circular /></Grid>:
                                     <Button type="submit" xs={12} variant="raised" size="large" color="primary" style={{margin:"10px auto"}}>
-                                    Sign up
+                                    {<Loc locKey="account.signup"/>}
                                     </Button>
                                     }
                                 </Grid>

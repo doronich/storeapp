@@ -11,9 +11,10 @@ import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography'
 import Person from '@material-ui/icons/Person'
 
-
 import { ListMenu } from './List'
+import LanguageSwitcher from './LanguageSwitcher'
 
+import { Loc } from 'redux-react-i18n'
 
 
 const mapDispatchToProps = dispatch => ({
@@ -93,64 +94,80 @@ class Header extends React.Component {
 
                     <Grid item className="nav_item">
                         <Grid container>
-                            <Grid item className="nav_item mobile600" >
+                            {/* <Grid item className="nav_item mobile600" >
                                 <Link to="/allitems">
                                     <Button fullWidth>Все</Button>
                                 </Link>
-                            </Grid>
+                            </Grid> */}
                             <Grid item className="nav_item mobile600" >
                                 <Link to="/f/items">
-                                    <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}>Девушкам</Button>
+                                    <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women"/></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile600" >
                                 <Link to="/m/items">
-                                    <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}>Парням</Button>
+                                    <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men"/></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/contacts">
-                                    <Button fullWidth >Контакты</Button>
+                                    <Button fullWidth ><Loc locKey="header.contacts"/></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/">
-                                    <Button fullWidth >Доставка</Button>
+                                    <Button fullWidth ><Loc locKey="header.delivery"/></Button>
+                                </Link>
+                            </Grid>
+                            <Grid item className="nav_item mobile900" >
+                                <Link className="link" to="/">
+                                    <Button fullWidth ><Loc locKey="header.about"/></Button>
                                 </Link>
                             </Grid>
                         </Grid>
 
                     </Grid>
-                    {
-                        loggedIn ? (
-                            <Grid item className="nav_item mobile900">
-                                <Grid container direction="row" justify="center">
+                    <Grid item className="nav_item">
+                        <Grid container>
+                            {
+                                loggedIn ? (
                                     <Grid item className="nav_item">
-                                        <Link to="/profile" className="link">
-                                            <Button><Person /></Button>
-                                        </Link>
+                                        <Grid container direction="row" justify="center">
+                                            <Grid item className="nav_item mobile900">
+                                                <Link to="/profile" className="link">
+                                                    <Button><Person /></Button>
+                                                </Link>
+                                            </Grid>
+                                            <Grid item className="nav_item mobile900">
+                                                <Link to="/" className="link"><Button fullWidth onClick={this.logout}><Loc locKey="account.logout" /></Button></Link>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item className="nav_item">
-                                        <Link to="/" className="link"><Button fullWidth onClick={this.logout}>Выйти</Button></Link>
-                                    </Grid>
-                                </Grid>
+                                )
+                                    : (
+                                        <Grid item className="nav_item">
+                                            <Grid container direction="row" justify="center">
+                                                <Grid item className="nav_item mobile900">
+                                                    <Link className="link" to="/login">
+                                                        <Button fullWidth><Loc locKey="account.signin" /></Button>
+                                                    </Link>
+                                                </Grid>
+                                                <Grid item className="nav_item mobile900">
+                                                    <Link className="link" to="/register"><Button fullWidth><Loc locKey="account.signup" /></Button></Link>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    )
+                            }
+                            <Grid item>
+                                <LanguageSwitcher/>
                             </Grid>
-                        )
-                            : (
-                                <Grid item className="nav_item mobile900">
-                                    <Grid container direction="row" justify="center">
-                                        <Grid item className="nav_item">
-                                            <Link className="link" to="/login">
-                                                <Button fullWidth>Войти</Button>
-                                            </Link>
-                                        </Grid>
-                                        <Grid item className="nav_item">
-                                            <Link className="link" to="/register"><Button fullWidth>Регистрация</Button></Link>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            )
-                    }
+                        </Grid>
+
+
+
+                    </Grid>
+
 
                     <Drawer open={this.state.left} onClose={this.toggleDrawer(false)}>
                         <div

@@ -34,7 +34,8 @@ function register(creds) {
             //return err;
         })
         .then(response => {
-            return response.data;
+            if(response)return response.data;
+            
         })
 
 }

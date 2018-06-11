@@ -28,7 +28,7 @@ export class ToUpButton extends React.Component{
 
         return(
             
-            <Button variant="fab" color="primary" aria-label="edit" style={styles.button} onClick={this.toTop}>
+            <Button variant="fab" color="secondary" aria-label="edit" style={styles.button} onClick={this.toTop}>
                 <ArrowUpward/>
             </Button>
         );

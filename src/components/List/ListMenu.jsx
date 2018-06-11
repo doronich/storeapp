@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { userConstants, itemConstants } from '../../constants';
+import { Loc } from 'redux-react-i18n'
 
 const mapStateToProps = state => {
     const { loggedIn, currentUser } = state.authentication;
@@ -78,18 +79,18 @@ class ListMenu extends React.Component {
             <List
                 component="nav"
             >
-                <ListSubheader disableSticky>КАТЕГОРИИ</ListSubheader>
-                <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}>Девушкам</Button>
-                <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}>Парням</Button>
-
+                
+                <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women"/></Button>
+                <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men"/></Button>
+                <ListSubheader disableSticky><Loc locKey="aside.categories"/></ListSubheader>
                 <Link to='/items'>
                     <ListItem button>
-                        <ListItemText><Typography variant="button">товары</Typography></ListItemText>
+                        <ListItemText><Typography variant="button"><Loc locKey="aside.products"/></Typography></ListItemText>
                     </ListItem>
                 </Link>
                 <Divider />
                 <ListItem button onClick={this.handleClick('openShoes')}>
-                    <ListItemText><Typography variant="button">Обувь</Typography></ListItemText>
+                    <ListItemText><Typography variant="button"><Loc locKey="aside.footwear"/></Typography></ListItemText>
                     {this.state.openShoes ? <ExpandLess /> : <ExpandMore />}
 
                 </ListItem>
@@ -122,7 +123,7 @@ class ListMenu extends React.Component {
                 <Divider />
 
                 <ListItem button onClick={this.handleClick('openClothing')}>
-                    <ListItemText><Typography variant="button">Одежда</Typography></ListItemText>
+                    <ListItemText><Typography variant="button"><Loc locKey="aside.clothing"/></Typography></ListItemText>
                     {this.state.openClothing ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
 
@@ -191,7 +192,7 @@ class ListMenu extends React.Component {
 
 
                 <ListItem button onClick={this.handleClick('openAccessory')}>
-                    <ListItemText><Typography variant="button">Аксессуары</Typography></ListItemText>
+                    <ListItemText><Typography variant="button"><Loc locKey="aside.accessories"/></Typography></ListItemText>
                     {this.state.openAccessory ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
 
@@ -222,9 +223,9 @@ class ListMenu extends React.Component {
                 </Collapse>
 
                 <Divider />
-
+                <ListSubheader disableSticky><Loc locKey="aside.other"/></ListSubheader>
                 <ListItem button onClick={this.handleClick('openAcc')}>
-                    <ListItemText><Typography variant="button">Профиль</Typography></ListItemText>
+                    <ListItemText><Typography variant="button"><Loc locKey="aside.account.name"/></Typography></ListItemText>
 
                     {this.state.openAcc ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
@@ -254,7 +255,7 @@ class ListMenu extends React.Component {
                                             <Divider />
                                             <Link to='/additem'>
                                                 <ListItem button>
-                                                    <ListItemText primary="Добавить предмет" />
+                                    <ListItemText primary={<Loc locKey="aside.account.additem"/>} />
                                                 </ListItem>
                                             </Link>
                                         </div>
@@ -263,12 +264,12 @@ class ListMenu extends React.Component {
                                     <Divider />
                                     <Link to='/allitems'>
                                         <ListItem button>
-                                            <ListItemText primary="Все предметы" />
+                                            <ListItemText primary={<Loc locKey="aside.account.allitems"/>} />
                                         </ListItem>
                                     </Link>
                                     <Divider />
                                     <ListItem button onClick={this.logout}>
-                                        <ListItemText primary="Выйти" />
+                                        <ListItemText primary={<Loc locKey="account.logout"/>} />
                                     </ListItem>
                                 </div>
 
@@ -279,7 +280,7 @@ class ListMenu extends React.Component {
                 <Divider />
                 <Link to='/contacts'>
                     <ListItem button>
-                        <ListItemText><Typography variant="button">Контакты</Typography></ListItemText>
+                        <ListItemText><Typography variant="button"><Loc locKey="header.contacts"/></Typography></ListItemText>
                     </ListItem>
                 </Link>
 
