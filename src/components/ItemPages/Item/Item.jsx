@@ -17,7 +17,8 @@ const styles = {
     card: {
         width: 300,
         margin: "0 15px 15px 15px",
-        borderRadius:"5px"
+        borderRadius:"5px",
+        backgroundColor:"#fff"
     },
     media: {
         height: "350px",
@@ -55,6 +56,17 @@ class Item extends React.Component {
     render() {
         const { name, price, id, active } = this.state;
         const { currentUser } = this.props;
+
+        let valuePosfix;
+        let valueMultiplier;
+        if(this.props.currency==='rub'){
+            valuePosfix="р."
+            valueMultiplier=1;
+        }else{
+            valuePosfix="$"
+            valueMultiplier=0.5;
+        }
+
         return (
             <div>
 
@@ -74,7 +86,7 @@ class Item extends React.Component {
                                 {name}
                             </Typography>
                             <Typography gutterBottom variant="subheading">
-                                {price} р.
+                                {price*valueMultiplier + valuePosfix}
                             </Typography>
                          {
                             !active&&
@@ -124,8 +136,10 @@ class Item extends React.Component {
 
 const mapStateToProps = state => {
     const { currentUser } = state.authentication;
+    const { currency } = state.item
     return {
-        currentUser
+        currentUser,
+        currency
     };
 }
 

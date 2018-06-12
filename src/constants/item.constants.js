@@ -8,5 +8,6 @@ export const itemConstants={
     PRICESTART:"PRICESTART",
     PRICEEND:"PRICEEND",
     RESET:"RESET",
-    NAME:"NAME"
+    NAME:"NAME",
+    SET_CURRENCY:"SET_CURRENCY",
 }

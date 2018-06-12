@@ -76,6 +76,7 @@ class ListMenu extends React.Component {
         }
 
         return (
+            
             <List
                 component="nav"
             >
@@ -85,7 +86,7 @@ class ListMenu extends React.Component {
                 <ListSubheader disableSticky><Loc locKey="aside.categories"/></ListSubheader>
                 <Link to='/items'>
                     <ListItem button>
-                        <ListItemText><Typography variant="button"><Loc locKey="aside.products"/></Typography></ListItemText>
+                        <ListItemText ><Typography variant="button"><Loc locKey="aside.products"/></Typography></ListItemText>
                     </ListItem>
                 </Link>
                 <Divider />
@@ -237,13 +238,13 @@ class ListMenu extends React.Component {
                                 <Divider />
                                 <Link to='/login'>
                                     <ListItem button>
-                                        <ListItemText primary="Войти" />
+                                        <ListItemText primary={<Loc locKey="account.signin"/>} />
                                     </ListItem>
                                 </Link>
                                 <Divider />
                                 <Link to='/register'>
                                     <ListItem button >
-                                        <ListItemText primary="Регистрация" />
+                                        <ListItemText primary={<Loc locKey="account.signup"/>} />
                                     </ListItem>
                                 </Link>
                             </div> :

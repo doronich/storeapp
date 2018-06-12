@@ -1,7 +1,5 @@
 import React from 'react'
 
-//import { Manager, Reference, Popper } from 'react-popper';
-
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
@@ -13,13 +11,14 @@ import TextField from '@material-ui/core/TextField';
 import 'react-input-range/lib/css/index.css'
 
 import { connect } from 'react-redux';
+import { Loc } from 'redux-react-i18n'
 
-import { itemConstants } from '../../constants';
+import { itemConstants, kinds, subkindsClothing, subkindsFootwear, colors, brandsFootwear,brandsClothing, subkindsAccessories } from '../../constants';
 
 function mapStateToProps(state) {
-    const { sex, kind, subkind, brand, color, priceEnd, priceStart, name } = state.item;
+    const { sex, kind, subkind, brand, color, priceEnd, priceStart, name, currency } = state.item;
     return {
-        sex, kind, subkind, brand, color, priceEnd, priceStart, name
+        sex, kind, subkind, brand, color, priceEnd, priceStart, name, currency
     };
 }
 
@@ -30,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
     changeColor: (color) => dispatch({ type: itemConstants.COLOR, color }),
     changePriceEnd: (priceEnd) => dispatch({ type: itemConstants.PRICEEND, priceEnd }),
     changePriceStart: (priceStart) => dispatch({ type: itemConstants.PRICESTART, priceStart }),
-    changeName: (name)=> dispatch({type:itemConstants.NAME, name}),
+    changeName: (name) => dispatch({ type: itemConstants.NAME, name }),
     reset: () => dispatch({ type: itemConstants.RESET })
 });
 
@@ -46,13 +45,21 @@ class Filters extends React.Component {
                 min: this.props.priceStart,
                 max: this.props.priceEnd
             },
-            name:this.props.name
+            name: this.props.name,
+        }
+        
+        if(this.props.currency==='rub'){
+            this.valuePosfix="р."
+            this.valueMultiplier=1;
+        }else{
+            this.valuePosfix="$"
+            this.valueMultiplier=0.5;
         }
     }
 
     dragEnd = () => {
-        this.props.changePriceEnd(this.state.value.max)
-        this.props.changePriceStart(this.state.value.min)
+        this.props.changePriceEnd(this.state.value.max/this.valueMultiplier)
+        this.props.changePriceStart(this.state.value.min/this.valueMultiplier)
     }
 
     reset = async () => {
@@ -84,163 +91,192 @@ class Filters extends React.Component {
                 break;
         }
     }
+    
 
-    timerId=null;
+    timerId = null;
 
-    searchByName = async (event) =>{
+    searchByName = async (event) => {
         const value = event.target.value;
         await this.setState({ name: value })
         clearTimeout(this.timerId)
-            this.timerId = setTimeout(()=>{
-                this.props.changeName(value) 
-            }
-            ,700)
+        this.timerId = setTimeout(() => {
+            this.props.changeName(value)
+        }, 700)
     }
 
     changeRange = (value) => {
         if (value.min >= 0 && value.max <= 500) this.setState({ value })
-
     }
 
     render() {
         const { kind, subkind, brand, color, name } = this.state;
+
+        const tkinds = kinds.map((item, index) => {
+            return <MenuItem key={index} value={item.value}><Loc locKey={item.name} /></MenuItem>
+        })
+
+        const tcolors = colors.map((item, index) => {
+            return <MenuItem key={index} value={item.value}><Loc locKey={item.name} /></MenuItem>
+        })
+
+        const tsubkindClothing = subkindsClothing.map((item, index) => {
+            return <MenuItem key={index} value={item.value}><Loc locKey={item.name} /></MenuItem>
+        })
+
+        const tsubkindFootwear = subkindsFootwear.map((item, index) => {
+            return <MenuItem key={index} value={item.value}><Loc locKey={item.name} /></MenuItem>
+        })
+
+        const tsubkindAccessories = subkindsAccessories.map((item, index) => {
+            return <MenuItem key={index} value={item.value}><Loc locKey={item.name} /></MenuItem>
+        })
+
+        const tbrandsFootwear = brandsFootwear.map((item, index) => {
+            return <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
+        })
+
+        const tbrandsClothing = brandsClothing.map((item, index) => {
+            return <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
+        })
+
+        if(this.props.currency==='rub'){
+            this.valuePosfix="р."
+            this.valueMultiplier=1;
+        }else{
+            this.valuePosfix="$"
+            this.valueMultiplier=0.5;
+        }
+
         return (
             <div>
                 <hr />
-                    <Grid container direction="row" justify="space-around" alignItems="baseline">
+                <Grid container direction="row" justify="space-around" alignItems="baseline">
 
-                        <Grid item>
-                            <FormControl>
+                    <Grid item>
+                        <FormControl>
+                            <Select
+                                value={kind}
+                                onChange={this.handleChange("kind")}
+                                name="kind"
+                            >
+                                {tkinds}
+                            </Select>
+                            <FormHelperText><Loc locKey="filtres.kind" /></FormHelperText>
+                        </FormControl>
+                    </Grid>
+                    <Grid item>
+                        <FormControl>
+                            {
+                                kind === 2 &&
                                 <Select
-                                    value={kind}
-                                    onChange={this.handleChange("kind")}
-                                    name="kind"
+                                    value={subkind}
+                                    onChange={this.handleChange("subkind")}
+                                    name="subkind"
+
                                 >
-                                    <MenuItem value="none">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={2}>Одежда</MenuItem>
-                                    <MenuItem value={1}>Обувь</MenuItem>
-                                    <MenuItem value={3}>Аксесуары</MenuItem>
-                                    <MenuItem value={0}>Другое</MenuItem>
+                                    {tsubkindClothing}
                                 </Select>
-                                <FormHelperText>Вид</FormHelperText>
-                            </FormControl>
-                        </Grid>
-                        <Grid item>
-                            <FormControl>
-                                {
-                                    kind === 2 &&
-                                    <Select
-                                        value={subkind}
-                                        onChange={this.handleChange("subkind")}
-                                        name="subkind"
-                                        
-                                    >
-                                        <MenuItem value="none">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value="верхняя одежда">Верхняя одежда</MenuItem>
-                                        <MenuItem value="брюки">Брюки</MenuItem>
-                                        <MenuItem value="джинсы">Джинсы</MenuItem>
-                                        <MenuItem value="футболки">Футболки</MenuItem>
-                                        <MenuItem value="шорты">Шорты</MenuItem>
-                                        <MenuItem value="толстовки">Толстовки</MenuItem>
-                                    </Select>
-                                }
+                            }
 
-                                {
-                                    kind === 1 &&
-                                    <Select
-                                        value={subkind}
-                                        onChange={this.handleChange("subkind")}
-                                        name="subkind"
-                                    >
-                                        <MenuItem value="none">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value="кроссовки">Кроссовки</MenuItem>
-                                        <MenuItem value="кеды">Кеды</MenuItem>
-                                    </Select>
-                                }
+                            {
+                                kind === 1 &&
+                                <Select
+                                    value={subkind}
+                                    onChange={this.handleChange("subkind")}
+                                    name="subkind"
+                                >
+                                    {tsubkindFootwear}
+                                </Select>
+                            }
+                            {
+                                kind === 3 &&
+                                <Select
+                                    value={subkind}
+                                    onChange={this.handleChange("subkind")}
+                                    name="subkind"
+                                >
+                                    {tsubkindAccessories}
+                                </Select>
+                            }
 
-                                <FormHelperText>Подвид</FormHelperText>
-                            </FormControl>
-                        </Grid>
+                            <FormHelperText><Loc locKey="filtres.subkind" /></FormHelperText>
+                        </FormControl>
+                    </Grid>
 
-                        <Grid item>
-                            <FormControl>
+                    <Grid item>
+                        <FormControl>
+
+                            {
+                                kind === 1 &&
                                 <Select
                                     value={brand}
                                     onChange={this.handleChange("brand")}
                                     name="brand"
                                 >
                                     <MenuItem value="none">
-                                        <em>None</em>
+                                        <Loc locKey="filtres.none" />
                                     </MenuItem>
-                                    <MenuItem value="Adidas">Adidas</MenuItem>
-                                    <MenuItem value="Nike">Nike</MenuItem>
-                                    <MenuItem value="Puma">Puma</MenuItem>
-                                    <MenuItem value="Kappa">Kappa</MenuItem>
-                                    <MenuItem value="FILA">FILA</MenuItem>
-                                    <MenuItem value="Umbro">Umbro</MenuItem>
-                                    <MenuItem value="The North Face">The North Face</MenuItem>
-                                    <MenuItem value="Reebok">Reebok</MenuItem>
+                                    {tbrandsFootwear}
                                 </Select>
-                                <FormHelperText>Бренд</FormHelperText>
-                            </FormControl>
-                        </Grid>
-
-                        <Grid item>
-                            <FormControl>
+                            }
+                            {
+                                kind === 2 &&
                                 <Select
-                                    value={color}
-                                    onChange={this.handleChange("color")}
-                                    name="color"
+                                    value={brand}
+                                    onChange={this.handleChange("brand")}
+                                    name="brand"
                                 >
-
                                     <MenuItem value="none">
-                                        <em>None</em>
+                                        <Loc locKey="filtres.none" />
                                     </MenuItem>
-                                    <MenuItem value="белый">белый</MenuItem>
-                                    <MenuItem value="черный">черный</MenuItem>
-                                    <MenuItem value="серый">серый</MenuItem>
-                                    <MenuItem value="красный">красный</MenuItem>
-                                    <MenuItem value="синий">синий</MenuItem>
-                                    <MenuItem value="желтый">желтый</MenuItem>
-                                    <MenuItem value="зеленый">зеленый</MenuItem>
-                                    <MenuItem value="розовый">розовый</MenuItem>
+                                    {tbrandsClothing}
                                 </Select>
-                                <FormHelperText>Цвет</FormHelperText>
-                            </FormControl>
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                fullWidth
-                                value={name}
-                                onChange={this.searchByName}
-                                margin="normal"
-                                helperText="поиск по названию"
-                            />
-                        </Grid>
+                            }
 
-                        <Grid item style={{ width: "150px" }}>
-                            <InputRange
-                                formatLabel={value => `${value}р.`}
-                                step={1}
-                                minValue={0}
-                                maxValue={500}
-                                value={this.state.value}
-                                onChange={this.changeRange}
-                                onChangeComplete={this.dragEnd}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <Button onClick={this.reset} variant="raised">
-                                Сбросить
-                            </Button>
-                        </Grid>
+                            <FormHelperText><Loc locKey="filtres.brand" /></FormHelperText>
+                        </FormControl>
                     </Grid>
+
+                    <Grid item>
+                        <FormControl>
+                            <Select
+                                value={color}
+                                onChange={this.handleChange("color")}
+                                name="color"
+                                MenuProps={{ PaperProps: { style: { maxHeight: "400px" } } }}
+                            >
+                                {tcolors}
+                            </Select>
+                            <FormHelperText><Loc locKey="filtres.color" /></FormHelperText>
+                        </FormControl>
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            fullWidth
+                            value={name}
+                            onChange={this.searchByName}
+                            margin="normal"
+                            helperText={<Loc locKey="filtres.searchByName" />}
+                        />
+                    </Grid>
+
+                    <Grid item style={{ width: "150px" }}>
+                        <InputRange
+                            formatLabel={value => `${value}${this.valuePosfix}`}
+                            step={1}
+                            minValue={0}
+                            maxValue={500*this.valueMultiplier}
+                            value={this.state.value}
+                            onChange={this.changeRange}
+                            onChangeComplete={this.dragEnd}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <Button onClick={this.reset} variant="raised">
+                            <Loc locKey="filtres.reset" />
+                        </Button>
+                    </Grid>
+                </Grid>
                 <hr />
             </div>
 

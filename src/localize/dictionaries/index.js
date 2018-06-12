@@ -1,5 +1,5 @@
-import {en} from './en_US'
-import {ru} from './ru-RU'
+//import {en} from './en_US'
+//import {ru} from './ru-RU'
 
 
 
@@ -40,8 +40,60 @@ const dictionaries = {
                 "name":"Account",
                 "allitems":"All products",
                 "additem":"Add a product"
+            },            
+        },
+        "titles":{
+            "products":"Products"
+        },
+        "filtres":{
+            "none":"None",
+            "kind":"Kind",
+            "subkind":"Subkind",
+            "color":"Color",
+            "brand":"Brand",
+            "searchByName":"Search by name",
+            "reset":"Reset",
+            "kinds":{
+                "clothing":"Clothing",
+                "footwear":"Shoes",
+                "accessories":"Accessories",
+                "other":"Other"
             },
-            
+            "subkinds":{
+                "jeans":"Jeans",
+                "shorts":"Shorts",
+                "shirts":"Shirts",
+                "pants":"Pants",
+                "hoodies":"Hoodies",
+                "jackets":"Jacket",
+                "outerwear":"Outerwear",
+                "costumes":"Costumes",
+                "sneakers":"Sneakers",
+                "shoes":"Shoes",
+                "boots":"Boots",
+                "bags":"Bags",
+                "backpacks":"Backpacks",
+                "glasses":"Glasses",
+                "cases":"Cases",
+                "watches":"Watches"
+            },
+            "colors":{
+                "beige":"Beige",
+                "black":"Black",
+                "blue":"Blue",
+                "brown":"Brown",
+                "cream":"Cream",
+                "gray":"Gray",
+                "green":"Green",
+                "multi":"Multi",
+                "navy":"Navy",
+                "orange":"Orange",
+                "pink":"Pink",
+                "purple":"Purple",
+                "red":"Red",
+                "white":"White",
+                "yellow":"Yellow"
+            }
         }
 
     },
@@ -81,10 +133,62 @@ const dictionaries = {
                 "name":"Аккаунт",
                 "allitems":"Все товары",
                 "additem":"Добавить товар"
+            },            
+        },
+        "titles":{
+            "products":"Товары"
+        },
+        "filtres":{
+            "none":"Нет",
+            "kind":"Вид",
+            "subkind":"Подвид",
+            "color":"Цвет",
+            "brand":"Бренд",
+            "searchByName":"Поиск по названию",
+            "reset":"Сброс",
+            "kinds":{
+                "clothing":"Одежда",
+                "footwear":"Обувь",
+                "accessories":"Аксессуары",
+                "other":"Другое"
             },
-            
+            "subkinds":{
+                "jeans":"Джинсы",
+                "shorts":"Шорты",
+                "shirts":"Рубашки",
+                "pants":"Брюки",
+                "hoodies":"Худи",
+                "jackets":"Джакет",
+                "outerwear":"Верхняя одежда",
+                "costumes":"Костюмы",
+                "sneakers":"Кроссовки",
+                "shoes":"Туфли",
+                "boots":"Ботинки",
+                "bags":"Сумки",
+                "backpacks":"Рюкзаки",
+                "glasses":"Очки",
+                "cases":"Чехлы",
+                "watches":"Часы",
+                
+            },
+            "colors":{
+                "beige":"Бежевый",
+                "black":"Черный",
+                "blue":"Голубой",
+                "brown":"Коричневый",
+                "cream":"Кремовый",
+                "gray":"Серый",
+                "green":"Зеленый",
+                "multi":"Многоцветный",
+                "navy":"Темно-синий",
+                "orange":"Оранжевый",
+                "pink":"Розовый",
+                "purple":"Фиолетовый",
+                "red":"Красный",
+                "white":"Белый",
+                "yellow":"Желтый"
+            }
         }
-
     }
 }
 

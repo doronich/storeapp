@@ -12,8 +12,6 @@ export class ToUpButton extends React.Component{
         }
         else clearTimeout(this.tId);
         return false
-/*         document.body.scrollTop=0;
-        document.documentElement.scrollTop=0; */
     }
 
     render(){
