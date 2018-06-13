@@ -80,6 +80,7 @@ class Filters extends React.Component {
         this.setState({ [name]: event.target.value });
         switch (name) {
             case "kind": this.props.changeKind(event.target.value);
+                        this.props.changeSubkind("none")
                 break;
             case "subkind": this.props.changeSubkind(event.target.value);
                 break;
@@ -150,7 +151,7 @@ class Filters extends React.Component {
         return (
             <div>
                 <hr />
-                <Grid container direction="row" justify="space-around" alignItems="baseline">
+                <Grid id="filtres" container direction={"row"} justify="space-around" alignItems="baseline">
 
                     <Grid item>
                         <FormControl>
@@ -260,7 +261,7 @@ class Filters extends React.Component {
                         />
                     </Grid>
 
-                    <Grid item style={{ width: "150px" }}>
+                    <Grid item style={{ width: "200px" }}>
                         <InputRange
                             formatLabel={value => `${value}${this.valuePosfix}`}
                             step={1}

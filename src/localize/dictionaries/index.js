@@ -5,6 +5,7 @@
 
 const dictionaries = {
     "en-US":{
+        "currency":"$",
         "account":{
             "logout": "Logout",
             "signin": "Sign In",
@@ -94,10 +95,30 @@ const dictionaries = {
                 "white":"White",
                 "yellow":"Yellow"
             }
+        },
+        "chat":{
+            "name":"Chat",
+            "welcome":"Welcome!",
+            'auth':"To write you must log in",
+            "send": "Write a message...",
+            "typing":"is typing..."
+        },
+        "item":{
+            "change":"Change",
+            "remove":"Remove",
+            "brand":"Brand",
+            "color":"Color",
+            "size":"Size",
+            "desc":"Description",
+            "add":"Add to cart",
+            "added":"Added",
+            "notAv":"Not available",
+            "cancel":"Cancel"
         }
 
     },
     "ru-RU":{
+        "currency":"р.",
         "account":{
             "logout": "Выйти",
             "signin": "Войти",
@@ -188,6 +209,25 @@ const dictionaries = {
                 "white":"Белый",
                 "yellow":"Желтый"
             }
+        },
+        "chat":{
+            "name":"Чат",
+            "welcome":"Приветствуем!",
+            'auth':"Необходимо авторизироваться",
+            "send": "Отправить сообщение",
+            "typing":"набирает сообщение..."
+        },
+        "item":{
+            "change":"Изменить",
+            "remove":"Удалить",
+            "brand":"Бренд",
+            "color":"Цвет",
+            "size":"Размер",
+            "desc":"Описание",
+            "add":"Добавить в корзину",
+            "added":"Добавлено",
+            "notAv":"Не доступен",
+            "cancel":"Отмена"
         }
     }
 }

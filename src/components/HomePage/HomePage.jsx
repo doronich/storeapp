@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
+import {Last} from './sections'
 
 class HomePage extends React.Component {
 
@@ -18,9 +19,12 @@ class HomePage extends React.Component {
                     {loggedIn ? <Grid item><Typography variant="display1" >Hi {currentUser.username}!</Typography></Grid> 
                     : <Grid item><Typography variant="display1" >Welcome travaler!</Typography></Grid>}
                     <Divider />
-                    <Grid item><Typography variant="display4">Рекомендуем</Typography></Grid>
+                    <Grid item>
+                        <Typography align="center" color="secondary" gutterBottom variant="display1">Последние</Typography>
+                        <Last/>
+                    </Grid>
                     <Divider />
-                    <Grid item><Typography variant="display4">Актуально</Typography></Grid>
+                    <Grid item><Typography variant="display4">СЛАЙДЕР</Typography></Grid>
                     <Divider />
                     <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
 

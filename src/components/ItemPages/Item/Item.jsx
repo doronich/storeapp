@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Loc } from 'redux-react-i18n'
 
 
 const styles = {
@@ -57,13 +58,10 @@ class Item extends React.Component {
         const { name, price, id, active } = this.state;
         const { currentUser } = this.props;
 
-        let valuePosfix;
         let valueMultiplier;
         if(this.props.currency==='rub'){
-            valuePosfix="р."
             valueMultiplier=1;
         }else{
-            valuePosfix="$"
             valueMultiplier=0.5;
         }
 
@@ -86,12 +84,12 @@ class Item extends React.Component {
                                 {name}
                             </Typography>
                             <Typography gutterBottom variant="subheading">
-                                {price*valueMultiplier + valuePosfix}
+                                {price*valueMultiplier}<Loc locKey="currency"/>
                             </Typography>
                          {
                             !active&&
                             <Typography gutterBottom variant="caption" color="error">
-                            Не доступен
+                                <Loc locKey="item.notAv"/>
                             </Typography>
                          }
                         </CardContent>
@@ -100,12 +98,12 @@ class Item extends React.Component {
                         currentUser? currentUser.role==="Admin" &&
                         <CardActions>
                             <Link to={"/updateitem/" + id}>
-                                <Button size="small" color="primary">
-                                    Изменить
+                                <Button size="small" color="secondary">
+                                <Loc locKey="item.change"/>
                                 </Button>
                             </Link>
-                            <Button size="small" color="primary" onClick={this.handleClickOpen}>
-                                Удалить
+                            <Button size="small" color="secondary" onClick={this.handleClickOpen}>
+                            <Loc locKey="item.remove"/>
                             </Button>
                         </CardActions>
                         :null
@@ -121,11 +119,11 @@ class Item extends React.Component {
                 >
                     <DialogTitle id="alert-dialog-title">{"Удалить предмет?"}</DialogTitle>
                     <DialogActions>
-                        <Button onClick={this.DeleteItem} color="primary" variant="raised">
-                            Удалить
+                        <Button onClick={this.DeleteItem} color="secondary" variant="raised">
+                        <Loc locKey="item.remove"/>
                         </Button>
-                        <Button onClick={this.handleClose} color="primary" autoFocus>
-                            Отмена
+                        <Button onClick={this.handleClose} color="secondary" autoFocus>
+                        <Loc locKey="item.cancel"/>
                         </Button>
                     </DialogActions>
                 </Dialog>

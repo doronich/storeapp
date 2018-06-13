@@ -160,8 +160,16 @@ export const brandsFootwear = [
         value: "asics"
     },
     {
+        name:"Dr Martens",
+        value:"dr martens"
+    },
+    {
         name: "Nike",
         value: "nike"
+    },
+    {
+        name: "FILA",
+        value: "fila"
     },
     {
         name: "Jordan",
@@ -192,8 +200,8 @@ export const brandsFootwear = [
         value: "converse"
     },
     {
-        name: "Newbalance",
-        value: "newbalance"
+        name: "New balance",
+        value: "new balance"
     },
     {
         name: "Balenciaga",

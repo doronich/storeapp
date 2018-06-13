@@ -40,13 +40,13 @@ class App extends React.Component {
                         <AdminRoute exact path="/updateitem/:number" component={UpdateItemPage}/>
                         <Route exact path="/item/:number" component={ItemPage}/>
                         {/* <PrivateRoute exact path="/allitems" component={Items}/> */}
-                        <Route exact path="/allitems" component={Items}/>
+                        <AdminRoute exact path="/allitems" component={Items}/>
                         <Route path='/login' component={LoginPage} />
                         <Route path='/register' component={RegisterPage} />
                         <Route path='/contacts' component={ContactsPage} />
-                        <Route strict path='/f/items/:kind?/:subkind?/:brand?/:color?' component={FItems}/>
-                        <Route strict path='/m/items/:kind?/:subkind?/:brand?/:color?' component={MItems}/>
-                        <Route strict path='/items/:sex?/:kind?/:subkind?' component={ItemsPage}/>
+                        <Route strict path='/f/items' component={FItems}/>
+                        <Route strict path='/m/items' component={MItems}/>
+                        <Route strict path='/items' component={ItemsPage}/>
                     </div>
                     <div className="footer">
                         <Footer />

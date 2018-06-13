@@ -7,7 +7,8 @@ export const itemService = {
     getItem,
     getAllItems,
     deleteItem,
-    getReqItems
+    getReqItems,
+    getLast
 }
 
 function addItem(obj){
@@ -40,4 +41,8 @@ function getUser(){
 function deleteItem(id){
     const user = getUser();
     return axios.delete(`${api.url}/api/item/${id}`,user&&{headers:{"Authorization":"Bearer "+user.acces_token}})
+}
+
+function getLast(n=5){
+    return axios.get(`${api.url}/api/item/last?amount=${n}`)
 }

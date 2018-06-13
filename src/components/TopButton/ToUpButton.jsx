@@ -7,7 +7,7 @@ export class ToUpButton extends React.Component{
     toTop = () => {
         const top = Math.max(document.body.scrollTop,document.documentElement.scrollTop)
         if(top > 0){
-            window.scrollBy(0, -50);
+            window.scrollBy(0, -100);
             this.tId = setTimeout(()=>this.toTop(),15);
         }
         else clearTimeout(this.tId);

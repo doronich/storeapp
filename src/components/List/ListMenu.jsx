@@ -11,7 +11,7 @@ import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { userConstants, itemConstants } from '../../constants';
+import { userConstants, itemConstants, subkindsClothing, subkindsFootwear, subkindsAccessories } from '../../constants';
 import { Loc } from 'redux-react-i18n'
 
 const mapStateToProps = state => {
@@ -58,12 +58,17 @@ class ListMenu extends React.Component {
         this.props.toFemale();
     }
 
-    changeKind = (n) => (event) => {
-        this.props.changeKind(n)
+
+    changeSubkindClothing = (n) => (event) => {
+        this.props.changeKind(2)
+        this.props.changeSubkind(n)
     }
-
-
-    changeSubkind = (n) => (event) => {
+    changeSubkindFootwear = (n) => (event) => {
+        this.props.changeKind(1)
+        this.props.changeSubkind(n)
+    }
+    changeSubkindAccessories = (n) => (event) => {
+        this.props.changeKind(3)
         this.props.changeSubkind(n)
     }
 
@@ -74,117 +79,80 @@ class ListMenu extends React.Component {
         const border = {
             border: "2px solid black"
         }
+        const tsubkindClothing = subkindsClothing.map((item, index) => {
+            if(index===0)return null;
+            return <div key={index}>
+                <Divider />
+                <Link to={`/${sex}/items`}>
+                    <ListItem button onClick={this.changeSubkindClothing(item.value)}>
+                        <ListItemText primary={<Loc locKey={item.name}/>} />
+                    </ListItem>
+                </Link>
+            </div>
+        })
+
+        const tsubkindFootwear = subkindsFootwear.map((item, index) => {
+            if(index===0)return null;
+            return <div key={index}>
+                <Divider />
+                <Link to={`/${sex}/items`}>
+                    <ListItem button onClick={this.changeSubkindFootwear(item.value)}>
+                        <ListItemText primary={<Loc locKey={item.name}/>} />
+                    </ListItem>
+                </Link>
+            </div>
+        })
+
+        const tsubkindAccessories= subkindsAccessories.map((item, index) => {
+            if(index===0)return null;
+            return <div key={index}>
+                <Divider />
+                <Link to={`/${sex}/items`}>
+                    <ListItem button onClick={this.changeSubkindAccessories(item.value)}>
+                        <ListItemText primary={<Loc locKey={item.name}/>} />
+                    </ListItem>
+                </Link>
+            </div>
+        })
 
         return (
-            
+
             <List
                 component="nav"
             >
-                
-                <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women"/></Button>
-                <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men"/></Button>
-                <ListSubheader disableSticky><Loc locKey="aside.categories"/></ListSubheader>
+
+                <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women" /></Button>
+                <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men" /></Button>
+                <ListSubheader disableSticky><Loc locKey="aside.categories" /></ListSubheader>
                 <Link to='/items'>
                     <ListItem button>
-                        <ListItemText ><Typography variant="button"><Loc locKey="aside.products"/></Typography></ListItemText>
+                        <ListItemText ><Typography variant="button"><Loc locKey="aside.products" /></Typography></ListItemText>
                     </ListItem>
                 </Link>
                 <Divider />
                 <ListItem button onClick={this.handleClick('openShoes')}>
-                    <ListItemText><Typography variant="button"><Loc locKey="aside.footwear"/></Typography></ListItemText>
+                    <ListItemText><Typography variant="button"><Loc locKey="aside.footwear" /></Typography></ListItemText>
                     {this.state.openShoes ? <ExpandLess /> : <ExpandMore />}
 
                 </ListItem>
 
                 <Collapse in={this.state.openShoes} timeout="auto" unmountOnExit>
-                    <List component='div' onClick={this.changeKind(1)}>
-                        <Divider />
-                        <Link to={`/${sex}/items/1/кроссовки`}>
-                            <ListItem button>
-                                <ListItemText primary="Кроссовки" />
-                            </ListItem>
-                        </Link>
-
-                        <Divider />
-                        <Link to={`/${sex}/items/1/кеды`}>
-                            <ListItem button>
-                                <ListItemText primary="Кеды" />
-                            </ListItem>
-                        </Link>
-
-                        <Divider />
-                        <Link to={`/${sex}/items/1/туфли`}>
-                            <ListItem button>
-                                <ListItemText primary="Туфли" />
-                            </ListItem>
-                        </Link>
+                    <List component='div'>
+                    {tsubkindFootwear}
                     </List>
                 </Collapse>
 
                 <Divider />
 
                 <ListItem button onClick={this.handleClick('openClothing')}>
-                    <ListItemText><Typography variant="button"><Loc locKey="aside.clothing"/></Typography></ListItemText>
+                    <ListItemText><Typography variant="button"><Loc locKey="aside.clothing" /></Typography></ListItemText>
                     {this.state.openClothing ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
 
                 <Collapse in={this.state.openClothing} timeout="auto" unmountOnExit>
 
-                    <List component='div' onClick={this.changeKind(2)}>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/верхняя одежда`}>
-                            <ListItem button>
-                                <ListItemText primary="Верхняя одежда"></ListItemText>
-                            </ListItem>
-                        </Link>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/свитшоты`}>
-                            <ListItem button>
-                                <ListItemText primary="Свитшоты"></ListItemText>
-                            </ListItem>
-                        </Link>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/брюки`}>
-                            <ListItem button>
-                                <ListItemText primary="Брюки" />
-                            </ListItem>
-                        </Link>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/джинсы`}>
-                            <ListItem button>
-                                <ListItemText primary="Джинсы" />
-                            </ListItem>
-                        </Link>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/футболки и поло`}>
-                            <ListItem button>
-                                <ListItemText primary="Футболки и поло" />
-                            </ListItem>
-                        </Link>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/нижнее бельё`}>
-                            <ListItem button>
-                                <ListItemText primary="Нижнее бельё" />
-                            </ListItem>
-                        </Link>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/толстовки`}>
-                            <ListItem button>
-                                <ListItemText primary="Толстовки" />
-                            </ListItem>
-                        </Link>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/шорты`}>
-                            <ListItem button>
-                                <ListItemText primary="Шорты" />
-                            </ListItem>
-                        </Link>
-                        <Divider />
-                        <Link to={`/${sex}/items/2/костюмы`}>
-                            <ListItem button>
-                                <ListItemText primary="Костюмы" />
-                            </ListItem>
-                        </Link>
+                    <List component='div'>
+                        {tsubkindClothing}
                     </List>
                 </Collapse>
 
@@ -193,40 +161,21 @@ class ListMenu extends React.Component {
 
 
                 <ListItem button onClick={this.handleClick('openAccessory')}>
-                    <ListItemText><Typography variant="button"><Loc locKey="aside.accessories"/></Typography></ListItemText>
+                    <ListItemText><Typography variant="button"><Loc locKey="aside.accessories" /></Typography></ListItemText>
                     {this.state.openAccessory ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
 
                 <Collapse in={this.state.openAccessory} timeout="auto" unmountOnExit>
 
-                    <List component='div' onClick={this.changeKind(3)}>
-                        <Divider />
-                        <ListItem button>
-                            <ListItemText primary="Очки"></ListItemText>
-                        </ListItem>
-                        <Divider />
-                        <ListItem button>
-                            <ListItemText primary="Часы" />
-                        </ListItem>
-                        <Divider />
-                        <ListItem button>
-                            <ListItemText primary="Чехлы" />
-                        </ListItem>
-                        <Divider />
-                        <ListItem button>
-                            <ListItemText primary="Сумки" />
-                        </ListItem>
-                        <Divider />
-                        <ListItem button>
-                            <ListItemText primary="Рюкзаки" />
-                        </ListItem>
+                    <List component='div'>
+                        {tsubkindAccessories}
                     </List>
                 </Collapse>
 
                 <Divider />
-                <ListSubheader disableSticky><Loc locKey="aside.other"/></ListSubheader>
+                <ListSubheader disableSticky><Loc locKey="aside.other" /></ListSubheader>
                 <ListItem button onClick={this.handleClick('openAcc')}>
-                    <ListItemText><Typography variant="button"><Loc locKey="aside.account.name"/></Typography></ListItemText>
+                    <ListItemText><Typography variant="button"><Loc locKey="aside.account.name" /></Typography></ListItemText>
 
                     {this.state.openAcc ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
@@ -238,25 +187,25 @@ class ListMenu extends React.Component {
                                 <Divider />
                                 <Link to='/login'>
                                     <ListItem button>
-                                        <ListItemText primary={<Loc locKey="account.signin"/>} />
+                                        <ListItemText primary={<Loc locKey="account.signin" />} />
                                     </ListItem>
                                 </Link>
                                 <Divider />
                                 <Link to='/register'>
                                     <ListItem button >
-                                        <ListItemText primary={<Loc locKey="account.signup"/>} />
+                                        <ListItemText primary={<Loc locKey="account.signup" />} />
                                     </ListItem>
                                 </Link>
                             </div> :
                                 <div>
 
                                     {
-                                        currentUser.role==="Admin"&&
+                                        currentUser.role === "Admin" &&
                                         <div>
                                             <Divider />
                                             <Link to='/additem'>
                                                 <ListItem button>
-                                    <ListItemText primary={<Loc locKey="aside.account.additem"/>} />
+                                                    <ListItemText primary={<Loc locKey="aside.account.additem" />} />
                                                 </ListItem>
                                             </Link>
                                         </div>
@@ -265,12 +214,12 @@ class ListMenu extends React.Component {
                                     <Divider />
                                     <Link to='/allitems'>
                                         <ListItem button>
-                                            <ListItemText primary={<Loc locKey="aside.account.allitems"/>} />
+                                            <ListItemText primary={<Loc locKey="aside.account.allitems" />} />
                                         </ListItem>
                                     </Link>
                                     <Divider />
                                     <ListItem button onClick={this.logout}>
-                                        <ListItemText primary={<Loc locKey="account.logout"/>} />
+                                        <ListItemText primary={<Loc locKey="account.logout" />} />
                                     </ListItem>
                                 </div>
 
@@ -281,7 +230,7 @@ class ListMenu extends React.Component {
                 <Divider />
                 <Link to='/contacts'>
                     <ListItem button>
-                        <ListItemText><Typography variant="button"><Loc locKey="header.contacts"/></Typography></ListItemText>
+                        <ListItemText><Typography variant="button"><Loc locKey="header.contacts" /></Typography></ListItemText>
                     </ListItem>
                 </Link>
 

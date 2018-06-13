@@ -2,9 +2,9 @@ import React from 'react'
 import { ItemList } from './Item'
 
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 import { Filters } from '../Filters'
-import { Loc } from 'redux-react-i18n'
+//import { Loc } from 'redux-react-i18n'
 
 export class ItemsPage extends React.Component {
      constructor(props){

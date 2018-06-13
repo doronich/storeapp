@@ -1,9 +1,17 @@
 import React from 'react'
 import { itemService } from '../../services'
-
+import { connect } from 'react-redux';
 import { Grid, Typography, Button } from '@material-ui/core'
+import { Loc} from 'redux-react-i18n'
 
-export class ItemPage extends React.Component {
+const mapStateToProps = (state)=>{
+    const currency = state.item.currency
+    return{
+        currency
+    }
+}
+
+class ItemPage extends React.Component {
 
     state = {
         name: "",
@@ -63,6 +71,12 @@ export class ItemPage extends React.Component {
 
     render() {
 
+        let valueMultiplier;
+        if(this.props.currency==='rub'){
+            valueMultiplier=1;
+        }else{
+            valueMultiplier=0.5;
+        }
         const { name, price, color, size, description, brand } = this.state;
 
         return (
@@ -102,18 +116,18 @@ export class ItemPage extends React.Component {
 
                                     </Grid>
                                 </Grid>
-                                <Grid item style={{ width: "600px", marginRight: "20px" }}>
+                                <Grid item style={{ maxWidth: "600px", marginRight: "20px" }}>
                                     <img src={this.state.mainImage} alt="main" className="photo" style={{ maxHeight: "700px", maxWidth: "600px" }} />
                                 </Grid>
                                 <Grid item>
                                     <Typography variant="display1" gutterBottom>{name}</Typography>
-                                    <Typography variant="title" gutterBottom>{price}р.</Typography>
-                                    <Typography variant="button" color="secondary" gutterBottom>Бренд: {brand}</Typography>
-                                    <Typography variant="button" color="secondary" gutterBottom>Цвет: {color}</Typography>
-                                    <Typography variant="button" color="secondary" gutterBottom>Размер: {size}</Typography>
+                                    <Typography variant="title" gutterBottom>{price*valueMultiplier}<Loc locKey="currency"/></Typography>
+                                    <Typography variant="button" color="secondary" gutterBottom><Loc locKey="item.brand"/>: {brand}</Typography>
+                                    <Typography variant="button" color="secondary" gutterBottom><Loc locKey="item.color"/>: {color}</Typography>
+                                    <Typography variant="button" color="secondary" gutterBottom><Loc locKey="item.size"/>: {size}</Typography>
                                     
-                                    <Typography variant="headline" color="secondary" gutterBottom>Описание: <br /> {description}</Typography>
-                                    <Button variant="raised" color="secondary">Добавить в корзину</Button>
+                                    <Typography variant="headline" color="secondary" gutterBottom><Loc locKey="item.desc"/>: <br /> {description}</Typography>
+                                    <Button variant="raised" color="secondary"><Loc locKey="item.add"/></Button>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -124,3 +138,6 @@ export class ItemPage extends React.Component {
         )
     }
 }
+
+const connectedItemPage = connect(mapStateToProps)(ItemPage);
+export { connectedItemPage as ItemPage };

@@ -12,7 +12,7 @@ class Aside extends React.Component{
     render(){
 
         return(
-            <aside className="mobile900" style={{maxHeight:"760px",overflow:"auto", backgroundColor:"#fff"}}>
+            <aside className="mobile900" style={{ backgroundColor:"#fff"}}>
                 <ListMenu {...this.props}/>
             </aside>
         );

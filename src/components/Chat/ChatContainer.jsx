@@ -3,14 +3,21 @@ import React from 'react'
 import { AppBar, IconButton, Typography, Grid} from '@material-ui/core'
 import { ArrowDropUp, ArrowDropDown } from '@material-ui/icons'
 import { Chat } from './Chat'
+import { Loc } from 'redux-react-i18n'
 
 export class ChatContainer extends React.Component {
     state = {
-        opened: false
+        opened: false,
+        chatWidth:"100px"
     }
 
     toggleChat = () => {
         this.setState({ opened: !this.state.opened })
+        if(this.state.chatWidth==="100px"){
+            this.setState({chatWidth:"300px"})
+        }else{
+            this.setState({chatWidth:"100px"})
+        }
     }
 
     render() {
@@ -22,7 +29,7 @@ export class ChatContainer extends React.Component {
                 bottom: "0",
                 right: "80px",
                 zIndex: "999",
-                width: "300px",
+                width: this.state.chatWidth,
                 backgroundColor: "rgb(240, 240, 240)",
                 boxShadow: "0px 3px 25px rgb(43, 43, 43)"
             }
@@ -41,7 +48,7 @@ export class ChatContainer extends React.Component {
                         </Grid>
                         <Grid item>
                             <Typography variant="title" color="inherit">
-                                Чат
+                                <Loc locKey="chat.name"/>
                             </Typography>
                         </Grid>
                     </Grid>

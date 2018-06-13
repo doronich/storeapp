@@ -86,7 +86,7 @@ aside{
 }
 
 .backcolor_primary{
-    background-color: #000;
+    background-color: #fff;
 }
 
 .backcolor_secondary{
@@ -130,7 +130,17 @@ aside{
     .mobile600{
         display: none;
     }
-
+    #filtres{
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #filtres>div{
+        margin: 20px 0 0 0;
+    }
+    #filtres>div:last-child{
+        margin: 40px 0 0 0;
+    }
     .not_mobile{
         display: block;
     }

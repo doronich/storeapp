@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { IconButton, Input, Grid, Typography } from '@material-ui/core'
 import { Send } from '@material-ui/icons'
+import { Loc } from 'redux-react-i18n'
 
 function mapStateToProps(state) {
     const { currentUser, loggedIn } = state.authentication;
@@ -110,7 +111,7 @@ class Chat extends React.Component {
         return (
             <Grid container direction="column" >
                 <Grid item id="chatDisplay" style={{ height: "400px",width:"100%", overflowY: "scroll", overflowX: "hidden",paddingLeft:"10px" }}>
-                    <Typography variant="subheading" color="textSecondary">Приветствуем!</Typography>
+                    <Typography variant="subheading" color="textSecondary"><Loc locKey="chat.welcome"/></Typography>
                     {
                         this.state.messages.map((message, index) => (
                             <span className="wordWrap" key={index}>{message}</span>
@@ -121,7 +122,7 @@ class Chat extends React.Component {
                         {
                             this.state.users.map((user, index) =>( <span key={index}>{user} </span>))
                         }
-                     набирает сообщение...</Typography>:null
+                     <Loc locKey="chat.typing"/></Typography>:null
 
                     }
                 </Grid>
@@ -132,7 +133,7 @@ class Chat extends React.Component {
                             <Grid container direction="row" justify="space-between">
                                 <Grid item xs={9} style={{ paddingLeft:"10px", paddingTop: "10px" }}>
                                     <Input
-                                        placeholder="Отправить сообщение"
+                                        placeholder="Write a message..."//{<Loc locKey="chat.send"/>}
                                         type="text"
                                         value={this.state.message}
                                         onChange={this.changeInput}
@@ -149,7 +150,7 @@ class Chat extends React.Component {
                     </Grid>
                     :
                     <Grid item style={{ border: "1px solid #ddd" }}> 
-                        <Link to="/login" style={{ textDecoration:"underline",height:"40px" }}> <Typography align="center">Необходимо авторизироваться </Typography></Link>
+                        <Link to="/login" style={{ textDecoration:"underline",height:"40px" }}> <Typography align="center"><Loc locKey="chat.auth"/></Typography></Link>
                     </Grid>
                 }
 
