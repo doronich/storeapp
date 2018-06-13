@@ -70,7 +70,7 @@ class Header extends React.Component {
         const { loggedIn, sex } = this.props;
 
         const border = {
-            borderBottom: "3px solid black"
+            borderBottom: "3px solid white"
         }
 
         const list = (
@@ -79,10 +79,10 @@ class Header extends React.Component {
             </div>
         );
         return (
-            <header className="navbar">
+            <header className="navbar backcolor_secondary">
                 <Grid className="nav" component="nav" container direction="row" justify="space-between" alignItems="center">
                     <Grid item className="nav_item not_mobile">
-                        <IconButton onClick={this.toggleDrawer(true)} color="inherit" aria-label="Menu">
+                        <IconButton onClick={this.toggleDrawer(true)} color="primary" aria-label="Menu">
                             <MenuIcon />
                         </IconButton>
                     </Grid>
@@ -101,27 +101,27 @@ class Header extends React.Component {
                             </Grid> */}
                             <Grid item className="nav_item mobile600" >
                                 <Link to="/f/items">
-                                    <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women"/></Button>
+                                    <Button fullWidth color="primary" onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women"/></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile600" >
                                 <Link to="/m/items">
-                                    <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men"/></Button>
+                                    <Button fullWidth color="primary" onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men"/></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/contacts">
-                                    <Button fullWidth ><Loc locKey="header.contacts"/></Button>
+                                    <Button fullWidth color="primary" ><Loc locKey="header.contacts"/></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/">
-                                    <Button fullWidth ><Loc locKey="header.delivery"/></Button>
+                                    <Button fullWidth color="primary" ><Loc locKey="header.delivery"/></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/">
-                                    <Button fullWidth ><Loc locKey="header.about"/></Button>
+                                    <Button fullWidth color="primary" ><Loc locKey="header.about"/></Button>
                                 </Link>
                             </Grid>
                         </Grid>
@@ -135,11 +135,11 @@ class Header extends React.Component {
                                         <Grid container direction="row" justify="center">
                                             <Grid item className="nav_item mobile900">
                                                 <Link to="/profile" className="link">
-                                                    <Button><Person /></Button>
+                                                    <Button color="primary"><Person /></Button>
                                                 </Link>
                                             </Grid>
                                             <Grid item className="nav_item mobile900">
-                                                <Link to="/" className="link"><Button fullWidth onClick={this.logout}><Loc locKey="account.logout" /></Button></Link>
+                                                <Link to="/" className="link"><Button color="primary" fullWidth onClick={this.logout}><Loc locKey="account.logout" /></Button></Link>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -149,11 +149,11 @@ class Header extends React.Component {
                                             <Grid container direction="row" justify="center">
                                                 <Grid item className="nav_item mobile900">
                                                     <Link className="link" to="/login">
-                                                        <Button fullWidth><Loc locKey="account.signin" /></Button>
+                                                        <Button fullWidth color="primary"><Loc locKey="account.signin" /></Button>
                                                     </Link>
                                                 </Grid>
                                                 <Grid item className="nav_item mobile900">
-                                                    <Link className="link" to="/register"><Button fullWidth><Loc locKey="account.signup" /></Button></Link>
+                                                    <Link className="link" to="/register"><Button fullWidth color="primary"><Loc locKey="account.signup" /></Button></Link>
                                                 </Grid>
                                             </Grid>
                                         </Grid>

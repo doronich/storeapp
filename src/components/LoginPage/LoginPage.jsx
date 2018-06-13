@@ -79,14 +79,14 @@ class LoginPage extends React.Component {
                     justify="center"
                 >
 
-                    <Grid item sm={4} lg={3} xl={2}>
+                    <Grid item xs={8} sm={4} lg={3} xl={2}>
                         <ValidatorForm onSubmit={this.handleSubmit}>
                             <Grid
                                 direction="column"
                                 container
                             >
                                 <Grid item>
-                                    <Typography align="center" variant='display3' color="primary"><Loc locKey="account.signin"/></Typography>
+                                    <Typography align="center" variant='display1' color="secondary"><Loc locKey="account.signin"/></Typography>
                                     <Link to="/register"><Typography align="center" variant='caption'><Loc locKey="account.needReg"/></Typography></Link>
                                 </Grid>
                                 <Grid item >
@@ -119,7 +119,7 @@ class LoginPage extends React.Component {
                                 </Grid>
                                 {
                                     inProgress ? <Grid item align="center"><Circular /></Grid> :
-                                        <Button type="submit" xs={12} variant="raised" size="large" color="primary" style={{ margin: "10px auto" }}>
+                                        <Button type="submit" xs={12} variant="raised" size="large" color="secondary" style={{ margin: "10px auto" }}>
                                             {<Loc locKey="account.signin"/>}
                                     </Button>
                                 }

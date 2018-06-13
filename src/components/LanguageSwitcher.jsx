@@ -62,11 +62,10 @@ class LanguageSwitcher extends React.Component {
             block: {
                 display: "block",
                 position: "absolute",
-                backgroundColor: "#fff",
                 boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
                 zIndex: "1",
-                right: "0px",
-                top: "50px"
+                right: "1px",
+                top: "49px"
             }
         }
 
@@ -75,7 +74,7 @@ class LanguageSwitcher extends React.Component {
                 <IconButton onClick={this.handleClick}>
                     <Language color="primary" />
                 </IconButton>
-                <div style={this.state.open ? styles.block : styles.dropdownContent}>
+                <div  className="backcolor_secondary" style={this.state.open ? styles.block : styles.dropdownContent}>
                     <Button onClick={this.handleClose('en-US')} color="primary">
                         Eng
                     </Button>

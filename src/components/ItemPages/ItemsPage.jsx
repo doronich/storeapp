@@ -18,9 +18,9 @@ export class ItemsPage extends React.Component {
         return (
             <Grid container direction="column" justify="flex-start" alignItems="center" style={{height:"100%"}}>
 
-                <Grid item>
-                    <Typography align="center" gutterBottom variant="display2" color="primary"><Loc locKey="titles.products"/></Typography>
-                </Grid>
+{/*                 <Grid item>
+                    <Typography align="center" gutterBottom variant="display2"><Loc locKey="titles.products"/></Typography>
+                </Grid> */}
                 <Grid item style={{ width: "100%" }}>
                     <Filters/>
                 </Grid>

@@ -108,12 +108,12 @@ export class ItemPage extends React.Component {
                                 <Grid item>
                                     <Typography variant="display1" gutterBottom>{name}</Typography>
                                     <Typography variant="title" gutterBottom>{price}р.</Typography>
-                                    <Typography variant="button" color="primary" gutterBottom>Бренд: {brand}</Typography>
-                                    <Typography variant="button" color="primary" gutterBottom>Цвет: {color}</Typography>
-                                    <Typography variant="button" color="primary" gutterBottom>Размер: {size}</Typography>
+                                    <Typography variant="button" color="secondary" gutterBottom>Бренд: {brand}</Typography>
+                                    <Typography variant="button" color="secondary" gutterBottom>Цвет: {color}</Typography>
+                                    <Typography variant="button" color="secondary" gutterBottom>Размер: {size}</Typography>
                                     
-                                    <Typography variant="headline" color="primary" gutterBottom>Описание: <br /> {description}</Typography>
-                                    <Button variant="raised" color="primary">Добавить в корзину</Button>
+                                    <Typography variant="headline" color="secondary" gutterBottom>Описание: <br /> {description}</Typography>
+                                    <Button variant="raised" color="secondary">Добавить в корзину</Button>
                                 </Grid>
                             </Grid>
                         </Grid>
