@@ -23,7 +23,8 @@ class ItemList extends React.Component {
 
     state = {
         list: null,
-        changed: this.props.changed
+        changed: this.props.changed,
+        currentPage:null
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -78,15 +79,17 @@ class ItemList extends React.Component {
 
             reqString += "&startPrice="+this.props.priceStart;
             reqString += "&endPrice="+this.props.priceEnd;
-
-            console.log("string", reqString)
+            reqString += "&pageIndex="+1;
+            reqString += "&pageSize="+12;
+            console.log("string", reqString);
 
             itemService.getReqItems(reqString)
                 .catch(err => {
                     console.log("reqItemList:", err)
                 })
                 .then(response => {
-                    if (response) this.setState({ list: response.data, changed: true })
+                    console.log(response)
+                    if (response) this.setState({ list: response.data.res, changed: true })
                 })
         }
     }

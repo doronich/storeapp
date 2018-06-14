@@ -100,8 +100,7 @@ class Chat extends React.Component {
         clearTimeout(this.timerId)
         this.timerId = setTimeout(()=>{
             this.state.hubConnection.invoke("DeleteTyping", this.props.currentUser.username)
-                .catch(err=>console.error(err));
-            
+                .catch(err=>console.error(err));            
         },1000)
 
     }

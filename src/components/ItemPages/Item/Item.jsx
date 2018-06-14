@@ -73,7 +73,7 @@ class Item extends React.Component {
                         <CardMedia
                             style={styles.media}
                             image={this.props.data.previewImagePath}
-                            title="Image"
+                            title={this.props.data.name}
                         />
                     </Link>
                     <Link to={"/item/" + id}>

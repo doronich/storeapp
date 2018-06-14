@@ -8,7 +8,8 @@ export const itemService = {
     getAllItems,
     deleteItem,
     getReqItems,
-    getLast
+    getLast,
+    getRandom
 }
 
 function addItem(obj){
@@ -45,4 +46,8 @@ function deleteItem(id){
 
 function getLast(n=5){
     return axios.get(`${api.url}/api/item/last?amount=${n}`)
+}
+
+function getRandom(n=6){
+    return axios.get(`${api.url}/api/item/random?amount=${n}`)
 }

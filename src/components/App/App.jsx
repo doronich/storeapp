@@ -33,7 +33,7 @@ class App extends React.Component {
 
                     <ToUpButton/>
                     <div className="content">
-                        <Aside />
+                        {/* <Aside /> */}
                         
                         <Route exact path='/' component={HomePage} />
                         <AdminRoute exact path="/additem" component={AddItemPage} />

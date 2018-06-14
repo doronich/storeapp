@@ -80,7 +80,7 @@ class ItemPage extends React.Component {
         const { name, price, color, size, description, brand } = this.state;
 
         return (
-            <Grid container>
+            <Grid container className="container">
                 <Grid item style={{ height: "100%" ,marginTop:"20px"}} xs={12}>
                     <Grid container direction="column" justify="flex-start" alignItems="stretch" style={{ height: "100%" }}>
                         <Grid item >
@@ -117,7 +117,7 @@ class ItemPage extends React.Component {
                                     </Grid>
                                 </Grid>
                                 <Grid item style={{ maxWidth: "600px", marginRight: "20px" }}>
-                                    <img src={this.state.mainImage} alt="main" className="photo" style={{ maxHeight: "700px", maxWidth: "600px" }} />
+                                    <img src={this.state.mainImage} alt={this.state.name} className="photo" style={{ maxHeight: "700px", maxWidth: "600px" }} />
                                 </Grid>
                                 <Grid item>
                                     <Typography variant="display1" gutterBottom>{name}</Typography>

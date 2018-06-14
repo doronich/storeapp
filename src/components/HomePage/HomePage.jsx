@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import {Last} from './sections'
+import {Last,Carousel} from './sections'
 
 class HomePage extends React.Component {
 
@@ -14,20 +13,21 @@ class HomePage extends React.Component {
             <div style={{overflow:"hidden"}}>
                 <Grid container
                     direction="column"
-                    justify="center"
-                    alignItems="center">
-                    {loggedIn ? <Grid item><Typography variant="display1" >Hi {currentUser.username}!</Typography></Grid> 
-                    : <Grid item><Typography variant="display1" >Welcome travaler!</Typography></Grid>}
-                    <Divider />
-                    <Grid item>
-                        <Typography align="center" color="secondary" gutterBottom variant="display1">Последние</Typography>
+                    justify="flex-start"
+                    alignItems="center"
+                    style={{height:"100%"}}>
+
+                    <Grid item  style={{backgroundColor:"#343434", width:"100%"}}>
+                        <Typography align="center" color="primary" variant="display1" style={{margin:"15px 0 0 0 "}}>Последние</Typography>
                         <Last/>
                     </Grid>
-                    <Divider />
-                    <Grid item><Typography variant="display4">СЛАЙДЕР</Typography></Grid>
-                    <Divider />
-                    <Grid item><Typography variant="display4">Еще что-то...</Typography></Grid>
-
+                    <Grid item style={{width:"100%"}}>
+                        <div className="container" style={{padding:"60px 0"}}>
+                            <Carousel/>
+                        </div>
+                    </Grid>
+                    <Grid item style={{width:"100%",backgroundColor:"#777"}}><Typography align="center" variant="display4">Еще что-то...</Typography></Grid>
+                    <Grid item style={{width:"100%",backgroundColor:"#FFF"}}><Typography align="center" variant="display4">Еще что-то...</Typography></Grid>
                 </Grid>
             </div>
         );

@@ -1,7 +1,7 @@
 import React from 'react'
-import {Item} from './'
-import {itemService} from '../../../services'
-import {Grid} from '@material-ui/core'
+import { Item } from './'
+import { itemService } from '../../../services'
+import { Grid } from '@material-ui/core'
 
 
 export class Last extends React.Component{
@@ -18,11 +18,9 @@ export class Last extends React.Component{
                 console.log(err)
             })
             .then(response=>{
-                console.log(response);
                 this.setState({list:response.data})
             });
     }
-///нужны новые айтемы
     render(){
         let listItems=null
         if(this.state.list){
@@ -32,7 +30,7 @@ export class Last extends React.Component{
         }
 
         return(
-            <Grid container justify="center">
+            <Grid container direction="row" justify="center" alignItems="stretch">
                {listItems} 
             </Grid>
         );

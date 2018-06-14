@@ -8,10 +8,9 @@ const styles = {
     card: {
         width: 250,
         height:350,
-        margin: "0 15px 15px 15px",
-        borderRadius: "5px",
+        //margin: "0 15px 15px 15px",
         backgroundColor: "#fff",
-        transform: "scale(0.85)",
+        transform: "scale(0.75)",
     },
     media: {
         height: 280,
@@ -26,8 +25,8 @@ export class Item extends React.Component {
     render() {
 
         return (
-            <Link to={"/item/" + this.props.data.id}>
-                <Card style={styles.card}>
+            <Link to={"/item/" + this.props.data.id}  className="card-scale">
+                <Card style={styles.card} raised evelation={0}>
                     <CardMedia
                         style={styles.media}
                         image={this.props.data.image}

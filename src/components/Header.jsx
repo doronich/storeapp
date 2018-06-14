@@ -81,11 +81,12 @@ class Header extends React.Component {
         return (
             <header className="navbar backcolor_secondary">
                 <Grid className="nav" component="nav" container direction="row" justify="space-between" alignItems="center">
-                    <Grid item className="nav_item not_mobile">
+                    <Grid item className="nav_item">
                         <IconButton onClick={this.toggleDrawer(true)} color="primary" aria-label="Menu">
                             <MenuIcon />
                         </IconButton>
                     </Grid>
+                    
                     <Grid item className="nav_item">
                         <Link className="link" to="/">
                             <Button fullWidth><Typography color="primary" variant="display1">Title</Typography></Button>

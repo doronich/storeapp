@@ -9,6 +9,7 @@ const dictionaries = {
         "account":{
             "logout": "Logout",
             "signin": "Sign In",
+            "signinTitle":"Authorization",
             "signup": "Sign Up",
             "login":"Login",
             "emailreq":"Email is not valid.",
@@ -122,6 +123,7 @@ const dictionaries = {
         "account":{
             "logout": "Выйти",
             "signin": "Войти",
+            "signinTitle":"Авторизация",
             "signup": "Регистрация",
             "login":"Логин",
             "emailreq":"Недействительный e-mail.",

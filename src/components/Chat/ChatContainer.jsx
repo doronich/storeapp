@@ -8,15 +8,15 @@ import { Loc } from 'redux-react-i18n'
 export class ChatContainer extends React.Component {
     state = {
         opened: false,
-        chatWidth:"100px"
+        chatWidth:"150px"
     }
 
     toggleChat = () => {
         this.setState({ opened: !this.state.opened })
-        if(this.state.chatWidth==="100px"){
+        if(this.state.chatWidth==="150px"){
             this.setState({chatWidth:"300px"})
         }else{
-            this.setState({chatWidth:"100px"})
+            this.setState({chatWidth:"150px"})
         }
     }
 

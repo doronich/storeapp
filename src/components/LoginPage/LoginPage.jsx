@@ -86,7 +86,7 @@ class LoginPage extends React.Component {
                                 container
                             >
                                 <Grid item>
-                                    <Typography align="center" variant='display1' color="secondary"><Loc locKey="account.signin"/></Typography>
+                                    <Typography align="center" variant='display1' color="secondary"><Loc locKey="account.signinTitle"/></Typography>
                                     <Link to="/register"><Typography align="center" variant='caption'><Loc locKey="account.needReg"/></Typography></Link>
                                 </Grid>
                                 <Grid item >
