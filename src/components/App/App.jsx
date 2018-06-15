@@ -44,8 +44,8 @@ class App extends React.Component {
                         <Route path='/login' component={LoginPage} />
                         <Route path='/register' component={RegisterPage} />
                         <Route path='/contacts' component={ContactsPage} />
-                        <Route strict path='/f/items' component={FItems}/>
-                        <Route strict path='/m/items' component={MItems}/>
+                        {/* <Route strict path='/f/items/:page?' component={FItems}/> */}
+                        {/* <Route strict path='/m/items/:page?' component={MItems}/> */}
                         <Route strict path='/items' component={ItemsPage}/>
                     </div>
                     <div className="footer">

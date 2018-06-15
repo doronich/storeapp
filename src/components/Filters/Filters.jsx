@@ -1,5 +1,5 @@
 import React from 'react'
-
+import debounce from 'lodash/debounce';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
@@ -105,11 +105,13 @@ class Filters extends React.Component {
         }, 700)
     }
 
-    changeRange = (value) => {
-        if (value.min >= 0 && value.max <= 500) this.setState({ value })
-    }
+    
 
     render() {
+        const changeRange = debounce(value => {
+            if (value.min >= 0 && value.max <= 500) this.setState({ value })
+        },16);
+
         const { kind, subkind, brand, color, name } = this.state;
 
         const tkinds = kinds.map((item, index) => {
@@ -268,8 +270,9 @@ class Filters extends React.Component {
                             minValue={0}
                             maxValue={500*this.valueMultiplier}
                             value={this.state.value}
-                            onChange={this.changeRange}
+                            onChange={changeRange}
                             onChangeComplete={this.dragEnd}
+                            
                         />
                     </Grid>
                     <Grid item>

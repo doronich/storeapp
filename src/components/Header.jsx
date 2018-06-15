@@ -95,20 +95,20 @@ class Header extends React.Component {
 
                     <Grid item className="nav_item">
                         <Grid container>
-                            {/* <Grid item className="nav_item mobile600" >
-                                <Link to="/allitems">
-                                    <Button fullWidth>Все</Button>
-                                </Link>
-                            </Grid> */}
                             <Grid item className="nav_item mobile600" >
-                                <Link to="/f/items">
-                                    <Button fullWidth color="primary" onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women"/></Button>
+                                <Link className="link" to="/items">
+                                    <Button fullWidth color="primary"><Loc locKey="titles.products"/></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile600" >
-                                <Link to="/m/items">
+
+                                    <Button fullWidth color="primary" onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women"/></Button>
+
+                            </Grid>
+                            <Grid item className="nav_item mobile600" >
+
                                     <Button fullWidth color="primary" onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men"/></Button>
-                                </Link>
+
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/contacts">

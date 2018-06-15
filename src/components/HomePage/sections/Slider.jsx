@@ -18,7 +18,7 @@ export class Carousel extends React.Component {
                 console.log(err)
             })
             .then(response=>{
-                this.setState({list:response.data})
+                if(response) this.setState({list:response.data})
             });
     }
 

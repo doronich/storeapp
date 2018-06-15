@@ -15,6 +15,7 @@ export class ItemsPage extends React.Component {
      }
 
     render() {
+        //console.log("items",this.props)
         return (
             <Grid container className="container" direction="column" justify="flex-start" alignItems="center" style={{height:"100%"}}>
 
@@ -25,7 +26,7 @@ export class ItemsPage extends React.Component {
                     <Filters/>
                 </Grid>
                 <Grid item>
-                    <ItemList all={false}/>
+                    <ItemList all={false} {...this.props}/>
                 </Grid>
             </Grid>
         )

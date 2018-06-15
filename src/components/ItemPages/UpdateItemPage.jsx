@@ -313,25 +313,25 @@ function mapStateToProps(state) {
                                     type="number"
                                 />
 
-                                <Button color="primary" variant="outlined" size="large">
+                                <Button color="secondary" variant="outlined" size="large">
                                     <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(0)} accept="image/*" id="imageButton" />
                                     Выбрать главное изображение
                                 </Button>
                                 <br />
 
-                                <Button color="primary" variant="outlined" size="large">
+                                <Button color="secondary" variant="outlined" size="large">
                                     <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(1)} accept="image/*" id="imageButton" />
                                     Выбрать 1 изображение
                                 </Button>
                                 <br />
 
-                                <Button color="primary" variant="outlined" size="large">
+                                <Button color="secondary" variant="outlined" size="large">
                                     <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(2)} accept="image/*" id="imageButton" />
                                     Выбрать 2 изображение
                                 </Button>
                                 <br />
 
-                                <Button color="primary" variant="outlined" size="large">
+                                <Button color="secondary" variant="outlined" size="large">
                                     <input type="file" style={styles.exampleImageInput} onChange={this.encodeImageFileAsURL(3)} accept="image/*" id="imageButton" />
                                     Выбрать 3 изображение
                                 </Button>
