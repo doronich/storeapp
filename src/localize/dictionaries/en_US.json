@@ -1,0 +1,113 @@
+{
+    "currency": "$",
+    "account": {
+        "logout": "Logout",
+        "signin": "Sign In",
+        "signinTitle": "Authorization",
+        "signup": "Sign Up",
+        "login": "Login",
+        "emailreq": "Email is not valid.",
+        "loginreq": "Login must have atleast 6 characters.",
+        "pass": "Password",
+        "passreq": "Password must have contains at least 6 characters; one lowercase character; one upperrcase character; one digit from 0-9.",
+        "confpass": "Repeat password",
+        "passmism": "Password dismatch",
+        "fname": "First name",
+        "lname": "Last name",
+        "needReg": "Need an account?",
+        "needLog": "Have an account?",
+        "errsignin": "Incorrect login or password."
+    },
+    "header": {
+        "women": "Women",
+        "men": "Men",
+        "contacts": "Contacts",
+        "about": "About us",
+        "delivery": "Delivery"
+    },
+    "aside": {
+        "categories": "Categories",
+        "other": "Other",
+        "products": "Products",
+        "footwear": "Footwear",
+        "clothing": "Clothing",
+        "accessories": "Accessories",
+        "account": {
+            "name": "Account",
+            "allitems": "All products",
+            "additem": "Add a product"
+        }
+    },
+    "titles": {
+        "products": "Products"
+    },
+    "filtres": {
+        "none": "None",
+        "kind": "Kind",
+        "subkind": "Subkind",
+        "color": "Color",
+        "brand": "Brand",
+        "searchByName": "Search by name",
+        "reset": "Reset",
+        "kinds": {
+            "clothing": "Clothing",
+            "footwear": "Shoes",
+            "accessories": "Accessories",
+            "other": "Other"
+        },
+        "subkinds": {
+            "jeans": "Jeans",
+            "shorts": "Shorts",
+            "shirts": "Shirts",
+            "pants": "Pants",
+            "hoodies": "Hoodies",
+            "jackets": "Jacket",
+            "outerwear": "Outerwear",
+            "costumes": "Costumes",
+            "sneakers": "Sneakers",
+            "shoes": "Shoes",
+            "boots": "Boots",
+            "bags": "Bags",
+            "backpacks": "Backpacks",
+            "glasses": "Glasses",
+            "cases": "Cases",
+            "watches": "Watches"
+        },
+        "colors": {
+            "beige": "Beige",
+            "black": "Black",
+            "blue": "Blue",
+            "brown": "Brown",
+            "cream": "Cream",
+            "gray": "Gray",
+            "green": "Green",
+            "multi": "Multi",
+            "navy": "Navy",
+            "orange": "Orange",
+            "pink": "Pink",
+            "purple": "Purple",
+            "red": "Red",
+            "white": "White",
+            "yellow": "Yellow"
+        }
+    },
+    "chat": {
+        "name": "Chat",
+        "welcome": "Welcome!",
+        "auth": "To write you must log in",
+        "send": "Write a message...",
+        "typing": "is typing..."
+    },
+    "item": {
+        "change": "Change",
+        "remove": "Remove",
+        "brand": "Brand",
+        "color": "Color",
+        "size": "Size",
+        "desc": "Description",
+        "add": "Add to cart",
+        "added": "Added",
+        "notAv": "Not available",
+        "cancel": "Cancel"
+    }
+}

@@ -6,7 +6,8 @@ import { userConstants, itemConstants } from '../constants';
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Menu as MenuIcon, ShoppingCart } from '@material-ui/icons';
+import Badge from '@material-ui/core/Badge'
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography'
 import Person from '@material-ui/icons/Person'
@@ -27,8 +28,9 @@ const mapDispatchToProps = dispatch => ({
 function mapStateToProps(state) {
     const { loggedIn } = state.authentication;
     const { sex } = state.item;
+    const { items } = state.cart
     return {
-        loggedIn, sex
+        loggedIn, sex, count:items.length
     };
 }
 
@@ -75,7 +77,7 @@ class Header extends React.Component {
 
         const list = (
             <div style={{ width: "250px" }}>
-                <ListMenu />
+                <ListMenu toggleDrawer={this.toggleDrawer()}/>
             </div>
         );
         return (
@@ -86,7 +88,7 @@ class Header extends React.Component {
                             <MenuIcon />
                         </IconButton>
                     </Grid>
-                    
+
                     <Grid item className="nav_item">
                         <Link className="link" to="/">
                             <Button fullWidth><Typography color="primary" variant="display1">Title</Typography></Button>
@@ -95,34 +97,34 @@ class Header extends React.Component {
 
                     <Grid item className="nav_item">
                         <Grid container>
-                            <Grid item className="nav_item mobile600" >
+                            <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/items">
-                                    <Button fullWidth color="primary"><Loc locKey="titles.products"/></Button>
+                                    <Button fullWidth color="primary"><Loc locKey="titles.products" /></Button>
                                 </Link>
                             </Grid>
-                            <Grid item className="nav_item mobile600" >
+                            <Grid item className="nav_item mobile900" >
 
-                                    <Button fullWidth color="primary" onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women"/></Button>
+                                <Button fullWidth color="primary" onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women" /></Button>
 
                             </Grid>
-                            <Grid item className="nav_item mobile600" >
+                            <Grid item className="nav_item mobile900" >
 
-                                    <Button fullWidth color="primary" onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men"/></Button>
+                                <Button fullWidth color="primary" onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men" /></Button>
 
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/contacts">
-                                    <Button fullWidth color="primary" ><Loc locKey="header.contacts"/></Button>
+                                    <Button fullWidth color="primary" ><Loc locKey="header.contacts" /></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/">
-                                    <Button fullWidth color="primary" ><Loc locKey="header.delivery"/></Button>
+                                    <Button fullWidth color="primary" ><Loc locKey="header.delivery" /></Button>
                                 </Link>
                             </Grid>
                             <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/">
-                                    <Button fullWidth color="primary" ><Loc locKey="header.about"/></Button>
+                                    <Button fullWidth color="primary" ><Loc locKey="header.about" /></Button>
                                 </Link>
                             </Grid>
                         </Grid>
@@ -161,12 +163,17 @@ class Header extends React.Component {
                                     )
                             }
                             <Grid item>
-                                <LanguageSwitcher/>
+                                <Link to="/cart" className="link">
+                                    
+                                        <IconButton color="primary"><ShoppingCart color="primary" />{this.props.count!==0&&this.props.count}</IconButton>
+                                    
+                                </Link>
+                            </Grid>
+                            
+                            <Grid item>
+                                <LanguageSwitcher />
                             </Grid>
                         </Grid>
-
-
-
                     </Grid>
 
 

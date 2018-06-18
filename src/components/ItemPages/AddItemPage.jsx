@@ -1,5 +1,6 @@
 import React from 'react'
 import { itemService } from '../../services'
+import { connect } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -15,7 +16,14 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { ValidatorForm } from 'react-material-ui-form-validator'
 import { FormControlLabel } from '@material-ui/core';
 
-export class AddItemPage extends React.Component {
+function mapStateToProps(state) {
+    const { currentUser } = state.authentication;
+    return {
+        currentUser
+    };
+}
+
+class AddItemPage extends React.Component {
 
     state = {
         name: "",
@@ -52,6 +60,7 @@ export class AddItemPage extends React.Component {
         this.setState({ loading: true })
         const { image, image1, image2, image3, name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size } = this.state;
         const obj = {
+            createdBy:this.props.currentUser.username,
             name: name.trim(),
             description:description.trim(),
             Active: checkedActive,
@@ -330,3 +339,5 @@ export class AddItemPage extends React.Component {
     }
 }
 
+const connectedAddItemPage = connect(mapStateToProps)(AddItemPage);
+export { connectedAddItemPage as AddItemPage };

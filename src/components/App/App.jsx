@@ -39,7 +39,6 @@ class App extends React.Component {
                         <AdminRoute exact path="/additem" component={AddItemPage} />
                         <AdminRoute exact path="/updateitem/:number" component={UpdateItemPage}/>
                         <Route exact path="/item/:number" component={ItemPage}/>
-                        {/* <PrivateRoute exact path="/allitems" component={Items}/> */}
                         <AdminRoute exact path="/allitems" component={Items}/>
                         <Route path='/login' component={LoginPage} />
                         <Route path='/register' component={RegisterPage} />

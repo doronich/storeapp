@@ -13,7 +13,7 @@ import {Loc} from 'redux-react-i18n'
 
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state,ownProps) => {
     const { inProgress, reqError } = state.authentication;
     return {
         inProgress,

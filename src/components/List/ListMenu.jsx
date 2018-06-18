@@ -33,7 +33,6 @@ const mapDispatchToProps = dispatch => ({
 class ListMenu extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             openAcc: false,
             openClothing: false,
@@ -44,6 +43,7 @@ class ListMenu extends React.Component {
 
     logout = () => {
         this.props.logOut();
+        this.props.toggleDrawer(false)
     }
 
     handleClick = open => () => {
@@ -60,18 +60,24 @@ class ListMenu extends React.Component {
 
 
     changeSubkindClothing = (n) => (event) => {
+        this.props.toggleDrawer(false)
         this.props.changeKind(2)
         this.props.changeSubkind(n)
     }
     changeSubkindFootwear = (n) => (event) => {
+        this.props.toggleDrawer(false)
         this.props.changeKind(1)
         this.props.changeSubkind(n)
     }
     changeSubkindAccessories = (n) => (event) => {
+        this.props.toggleDrawer(false)
         this.props.changeKind(3)
         this.props.changeSubkind(n)
     }
 
+    toggleDrawer = ()=>{
+        this.props.toggleDrawer(false)
+    }
 
     render() {
 
@@ -83,7 +89,7 @@ class ListMenu extends React.Component {
             if(index===0)return null;
             return <div key={index}>
                 <Divider />
-                <Link to={`/${sex}/items`}>
+                <Link to={`/items`}>
                     <ListItem button onClick={this.changeSubkindClothing(item.value)}>
                         <ListItemText primary={<Loc locKey={item.name}/>} />
                     </ListItem>
@@ -95,7 +101,7 @@ class ListMenu extends React.Component {
             if(index===0)return null;
             return <div key={index}>
                 <Divider />
-                <Link to={`/${sex}/items`}>
+                <Link to={`/items`}>
                     <ListItem button onClick={this.changeSubkindFootwear(item.value)}>
                         <ListItemText primary={<Loc locKey={item.name}/>} />
                     </ListItem>
@@ -107,7 +113,7 @@ class ListMenu extends React.Component {
             if(index===0)return null;
             return <div key={index}>
                 <Divider />
-                <Link to={`/${sex}/items`}>
+                <Link to={`/items`}>
                     <ListItem button onClick={this.changeSubkindAccessories(item.value)}>
                         <ListItemText primary={<Loc locKey={item.name}/>} />
                     </ListItem>
@@ -124,7 +130,7 @@ class ListMenu extends React.Component {
                 <Button fullWidth onClick={this.toFemaleChange} style={sex === "F" ? border : {}}><Loc locKey="header.women" /></Button>
                 <Button fullWidth onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men" /></Button>
                 <ListSubheader disableSticky><Loc locKey="aside.categories" /></ListSubheader>
-                <Link to='/items'>
+                <Link to='/items' onClick={this.toggleDrawer}>
                     <ListItem button>
                         <ListItemText ><Typography variant="button"><Loc locKey="aside.products" /></Typography></ListItemText>
                     </ListItem>
@@ -185,13 +191,13 @@ class ListMenu extends React.Component {
                         {
                             !loggedIn ? <div>
                                 <Divider />
-                                <Link to='/login'>
+                                <Link to='/login' onClick={this.toggleDrawer}>
                                     <ListItem button>
                                         <ListItemText primary={<Loc locKey="account.signin" />} />
                                     </ListItem>
                                 </Link>
                                 <Divider />
-                                <Link to='/register'>
+                                <Link to='/register' onClick={this.toggleDrawer}>
                                     <ListItem button >
                                         <ListItemText primary={<Loc locKey="account.signup" />} />
                                     </ListItem>
@@ -203,7 +209,7 @@ class ListMenu extends React.Component {
                                         currentUser.role === "Admin" &&
                                         <div>
                                             <Divider />
-                                            <Link to='/additem'>
+                                            <Link to='/additem' onClick={this.toggleDrawer}>
                                                 <ListItem button>
                                                     <ListItemText primary={<Loc locKey="aside.account.additem" />} />
                                                 </ListItem>
@@ -212,7 +218,7 @@ class ListMenu extends React.Component {
                                     }
 
                                     <Divider />
-                                    <Link to='/allitems'>
+                                    <Link to='/allitems' onClick={this.toggleDrawer}>
                                         <ListItem button>
                                             <ListItemText primary={<Loc locKey="aside.account.allitems" />} />
                                         </ListItem>
@@ -228,7 +234,7 @@ class ListMenu extends React.Component {
                 </Collapse>
 
                 <Divider />
-                <Link to='/contacts'>
+                <Link to='/contacts' onClick={this.toggleDrawer}>
                     <ListItem button>
                         <ListItemText><Typography variant="button"><Loc locKey="header.contacts" /></Typography></ListItemText>
                     </ListItem>

@@ -2,7 +2,8 @@ import React from 'react'
 import { itemService } from '../../services'
 import { connect } from 'react-redux';
 import { Grid, Typography, Button } from '@material-ui/core'
-import { Loc} from 'redux-react-i18n'
+import { Loc} from 'redux-react-i18n';
+import { cartAcitons } from '../../actions'
 
 const mapStateToProps = (state)=>{
     const currency = state.item.currency
@@ -11,9 +12,15 @@ const mapStateToProps = (state)=>{
     }
 }
 
+const mapDispatchToProps = dispatch =>({
+    addToCart: id => dispatch(cartAcitons.addItemToCart(id)),
+    removeFromCart: id => dispatch(cartAcitons.removeItemFromCart(id))
+})
+
 class ItemPage extends React.Component {
 
     state = {
+        id:0,
         name: "",
         mainImage: "",
         image: "",
@@ -24,7 +31,8 @@ class ItemPage extends React.Component {
         color: "",
         size: "",
         description: "",
-        brand:""
+        brand:"",
+        added:false,
     }
 
     componentDidMount() {
@@ -38,6 +46,7 @@ class ItemPage extends React.Component {
                 if (response) {
                     const data = response.data;
                     this.setState({
+                        id:data.id,
                         name: data.name,
                         image: data.previewImagePath,
                         image1: data.imagePath1,
@@ -67,6 +76,15 @@ class ItemPage extends React.Component {
                 break;
             default: break;
         }
+    }
+
+    addToCart = () => {
+        this.props.addToCart(this.state.id);
+        this.setState({added:true})
+    }
+    removeFromCart = () => {
+        this.props.removeFromCart(this.state.id);
+        this.setState({added:false})
     }
 
     render() {
@@ -127,7 +145,11 @@ class ItemPage extends React.Component {
                                     <Typography variant="button" color="secondary" gutterBottom><Loc locKey="item.size"/>: {size}</Typography>
                                     
                                     <Typography variant="headline" color="secondary" gutterBottom><Loc locKey="item.desc"/>: <br /> {description}</Typography>
-                                    <Button variant="raised" color="secondary"><Loc locKey="item.add"/></Button>
+                                    {
+                                        this.state.added
+                                        ?<Button variant="raised" color="secondary" onClick={this.removeFromCart}><Loc locKey="item.remove"/></Button>
+                                        :<Button variant="raised" color="secondary" onClick={this.addToCart}><Loc locKey="item.add"/></Button>
+                                    }
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -139,5 +161,5 @@ class ItemPage extends React.Component {
     }
 }
 
-const connectedItemPage = connect(mapStateToProps)(ItemPage);
+const connectedItemPage = connect(mapStateToProps,mapDispatchToProps)(ItemPage);
 export { connectedItemPage as ItemPage };

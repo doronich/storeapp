@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { userConstants } from '../../../constants';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+
 import { Item } from './Item'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 import { Grid } from '@material-ui/core'
@@ -28,7 +29,7 @@ class ItemList extends React.Component {
             changed: this.props.changed,
             currentPage: this.props.match.params.page || 1,
             totalPages: null,
-            pageSize:12,
+            pageSize: 12,
             prev: null,
             next: null,
             pageRange: 2
@@ -189,46 +190,52 @@ class ItemList extends React.Component {
             });
         }
 
+
+
         const pages = this.pages();
 
-        return (
-            <Grid container direction="column" justify="space-between" alignItems="center" style={{ height: "100%"}}>
-                <Grid item style={{ margin: "20px 0", width: "100%"}}>
-                    <Grid container justify="space-between" alignItems="center">
-                        <Grid item>
-                            <Button variant="raised" size="small" disabled={!this.state.prev} onClick={this.prevPage} color="primary">
-                                <KeyboardArrowLeft />
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <Grid container >
-                                { this.hasFirst() &&
+        const Pagination = (
+            <Grid item style={{ margin: "20px 0", width: "100%" }}>
+                <Grid container justify="space-between" alignItems="center">
+                    <Grid item>
+                        <Button variant="raised" size="small" disabled={!this.state.prev} onClick={this.prevPage} color="primary">
+                            <KeyboardArrowLeft />
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Grid container >
+                            {this.hasFirst() &&
                                 <Grid item><Button variant="raised" size="small" color={this.state.currentPage === 1 ? "secondary" : "primary"} onClick={this.changePage(1)}>
                                     1
-                                </Button></Grid>}
-                                { this.hasFirst() &&
-                                <Grid item style={{margin:"0 15px"}}><Typography variant="headline">...</Typography></Grid>}
-                                {pages}
-                                { this.hasLast() &&
-                                <Grid item style={{margin:"0 15px"}}><Typography variant="headline">...</Typography></Grid>}
-                                { this.hasLast() &&
+                </Button></Grid>}
+                            {this.hasFirst() &&
+                                <Grid item style={{ margin: "0 15px" }}><Typography variant="headline">...</Typography></Grid>}
+                            {pages}
+                            {this.hasLast() &&
+                                <Grid item style={{ margin: "0 15px" }}><Typography variant="headline">...</Typography></Grid>}
+                            {this.hasLast() &&
                                 <Grid item><Button variant="raised" size="small" color={this.state.currentPage === this.state.totalPages ? "secondary" : "primary"} onClick={this.changePage(this.state.totalPages)}>
-                                    {this.state.totalPages?this.state.totalPages:"..."}
+                                    {this.state.totalPages ? this.state.totalPages : "..."}
                                 </Button></Grid>}
-                            </Grid>
-                        </Grid>
-                        <Grid item>
-                            <Button variant="raised" size="small" disabled={!this.state.next} onClick={this.nextPage} color="primary">
-                                <KeyboardArrowRight />
-                            </Button>
                         </Grid>
                     </Grid>
+                    <Grid item>
+                        <Button variant="raised" size="small" disabled={!this.state.next} onClick={this.nextPage} color="primary">
+                            <KeyboardArrowRight />
+                        </Button>
+                    </Grid>
                 </Grid>
+            </Grid>);
+
+        return (
+            <Grid container direction="column" justify="space-between" alignItems="center" style={{ height: "100%" }}>
+                {Pagination}
                 <Grid item>
                     <Grid container justify="center">
                         {listItems}
                     </Grid>
                 </Grid>
+                {/* Pagination */}
             </Grid>
         )
     }
