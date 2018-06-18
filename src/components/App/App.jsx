@@ -8,11 +8,11 @@ import { AdminRoute } from '../';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage'
-import { Aside } from '../Aside'
+//import { Aside } from '../Aside'
 import Header from '../Header.jsx'
 import Footer from '../Footer.jsx'
 import { ContactsPage } from '../ContactsPage'
-import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage, MItems, FItems } from '../ItemPages'
+import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage} from '../ItemPages'
 import { ToUpButton } from '../TopButton';
 import { ChatContainer } from '../Chat'
 
@@ -44,8 +44,6 @@ class App extends React.Component {
                         <Route path='/login' component={LoginPage} />
                         <Route path='/register' component={RegisterPage} />
                         <Route path='/contacts' component={ContactsPage} />
-                        {/* <Route strict path='/f/items/:page?' component={FItems}/> */}
-                        {/* <Route strict path='/m/items/:page?' component={MItems}/> */}
                         <Route strict path='/items' component={ItemsPage}/>
                     </div>
                     <div className="footer">

@@ -21,7 +21,7 @@ class HomePage extends React.Component {
                         <Typography align="center" color="primary" variant="display1" style={{margin:"15px 0 0 0 "}}>Последние</Typography>
                         <Last/>
                     </Grid>
-                    <Grid item style={{width:"100%"}}>
+                    <Grid item className="mobile600" style={{width:"100%"}}>
                         <div className="container" style={{padding:"60px 0"}}>
                             <Carousel/>
                         </div>

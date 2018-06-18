@@ -25,7 +25,7 @@ export class ItemsPage extends React.Component {
                 <Grid item style={{ width: "100%" }}>
                     <Filters/>
                 </Grid>
-                <Grid item>
+                <Grid item style={{width:"100%"}}>
                     <ItemList all={false} {...this.props}/>
                 </Grid>
             </Grid>
