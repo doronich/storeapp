@@ -39,7 +39,20 @@
         }
     },
     "titles": {
-        "products": "Products"
+        "products": "Products",
+        "contacts": "Contacts",
+        "shopCart":"Shopping cart"
+    },
+    "shopcart":{
+        "empty":"Your shopping cart is empty",
+        "header":{
+            "name":"Name",
+            "price":"Price",
+            "amount":"Amount"
+        },
+        "footer":{
+            "total":"Total"
+        }
     },
     "filtres": {
         "none": "None",

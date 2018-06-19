@@ -40,7 +40,7 @@ class Chat extends React.Component {
             this.state.hubConnection.on('Send', (username, message) => {
                 const time = new Date();
                 const text = (<Typography variant="subheading"
-                                color="primary"
+                                color="secondary"
                                 >
                                 <span style={{fontSize:"12px"}}>{time.getHours() + ":" + time.getMinutes()}</span>
                                 <span style={{color:"#000",fontWeight:"600"}}> {username}</span>

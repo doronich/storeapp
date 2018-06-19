@@ -1,5 +1,5 @@
 {
-    "currency": "р.",
+    "currency": " BYN",
     "account": {
         "logout": "Выйти",
         "signin": "Войти",
@@ -39,7 +39,20 @@
         }
     },
     "titles": {
-        "products": "Товары"
+        "products": "Товары",
+        "contacts": "Контакты",
+        "shopCart":"Корзина"
+    },
+    "shopcart":{
+        "empty":"Ваша корзина пуста",
+        "header":{
+            "name":"Название",
+            "price":"Цена",
+            "amount":"Количество"
+        },
+        "footer":{
+            "total":"Итого"
+        }
     },
     "filtres": {
         "none": "Нет",

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import api from '../api';
+import qs from 'querystring'
 
 export const itemService = {
     addItem,
@@ -9,7 +10,8 @@ export const itemService = {
     deleteItem,
     getReqItems,
     getLast,
-    getRandom
+    getRandom,
+    getCartList
 }
 
 function addItem(obj){
@@ -50,4 +52,14 @@ function getLast(n=5){
 
 function getRandom(n=6){
     return axios.get(`${api.url}/api/item/random?amount=${n}`)
+}
+
+function getCartList(arr){
+    const url=`${api.url}/api/item/cart`;
+/*     let params ="";
+    for(let i = 0; i<arr.length; i++){
+        params+=`&itemsId=${arr[i]}`
+    }
+    console.log("params",params) */
+    return axios.get(`${url}?${qs.stringify({itemsId:arr})}`);
 }

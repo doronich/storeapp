@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Menu as MenuIcon, ShoppingCart } from '@material-ui/icons';
-import Badge from '@material-ui/core/Badge'
+//import Badge from '@material-ui/core/Badge'
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography'
 import Person from '@material-ui/icons/Person'

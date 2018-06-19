@@ -15,7 +15,7 @@ import { ContactsPage } from '../ContactsPage'
 import { AddItemPage, UpdateItemPage, Items,ItemPage, ItemsPage} from '../ItemPages'
 import { ToUpButton } from '../TopButton';
 import { ChatContainer } from '../Chat'
-
+import { ShoppingCart } from '../Shopping Cart'
 
 
 const mapStateToProps = ( state ) => {
@@ -25,7 +25,6 @@ const mapStateToProps = ( state ) => {
 class App extends React.Component {
 
     render() {
-
         return (
             <Router history={history}>
                 <div className="wrapper">
@@ -44,6 +43,7 @@ class App extends React.Component {
                         <Route path='/register' component={RegisterPage} />
                         <Route path='/contacts' component={ContactsPage} />
                         <Route strict path='/items' component={ItemsPage}/>
+                        <Route path='/cart' component={ShoppingCart}/>
                     </div>
                     <div className="footer">
                         <Footer />

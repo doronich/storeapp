@@ -122,6 +122,24 @@ aside{
     overflow-wrap: break-word;
 }
 
+/*slickdots*/
+.slick-dots li {
+
+    width:auto;
+    height: auto;
+}
+
+li.slick-active{
+    box-sizing: border-box;
+    border:1px solid gray;
+}
+
+.slick-dots{
+    bottom:-70px;
+}
+
+/*small pagi buttons*/
+
 
 @media all and (max-width:1090px){
     .mobile900{

@@ -8,21 +8,23 @@ import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import IconButton from '@material-ui/core/IconButton'
+import { AddShoppingCart } from '@material-ui/icons'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Loc } from 'redux-react-i18n'
+import { Loc } from 'redux-react-i18n';
+import { cartAcitons } from '../../../actions'
 
 
 const styles = {
     card: {
         width: 300,
         margin: "0 15px 15px 15px",
-        borderRadius:"5px",
-        backgroundColor:"#fff"
+        borderRadius: "5px",
+        backgroundColor: "#fff"
     },
     media: {
-        height: "350px",
+        height: "300px",
         width: "auto"
         //paddingTop: '350px', // 16:9
         //paddingRight: '300px'
@@ -37,7 +39,8 @@ class Item extends React.Component {
         price: this.props.data.price,
         id: this.props.data.id,
         open: false,
-        active:this.props.data.active
+        active: this.props.data.active,
+        added: false
     }
 
     handleClickOpen = () => {
@@ -53,16 +56,22 @@ class Item extends React.Component {
         this.handleClose();
     }
 
+    addToCart = () => {
+        if (!this.state.added) this.props.addToCart(this.state.id)
+
+        this.setState({ added: true })
+    }
+
 
     render() {
         const { name, price, id, active } = this.state;
         const { currentUser } = this.props;
 
         let valueMultiplier;
-        if(this.props.currency==='rub'){
-            valueMultiplier=1;
-        }else{
-            valueMultiplier=0.5;
+        if (this.props.currency === 'rub') {
+            valueMultiplier = 1;
+        } else {
+            valueMultiplier = 0.5;
         }
 
         return (
@@ -78,37 +87,45 @@ class Item extends React.Component {
                     </Link>
                     <Link to={"/item/" + id}>
                         <CardContent
-
+                            style={{ paddingBottom: "0" }}
                         >
                             <Typography gutterBottom variant="title" >
                                 {name}
                             </Typography>
                             <Typography gutterBottom variant="subheading">
-                                {price*valueMultiplier}<Loc locKey="currency"/>
+                                {price * valueMultiplier}<Loc locKey="currency" />
                             </Typography>
-                         {
-                            !active&&
-                            <Typography gutterBottom variant="caption" color="error">
-                                <Loc locKey="item.notAv"/>
-                            </Typography>
-                         }
+                            {
+                                !active &&
+                                <Typography gutterBottom variant="caption" color="error">
+                                    <Loc locKey="item.notAv" />
+                                </Typography>
+                            }
+
                         </CardContent>
                     </Link>
-                    {
-                        currentUser? currentUser.role==="Admin" &&
-                        <CardActions>
-                            <Link to={"/updateitem/" + id}>
-                                <Button size="small" color="secondary">
-                                <Loc locKey="item.change"/>
-                                </Button>
-                            </Link>
-                            <Button size="small" color="secondary" onClick={this.handleClickOpen}>
-                            <Loc locKey="item.remove"/>
-                            </Button>
-                        </CardActions>
-                        :null
-                    }
+                    <CardActions>
+                        <div>
+                            <IconButton onClick={this.addToCart}>
+                                <AddShoppingCart />
+                            </IconButton>
+                        </div>
+                        {
+                            currentUser ? currentUser.role === "Admin" &&
+                                <div>                                <Link to={"/updateitem/" + id}>
+                                    <Button size="small" color="secondary">
+                                        <Loc locKey="item.change" />
+                                    </Button>
+                                </Link>
+                                    <Button size="small" color="secondary" onClick={this.handleClickOpen}>
+                                        <Loc locKey="item.remove" />
+                                    </Button>
+                                </div>
 
+                                : null
+                        }
+
+                    </CardActions>
                 </Card>
 
                 <Dialog
@@ -120,10 +137,10 @@ class Item extends React.Component {
                     <DialogTitle id="alert-dialog-title">{"Удалить предмет?"}</DialogTitle>
                     <DialogActions>
                         <Button onClick={this.DeleteItem} color="secondary" variant="raised">
-                        <Loc locKey="item.remove"/>
+                            <Loc locKey="item.remove" />
                         </Button>
                         <Button onClick={this.handleClose} color="secondary" autoFocus>
-                        <Loc locKey="item.cancel"/>
+                            <Loc locKey="item.cancel" />
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -141,6 +158,10 @@ const mapStateToProps = state => {
     };
 }
 
+const mapDispatchToProps = dispatch => ({
+    addToCart: id => dispatch(cartAcitons.addItemToCart(id))
+})
 
-const connectedItem = connect(mapStateToProps)(Item);
+
+const connectedItem = connect(mapStateToProps, mapDispatchToProps)(Item);
 export { connectedItem as Item };
