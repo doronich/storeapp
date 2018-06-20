@@ -120,16 +120,16 @@ class RegisterPage extends React.Component {
                                     </Grid>
                                     <Grid item>
                                         <TextValidator
-                                                fullWidth
-                                                required
-                                                label={<Loc locKey="account.login"/>}
-                                                onChange={this.handleChange("username")}
-                                                type="text"
-                                                name="username"
-                                                value={username}
-                                                validators={['minStringLength:6']}
-                                                errorMessages={[<Loc locKey="account.loginreq"/>]}
-                                                margin="dense"
+                                            fullWidth
+                                            required
+                                            label={<Loc locKey="account.login"/>}
+                                            onChange={this.handleChange("username")}
+                                            type="text"
+                                            name="username"
+                                            value={username}
+                                            validators={['minStringLength:6']}
+                                            errorMessages={[<Loc locKey="account.loginreq"/>]}
+                                            margin="dense"
                                         />
                                     </Grid>
                                     <Grid item>

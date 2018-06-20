@@ -194,7 +194,8 @@ class ItemPage extends React.Component {
                                     <Typography variant="button" color="secondary" gutterBottom><Loc locKey="item.color" />: {color}</Typography>
                                     <Typography variant="button" color="secondary" gutterBottom><Loc locKey="item.size" />: {size}</Typography>
 
-                                    <Typography variant="headline" color="secondary" style={{width:"320px"}} gutterBottom><Loc locKey="item.desc" />: <br /> <Typography variant="subheading">{description}</Typography></Typography>
+                                    <Typography variant="headline" color="secondary" style={{width:"320px"}} gutterBottom><Loc locKey="item.desc" />:</Typography>
+                                    <Typography variant="subheading" style={{width:"320px"}}>{description}</Typography>
                                     {
                                         this.state.added
                                             ? <Button variant="raised" color="secondary" onClick={this.removeFromCart}><Loc locKey="item.remove" /></Button>

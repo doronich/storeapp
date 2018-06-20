@@ -138,6 +138,53 @@ li.slick-active{
     bottom:-70px;
 }
 
+
+/* cart amount*/
+.cartButton{
+    background-color: #eeeeee;
+    border-radius: 3px;
+    text-align: center;
+    width: 20px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.1rem;
+}
+
+.cartButton:hover{
+    color:rgb(114, 114, 114);
+}
+
+.cartButton-value{
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+    height: 100%;
+}
+
+.cartButton-container{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+    border:1px solid rgb(201, 201, 201);
+    border-radius: 3px;
+    width: 72px;
+    background-color: white;
+}
+
+.cartButton-container>input{
+    width: 40px;
+    margin:0 5px;
+    text-align: center;
+}
+
+.cartButton-container::selection{
+    background-color: transparent;
+}
+
 /*small pagi buttons*/
 
 

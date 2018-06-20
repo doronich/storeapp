@@ -41,7 +41,8 @@
     "titles": {
         "products": "Products",
         "contacts": "Contacts",
-        "shopCart":"Shopping cart"
+        "shopCart":"Shopping cart",
+        "latest":"Latest products"
     },
     "shopcart":{
         "empty":"Your shopping cart is empty",
@@ -52,7 +53,17 @@
         },
         "footer":{
             "total":"Total"
-        }
+        },
+        "form":{
+            "title":"Contact details",
+            "name":"First name",
+            "address":"Address",
+            "phoneNumber":"Phone number",
+            "comment":"Comment to the order",
+            "confirm":"Confirm the order"
+        },
+        "response":"Order successfully added",
+        "error":"Error!"
     },
     "filtres": {
         "none": "None",

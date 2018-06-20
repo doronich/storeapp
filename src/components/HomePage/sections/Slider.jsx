@@ -26,7 +26,7 @@ export class Carousel extends React.Component {
         const settings = {
             dots: true,
             infinite: true,
-            speed: 500,
+            speed: 800,
             slidesToShow: 3,
             slidesToScroll: 1,
             autoplay:true,

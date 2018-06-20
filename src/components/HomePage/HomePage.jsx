@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import {Last,Carousel} from './sections'
+import { Loc } from 'redux-react-i18n';
 
 class HomePage extends React.Component {
 
@@ -18,11 +19,11 @@ class HomePage extends React.Component {
                     style={{height:"100%"}}>
 
                     <Grid item  style={{backgroundColor:"#343434", width:"100%"}}>
-                        <Typography align="center" color="primary" variant="display1" style={{margin:"15px 0 0 0 "}}>Последние</Typography>
+                        <Typography align="center" color="primary" variant="display1" style={{margin:"15px 0 0 0 "}}><Loc locKey="titles.latest"/></Typography>
                         <Last/>
                     </Grid>
                     <Grid item className="mobile600" style={{width:"100%"}}>
-                        <div className="container" style={{padding:"60px 0"}}>
+                        <div className="container" style={{padding:"80px 0"}}>
                             <Carousel/>
                         </div>
                     </Grid>

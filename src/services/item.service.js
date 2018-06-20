@@ -56,10 +56,5 @@ function getRandom(n=6){
 
 function getCartList(arr){
     const url=`${api.url}/api/item/cart`;
-/*     let params ="";
-    for(let i = 0; i<arr.length; i++){
-        params+=`&itemsId=${arr[i]}`
-    }
-    console.log("params",params) */
     return axios.get(`${url}?${qs.stringify({itemsId:arr})}`);
 }
