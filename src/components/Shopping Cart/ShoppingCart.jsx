@@ -54,7 +54,6 @@ class ShoppingCart extends React.Component {
         if (!(this.state.list[index].amount === 1 && n === -1)) {
             const list = this.state.list;
             list[index].amount += n;
-            //list[index].amount = parseInt(event.target.value, 10);
             this.setState({ list })
         }
     }
@@ -70,7 +69,7 @@ class ShoppingCart extends React.Component {
         this.setState({ [name]: event.target.value });
     }
 
-    submitOrder = (event) => {
+    submitOrder = event => {
         event.preventDefault();
         const { name, phoneNumber, address, email, comment, } = this.state;
         const list = JSON.parse(JSON.stringify(this.state.list));
@@ -119,7 +118,7 @@ class ShoppingCart extends React.Component {
             link: {
                 fontWeight: 400,
                 color: "black",
-                fontSize: "16px",
+                fontSize: "12px",
                 textDecoration: "underline"
             },
             total: {
@@ -161,7 +160,7 @@ class ShoppingCart extends React.Component {
                                 <TableCell><Loc locKey="shopcart.header.amount" /></TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody >
+                        <TableBody  style={{overflowX:"scroll"}}>
                             {rows ? rows : <TableRow></TableRow>}
                         </TableBody>
                         <TableFooter>

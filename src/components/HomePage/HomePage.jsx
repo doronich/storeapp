@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid'
+import {Grid, Hidden} from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import {Last,Carousel} from './sections'
 import { Loc } from 'redux-react-i18n';
@@ -10,6 +10,8 @@ class HomePage extends React.Component {
 
     render() {
         const { currentUser, loggedIn } = this.props;
+        document.title = "Store"
+        document.icon
         return (
             <div style={{overflow:"hidden"}}>
                 <Grid container
@@ -22,10 +24,11 @@ class HomePage extends React.Component {
                         <Typography align="center" color="primary" variant="display1" style={{margin:"15px 0 0 0 "}}><Loc locKey="titles.latest"/></Typography>
                         <Last/>
                     </Grid>
-                    <Grid item className="mobile600" style={{width:"100%"}}>
-                        <div className="container" style={{padding:"80px 0"}}>
+                    <Grid item style={{width:"100%"}}>
+                        <Hidden only="xs"><div className="container" style={{padding:"80px 0"}}>
                             <Carousel/>
                         </div>
+                        </Hidden>
                     </Grid>
                     <Grid item style={{width:"100%",backgroundColor:"#777"}}><Typography align="center" variant="display4">Еще что-то...</Typography></Grid>
                     <Grid item style={{width:"100%",backgroundColor:"#FFF"}}><Typography align="center" variant="display4">Еще что-то...</Typography></Grid>

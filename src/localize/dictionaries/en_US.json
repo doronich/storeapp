@@ -1,5 +1,5 @@
 {
-    "currency": "$",
+    "currency": " $",
     "account": {
         "logout": "Logout",
         "signin": "Sign In",
@@ -16,7 +16,8 @@
         "lname": "Last name",
         "needReg": "Need an account?",
         "needLog": "Have an account?",
-        "errsignin": "Incorrect login or password."
+        "errsignin": "Incorrect login or password.",
+        "profile":"Profile"
     },
     "header": {
         "women": "Women",
@@ -35,7 +36,8 @@
         "account": {
             "name": "Account",
             "allitems": "All products",
-            "additem": "Add a product"
+            "additem": "Add a product",
+            "orders":"Orders"
         }
     },
     "titles": {

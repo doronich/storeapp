@@ -75,7 +75,7 @@ class ListMenu extends React.Component {
         this.props.changeSubkind(n)
     }
 
-    toggleDrawer = ()=>{
+    toggleDrawer = () => {
         this.props.toggleDrawer(false)
     }
 
@@ -86,36 +86,36 @@ class ListMenu extends React.Component {
             border: "2px solid black"
         }
         const tsubkindClothing = subkindsClothing.map((item, index) => {
-            if(index===0)return null;
+            if (index === 0) return null;
             return <div key={index}>
                 <Divider />
                 <Link to={`/items`}>
                     <ListItem button onClick={this.changeSubkindClothing(item.value)}>
-                        <ListItemText primary={<Loc locKey={item.name}/>} />
+                        <ListItemText primary={<Loc locKey={item.name} />} />
                     </ListItem>
                 </Link>
             </div>
         })
 
         const tsubkindFootwear = subkindsFootwear.map((item, index) => {
-            if(index===0)return null;
+            if (index === 0) return null;
             return <div key={index}>
                 <Divider />
                 <Link to={`/items`}>
                     <ListItem button onClick={this.changeSubkindFootwear(item.value)}>
-                        <ListItemText primary={<Loc locKey={item.name}/>} />
+                        <ListItemText primary={<Loc locKey={item.name} />} />
                     </ListItem>
                 </Link>
             </div>
         })
 
-        const tsubkindAccessories= subkindsAccessories.map((item, index) => {
-            if(index===0)return null;
+        const tsubkindAccessories = subkindsAccessories.map((item, index) => {
+            if (index === 0) return null;
             return <div key={index}>
                 <Divider />
                 <Link to={`/items`}>
                     <ListItem button onClick={this.changeSubkindAccessories(item.value)}>
-                        <ListItemText primary={<Loc locKey={item.name}/>} />
+                        <ListItemText primary={<Loc locKey={item.name} />} />
                     </ListItem>
                 </Link>
             </div>
@@ -144,7 +144,7 @@ class ListMenu extends React.Component {
 
                 <Collapse in={this.state.openShoes} timeout="auto" unmountOnExit>
                     <List component='div'>
-                    {tsubkindFootwear}
+                        {tsubkindFootwear}
                     </List>
                 </Collapse>
 
@@ -214,6 +214,12 @@ class ListMenu extends React.Component {
                                                     <ListItemText primary={<Loc locKey="aside.account.additem" />} />
                                                 </ListItem>
                                             </Link>
+                                            <Divider />
+                                            <Link to='/orders' onClick={this.toggleDrawer}>
+                                                <ListItem button>
+                                                    <ListItemText primary={<Loc locKey="aside.account.orders" />} />
+                                                </ListItem>
+                                            </Link>
                                         </div>
                                     }
 
@@ -221,6 +227,12 @@ class ListMenu extends React.Component {
                                     <Link to='/allitems' onClick={this.toggleDrawer}>
                                         <ListItem button>
                                             <ListItemText primary={<Loc locKey="aside.account.allitems" />} />
+                                        </ListItem>
+                                    </Link>
+                                    <Divider />
+                                    <Link to='/profile' onClick={this.toggleDrawer}>
+                                        <ListItem button>
+                                            <ListItemText><Loc locKey="account.profile" /></ListItemText>
                                         </ListItem>
                                     </Link>
                                     <Divider />

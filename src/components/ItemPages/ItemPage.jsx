@@ -129,10 +129,11 @@ class ItemPage extends React.Component {
                 <div key={index} >
                     <div style={{
                         backgroundImage: `url("${item}")`,
+                        backgroundRepeat:"no-repeat",
                         backgroundPosition: "center",
-                        backgroundSize: "cover",
+                        backgroundSize: "contain",
                         width: "auto",
-                        height: "600px",
+                        height: "500px",
                     }}>
 
                     </div>
@@ -140,13 +141,16 @@ class ItemPage extends React.Component {
 
             )
         });
+
+        document.title = this.state.name
+
         return (
             <Grid container className="container">
                 <Grid item style={{ height: "100%", marginTop: "20px" }} xs={12}>
                     <Grid container direction="column" justify="flex-start" alignItems="stretch" style={{ height: "100%" }}>
                         <Grid item >
                             <Grid id="itempage-container" container direction="row" justify="center" alignItems="flex-start">
-                                <Grid item style={{ height: "auto", width: "600px",marginRight:"30px" }}>
+                                <Grid item xs={12} sm={12} md={12} lg={6} xl={6} style={{ height: "auto",width:"auto",marginRight:"30px" }}>
                                     <Slider {...settings}>
                                         {
                                             list

@@ -229,13 +229,13 @@ class ItemList extends React.Component {
 
         return (
             <Grid container direction="column" justify="space-between" alignItems="center" style={{ height: "100%" }}>
-                {Pagination}
+                {/* Pagination */}
                 <Grid item>
                     <Grid container justify="center">
                         {listItems}
                     </Grid>
                 </Grid>
-                {/* Pagination */}
+                {Pagination}
             </Grid>
         )
     }
