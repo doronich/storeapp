@@ -30,8 +30,8 @@ class HomePage extends React.Component {
                         </div>
                         </Hidden>
                     </Grid>
-                    <Grid item style={{width:"100%",backgroundColor:"#777"}}><Typography align="center" variant="display4">Еще что-то...</Typography></Grid>
-                    <Grid item style={{width:"100%",backgroundColor:"#FFF"}}><Typography align="center" variant="display4">Еще что-то...</Typography></Grid>
+                    {/* <Grid item style={{width:"100%",backgroundColor:"#777"}}><Typography align="center" variant="display4">Еще что-то...</Typography></Grid>
+                    <Grid item style={{width:"100%",backgroundColor:"#FFF"}}><Typography align="center" variant="display4">Еще что-то...</Typography></Grid> */}
                 </Grid>
             </div>
         );

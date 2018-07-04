@@ -91,7 +91,7 @@ class Header extends React.Component {
 
                     <Grid item className="nav_item">
                         <Link className="link" to="/">
-                            <Button fullWidth><Typography color="primary" variant="display1">Title</Typography></Button>
+                            <Button fullWidth><Typography color="primary" variant="display1">Store</Typography></Button>
                         </Link>
                     </Grid>
 
@@ -112,7 +112,7 @@ class Header extends React.Component {
                                 <Button fullWidth color="primary" onClick={this.toMaleChange} style={sex === "M" ? border : {}}><Loc locKey="header.men" /></Button>
 
                             </Grid>
-                            <Grid item className="nav_item mobile900" >
+  {/*                           <Grid item className="nav_item mobile900" >
                                 <Link className="link" to="/contacts">
                                     <Button fullWidth color="primary" ><Loc locKey="header.contacts" /></Button>
                                 </Link>
@@ -126,7 +126,7 @@ class Header extends React.Component {
                                 <Link className="link" to="/">
                                     <Button fullWidth color="primary" ><Loc locKey="header.about" /></Button>
                                 </Link>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
 
                     </Grid>
@@ -136,11 +136,11 @@ class Header extends React.Component {
                                 loggedIn ? (
                                     <Grid item className="nav_item">
                                         <Grid container direction="row" justify="center">
-                                            <Grid item className="nav_item mobile900">
+{/*                                             <Grid item className="nav_item mobile900">
                                                 <Link to="/profile" className="link">
                                                     <Button color="primary"><Person /></Button>
                                                 </Link>
-                                            </Grid>
+                                            </Grid> */}
                                             <Grid item className="nav_item mobile900">
                                                 <Link to="/" className="link"><Button color="primary" fullWidth onClick={this.logout}><Loc locKey="account.logout" /></Button></Link>
                                             </Grid>

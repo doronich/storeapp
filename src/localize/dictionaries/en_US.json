@@ -37,7 +37,8 @@
             "name": "Account",
             "allitems": "All products",
             "additem": "Add a product",
-            "orders":"Orders"
+            "orders":"Orders",
+            "profile":"Profile"
         }
     },
     "titles": {
@@ -62,7 +63,7 @@
             "address":"Address",
             "phoneNumber":"Phone number",
             "comment":"Comment to the order",
-            "confirm":"Confirm the order"
+            "confirm":"Checkout"
         },
         "response":"Order successfully added",
         "error":"Error!"
@@ -135,5 +136,12 @@
         "added": "Added",
         "notAv": "Not available",
         "cancel": "Cancel"
+    },
+    "orders":{
+        "table":{
+            "name":"Name",
+            "phone":"Phone number",
+            "comment":"Comment"
+        }
     }
 }

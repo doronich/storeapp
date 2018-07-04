@@ -1,9 +1,19 @@
 import React from 'react'
 import { Loc } from 'redux-react-i18n';
 import { orderService } from '../../services';
-import { Grid, Typography, Table, TableHead, TableRow, TableCell } from '@material-ui/core';
+import { Grid, Typography} from '@material-ui/core';
 
+import ReactTable from 'react-table'
+import "react-table/react-table.css";
 
+const columns=[
+    {
+        Header:<Loc locKey="orders.table.name"/>
+    },
+    {
+        Header:"Comment"
+    },
+]
 
 export class OrdersPage extends React.Component {
 
@@ -20,9 +30,6 @@ export class OrdersPage extends React.Component {
     }
 
     render() {
-
-
-
         document.title = "Orders"
         return (
             <Grid container className="container" direction="column" justify="flex-start" style={{ height: "100%" }}>
@@ -30,19 +37,10 @@ export class OrdersPage extends React.Component {
                     <Typography variant="headline"><Loc locKey="aside.account.orders" /></Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Table style={{width:"100%"}}>
-                         <TableHead>
-                             <TableRow>
-                                <TableCell>Имя</TableCell>
-                                <TableCell>Дата</TableCell>
-                                <TableCell>Телефон</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>Комментарий</TableCell>
-                                <TableCell>Комментарий</TableCell>
-                                <TableCell>Комментарий</TableCell>
-                             </TableRow>
-                         </TableHead>
-                    </Table>
+                    <ReactTable
+                        columns={columns}
+                        className="-stripped -highlight"
+                        />
                 </Grid>
             </Grid>
         )
