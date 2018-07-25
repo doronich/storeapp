@@ -214,12 +214,12 @@ class ListMenu extends React.Component {
                                                     <ListItemText primary={<Loc locKey="aside.account.additem" />} />
                                                 </ListItem>
                                             </Link>
-{/*                                             <Divider />
+                                            <Divider />
                                             <Link to='/orders' onClick={this.toggleDrawer}>
                                                 <ListItem button>
                                                     <ListItemText primary={<Loc locKey="aside.account.orders" />} />
                                                 </ListItem>
-                                            </Link> */}
+                                            </Link>
                                         </div>
                                     }
 

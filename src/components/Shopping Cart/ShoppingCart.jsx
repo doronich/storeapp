@@ -42,7 +42,7 @@ class ShoppingCart extends React.Component {
                 .catch(err => console.log(err))
                 .then(response => {
                     if (response) {
-                        console.log("resp:", response.data)
+                        //console.log("resp:", response.data)
                         this.setState({ list: response.data })
                     }
                 });

@@ -23,13 +23,15 @@ const styles = {
         margin: "0 15px 15px 15px",
         borderRadius: "5px",
         backgroundColor: "#fff",
+        cursor:"default"
     },
     media: {
         height: "200px",
         width: "auto"
     },
     actions:{
-        padding:"0"
+        padding:"0",
+        cursor:"default"
     },
     content:{
         padding:"10px 10px 0px 10px"
@@ -131,6 +133,7 @@ class Item extends React.Component {
                         }
 
                     </CardActions>
+                    
                 </Card>
 
                 <Dialog

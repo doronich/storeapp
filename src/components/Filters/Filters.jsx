@@ -117,6 +117,7 @@ class Filters extends React.Component {
             value[1] = parseInt(value[1], 10);
             if (value[0] >= 0 && value[1] <= this.maxrange) {
                 this.setState({ value })
+                this.dragEnd()
             }
         };
 
@@ -281,7 +282,7 @@ class Filters extends React.Component {
                                         step={1}
                                         range={{ min: 0, max: this.maxrange * this.valueMultiplier }}
                                         onChange={changeRange}
-                                        onSet={this.dragEnd}
+                                        //onSet={this.dragEnd}
                                     />
                                 </div></Grid>
                             <Grid item>{this.state.value[1]}{this.valuePosfix}</Grid>

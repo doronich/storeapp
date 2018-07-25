@@ -139,7 +139,7 @@ class ItemList extends React.Component {
             reqString += "&pageIndex=" + page;
             reqString += "&pageSize=" + this.state.pageSize;
 
-            //console.log("string", reqString);
+            console.log("string", reqString);
 
             itemService.getReqItems(reqString)
                 .catch(err => {

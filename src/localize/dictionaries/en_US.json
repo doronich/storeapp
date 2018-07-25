@@ -141,7 +141,12 @@
         "table":{
             "name":"Name",
             "phone":"Phone number",
-            "comment":"Comment"
+            "comment":"Comment",
+            "address":"Address",
+            "email":"Email",
+            "totalprice":"Total price",
+            "status":"Status",
+            "createddate":"Date of create"
         }
     }
 }

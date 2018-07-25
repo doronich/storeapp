@@ -140,8 +140,13 @@
     "orders":{
         "table":{
             "name":"Имя",
-            "phone":"Номер телефона",
-            "comment":"Комментарий"
+            "phone":"Телефон",
+            "comment":"Комментарий",
+            "address":"Адрес",
+            "email":"Email",
+            "totalprice":"Итоговая стоимость",
+            "status":"Статус",
+            "createddate":"Дата создания"
         }
     }
 }

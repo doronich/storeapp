@@ -2,12 +2,18 @@ import axios from 'axios';
 import api from '../api';
 
 export const orderService = {
-    getAll
+    getAll,
+    getOrderItems
 }
 
 function getAll(){
     const user = getUser();
-    return axios.get(`${api.url}/api/order`,{headers:{"Authorization":"Bearer "+user.acces_token}});
+    return axios.get(`${api.url}/api/order/orders`,{headers:{"Authorization":"Bearer "+user.acces_token}});
+}
+
+function getOrderItems(id){
+    const user = getUser();
+    return axios.get(`${api.url}/api/order/${id}`,{headers:{"Authorization":"Bearer "+user.acces_token}})
 }
 
 function getUser(){

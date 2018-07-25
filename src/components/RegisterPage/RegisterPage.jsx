@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
 class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
-        console.log('register ',this.props);
+        //console.log('register ',this.props);
         this.props.logOut();
 
         this.state = {
