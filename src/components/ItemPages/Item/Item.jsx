@@ -18,17 +18,22 @@ import { cartAcitons } from '../../../actions'
 
 const styles = {
     card: {
-        width: 300,
+        width: 200,
+        height: 330,
         margin: "0 15px 15px 15px",
         borderRadius: "5px",
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
     },
     media: {
-        height: "300px",
+        height: "200px",
         width: "auto"
-        //paddingTop: '350px', // 16:9
-        //paddingRight: '300px'
     },
+    actions:{
+        padding:"0"
+    },
+    content:{
+        padding:"10px 10px 0px 10px"
+    }
 };
 
 class Item extends React.Component {
@@ -87,12 +92,12 @@ class Item extends React.Component {
                     </Link>
                     <Link to={"/item/" + id}>
                         <CardContent
-                            style={{ paddingBottom: "0" }}
+                            style={styles.content}
                         >
-                            <Typography gutterBottom variant="title" >
+                            <Typography gutterBottom variant="title" style={{fontSize:"12px"}}>
                                 {name}
                             </Typography>
-                            <Typography gutterBottom variant="subheading">
+                            <Typography gutterBottom variant="subheading" style={{fontSize:"16px"}}>
                                 {price * valueMultiplier}<Loc locKey="currency" />
                             </Typography>
                             {
@@ -104,7 +109,7 @@ class Item extends React.Component {
 
                         </CardContent>
                     </Link>
-                    <CardActions>
+                    <CardActions style={styles.actions}>
                         <div>
                             <IconButton onClick={this.addToCart}>
                                 <AddShoppingCart />

@@ -21,6 +21,7 @@ const mapDispatchToProps = dispatch => ({
 class ItemPage extends React.Component {
 
     state = {
+        active: false,
         id: 0,
         name: "",
         mainImage: "",
@@ -47,6 +48,7 @@ class ItemPage extends React.Component {
                 if (response) {
                     const data = response.data;
                     this.setState({
+                        active: data.active,
                         id: data.id,
                         name: data.name,
                         image: data.previewImagePath,
@@ -150,7 +152,7 @@ class ItemPage extends React.Component {
                     <Grid container direction="column" justify="flex-start" alignItems="stretch" style={{ height: "100%" }}>
                         <Grid item >
                             <Grid id="itempage-container" container direction="row" justify="center" alignItems="flex-start">
-                                <Grid item xs={12} sm={12} md={12} lg={6} xl={6} style={{ height: "auto",width:"auto",marginRight:"30px" }}>
+                                <Grid item xs={12} sm={12} md={12} lg={6} xl={6} style={{ height: "auto",width:"auto"}}>
                                     <Slider {...settings}>
                                         {
                                             list
@@ -191,7 +193,7 @@ class ItemPage extends React.Component {
 
                                     </Grid>
                                 </Grid> */}
-                                <Grid item style={{marginTop:"100px"}}>
+                                <Grid item style={{marginTop:"100px",marginLeft:"30px"}}>
                                     <Typography variant="title" gutterBottom  style={{width:"320px"}}><span>{name}</span></Typography>
                                     <Typography variant="title" gutterBottom>{price * valueMultiplier}<Loc locKey="currency" /></Typography>
                                     <Typography variant="button" color="secondary" gutterBottom><Loc locKey="item.brand" />: {brand}</Typography>
@@ -203,7 +205,7 @@ class ItemPage extends React.Component {
                                     {
                                         this.state.added
                                             ? <Button variant="raised" color="secondary" onClick={this.removeFromCart}><Loc locKey="item.remove" /></Button>
-                                            : <Button variant="raised" color="secondary" onClick={this.addToCart}><Loc locKey="item.add" /></Button>
+                                            : <Button variant="raised" color="secondary" disabled={!this.state.active} onClick={this.addToCart}><Loc locKey="item.add" /></Button>
                                     }
                                 </Grid>
                             </Grid>

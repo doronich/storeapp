@@ -29,7 +29,7 @@ class ItemList extends React.Component {
             changed: this.props.changed,
             currentPage: this.props.match.params.page || 1,
             totalPages: null,
-            pageSize: 12,
+            pageSize: 18,
             prev: null,
             next: null,
             pageRange: 2
@@ -69,7 +69,7 @@ class ItemList extends React.Component {
 
         for (let i = this.rangeStart(); i <= this.rangeEnd(); i++) {
             pages.push(
-                (<Grid item key={i}><Button variant="raised" style={{minWidth:"30px"}} size="small" color={this.state.currentPage === i ? "secondary" : "primary"} onClick={this.changePage(i)}>
+                (<Grid item key={i}><Button variant="raised" style={{ minWidth: "30px" }} size="small" color={this.state.currentPage === i ? "secondary" : "primary"} onClick={this.changePage(i)}>
                     {i}
                 </Button></Grid>)
             );
@@ -139,7 +139,7 @@ class ItemList extends React.Component {
             reqString += "&pageIndex=" + page;
             reqString += "&pageSize=" + this.state.pageSize;
 
-            console.log("string", reqString);
+            //console.log("string", reqString);
 
             itemService.getReqItems(reqString)
                 .catch(err => {
@@ -196,31 +196,33 @@ class ItemList extends React.Component {
 
         const Pagination = (
             <Grid item style={{ margin: "20px 0", width: "100%" }}>
-                <Grid container justify="space-between" alignItems="center">
+                <Grid container justify="center" alignItems="center">
                     <Grid item>
-                        <Button variant="raised" style={{minWidth:"40px"}} size="small" disabled={!this.state.prev} onClick={this.prevPage} color="primary">
-                            <KeyboardArrowLeft />
+                        <Button variant="raised" style={{ minWidth: "40px",padding:"0" }} size="small" disabled={!this.state.prev} onClick={this.prevPage} color="primary">
+                            <KeyboardArrowLeft/>
                         </Button>
                     </Grid>
                     <Grid item>
                         <Grid container >
                             {this.hasFirst() &&
-                                <Grid item><Button variant="raised" style={{minWidth:"30px"}} size="small" color={this.state.currentPage === 1 ? "secondary" : "primary"} onClick={this.changePage(1)}>
-                                    1
-                </Button></Grid>}
-{/*                             {this.hasFirst() &&
+                                <Grid item>
+                                    <Button variant="raised" style={{ minWidth: "30px" }} size="small" color={this.state.currentPage === 1 ? "secondary" : "primary"} onClick={this.changePage(1)}>
+                                        1
+                                    </Button>
+                                </Grid>}
+                            {/*                             {this.hasFirst() &&
                                 <Grid item style={{ margin: "0 15px" }}><Typography variant="headline">...</Typography></Grid>} */}
                             {pages}
-{/*                             {this.hasLast() &&
+                            {/*                             {this.hasLast() &&
                                 <Grid item style={{ margin: "0 15px" }}><Typography variant="headline">...</Typography></Grid>} */}
                             {this.hasLast() &&
-                                <Grid item><Button variant="raised" style={{minWidth:"30px"}} size="small" color={this.state.currentPage === this.state.totalPages ? "secondary" : "primary"} onClick={this.changePage(this.state.totalPages)}>
+                                <Grid item><Button variant="raised" style={{ minWidth: "30px" }} size="small" color={this.state.currentPage === this.state.totalPages ? "secondary" : "primary"} onClick={this.changePage(this.state.totalPages)}>
                                     {this.state.totalPages ? this.state.totalPages : "..."}
                                 </Button></Grid>}
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <Button variant="raised" style={{minWidth:"40px"}} size="small" disabled={!this.state.next} onClick={this.nextPage} color="primary">
+                        <Button variant="raised" style={{ minWidth: "40px",padding:"0" }} size="small" disabled={!this.state.next} onClick={this.nextPage} color="primary">
                             <KeyboardArrowRight />
                         </Button>
                     </Grid>

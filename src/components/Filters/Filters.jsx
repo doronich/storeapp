@@ -8,12 +8,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputRange from 'react-input-range'
 import TextField from '@material-ui/core/TextField';
-import 'react-input-range/lib/css/index.css'
+import 'react-input-range/lib/css/index.css';
+import Nouislider from 'react-nouislider';
+import '../styles/nouislider.css'
 
 import { connect } from 'react-redux';
 import { Loc } from 'redux-react-i18n'
 
-import { itemConstants, kinds, subkindsClothing, subkindsFootwear, colors, brandsFootwear,brandsClothing, subkindsAccessories } from '../../constants';
+import { itemConstants, kinds, subkindsClothing, subkindsFootwear, colors, brandsFootwear, brandsClothing, subkindsAccessories } from '../../constants';
 
 function mapStateToProps(state) {
     const { sex, kind, subkind, brand, color, priceEnd, priceStart, name, currency } = state.item;
@@ -41,26 +43,28 @@ class Filters extends React.Component {
             subkind: this.props.subkind,
             brand: this.props.brand,
             color: this.props.color,
-            value: {
-                min: this.props.priceStart,
-                max: this.props.priceEnd
-            },
+            value: [
+                this.props.priceStart,
+                this.props.priceEnd
+            ],
             name: this.props.name,
         }
-        
-        if(this.props.currency==='rub'){
-            this.valuePosfix="р."
-            this.valueMultiplier=1;
-        }else{
-            this.valuePosfix="$"
-            this.valueMultiplier=0.5;
+
+        if (this.props.currency === 'rub') {
+            this.valuePosfix = "р."
+            this.valueMultiplier = 1;
+        } else {
+            this.valuePosfix = "$"
+            this.valueMultiplier = 0.5;
         }
     }
 
     dragEnd = () => {
-        this.props.changePriceEnd(this.state.value.max/this.valueMultiplier)
-        this.props.changePriceStart(this.state.value.min/this.valueMultiplier)
+        this.props.changePriceEnd(this.state.value[1] / this.valueMultiplier)
+        this.props.changePriceStart(this.state.value[0] / this.valueMultiplier)
     }
+
+    maxrange = 1000;
 
     reset = async () => {
         await this.props.reset()
@@ -69,10 +73,10 @@ class Filters extends React.Component {
             subkind: this.props.subkind,
             brand: this.props.brand,
             color: this.props.color,
-            value: {
-                min: this.props.priceStart,
-                max: this.props.priceEnd
-            },
+            value: [
+                this.props.priceStart,
+                this.props.priceEnd
+            ],
             name: this.props.name
         })
     }
@@ -80,7 +84,7 @@ class Filters extends React.Component {
         this.setState({ [name]: event.target.value });
         switch (name) {
             case "kind": this.props.changeKind(event.target.value);
-                        this.props.changeSubkind("none")
+                this.props.changeSubkind("none")
                 break;
             case "subkind": this.props.changeSubkind(event.target.value);
                 break;
@@ -92,7 +96,7 @@ class Filters extends React.Component {
                 break;
         }
     }
-    
+
 
     timerId = null;
 
@@ -105,12 +109,16 @@ class Filters extends React.Component {
         }, 700)
     }
 
-    
+
 
     render() {
-        const changeRange = debounce(value => {
-            if (value.min >= 0 && value.max <= 500) this.setState({ value })
-        },16);
+        const changeRange = value => {
+            value[0] = parseInt(value[0], 10);
+            value[1] = parseInt(value[1], 10);
+            if (value[0] >= 0 && value[1] <= this.maxrange) {
+                this.setState({ value })
+            }
+        };
 
         const { kind, subkind, brand, color, name } = this.state;
 
@@ -142,22 +150,22 @@ class Filters extends React.Component {
             return <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
         })
 
-        if(this.props.currency==='rub'){
-            this.valuePosfix="р."
-            this.valueMultiplier=1;
-        }else{
-            this.valuePosfix="$"
-            this.valueMultiplier=0.5;
+        if (this.props.currency === 'rub') {
+            this.valuePosfix = "р."
+            this.valueMultiplier = 1;
+        } else {
+            this.valuePosfix = "$"
+            this.valueMultiplier = 0.5;
         }
 
         return (
             <div>
                 <hr />
-                <Grid id="filtres" container direction={"row"} justify="space-around" alignItems="baseline">
+                <Grid id="filtres" container direction={"row"} justify="space-between" alignItems="baseline">
 
                     <Grid item>
                         <FormControl>
-                            <Select
+                            <Select  style={{width:"300px"}}
                                 value={kind}
                                 onChange={this.handleChange("kind")}
                                 name="kind"
@@ -167,11 +175,11 @@ class Filters extends React.Component {
                             <FormHelperText><Loc locKey="filtres.kind" /></FormHelperText>
                         </FormControl>
                     </Grid>
-                    <Grid item>
+                    <Grid item style={{width:"300px"}}>
                         <FormControl>
                             {
                                 kind === 2 &&
-                                <Select
+                                <Select  style={{width:"300px"}}
                                     value={subkind}
                                     onChange={this.handleChange("subkind")}
                                     name="subkind"
@@ -183,7 +191,7 @@ class Filters extends React.Component {
 
                             {
                                 kind === 1 &&
-                                <Select
+                                <Select  style={{width:"300px"}}
                                     value={subkind}
                                     onChange={this.handleChange("subkind")}
                                     name="subkind"
@@ -193,7 +201,7 @@ class Filters extends React.Component {
                             }
                             {
                                 kind === 3 &&
-                                <Select
+                                <Select  style={{width:"300px"}}
                                     value={subkind}
                                     onChange={this.handleChange("subkind")}
                                     name="subkind"
@@ -206,12 +214,12 @@ class Filters extends React.Component {
                         </FormControl>
                     </Grid>
 
-                    <Grid item>
+                    <Grid item style={{width:"300px"}}>
                         <FormControl>
 
                             {
                                 kind === 1 &&
-                                <Select
+                                <Select  style={{width:"300px"}}
                                     value={brand}
                                     onChange={this.handleChange("brand")}
                                     name="brand"
@@ -224,7 +232,7 @@ class Filters extends React.Component {
                             }
                             {
                                 kind === 2 &&
-                                <Select
+                                <Select  style={{width:"300px"}}
                                     value={brand}
                                     onChange={this.handleChange("brand")}
                                     name="brand"
@@ -242,7 +250,7 @@ class Filters extends React.Component {
 
                     <Grid item>
                         <FormControl>
-                            <Select
+                            <Select style={{width:"300px"}}
                                 value={color}
                                 onChange={this.handleChange("color")}
                                 name="color"
@@ -253,7 +261,7 @@ class Filters extends React.Component {
                             <FormHelperText><Loc locKey="filtres.color" /></FormHelperText>
                         </FormControl>
                     </Grid>
-                    <Grid item>
+                    <Grid item style={{width:"300px"}}>
                         <TextField
                             fullWidth
                             value={name}
@@ -262,19 +270,35 @@ class Filters extends React.Component {
                             helperText={<Loc locKey="filtres.searchByName" />}
                         />
                     </Grid>
-
-                    <Grid item style={{ width: "200px" }}>
+                    <Grid item>
+                        <Grid container style={{width:"300px", padding:"10px 5px 0px"}} justify="space-around">
+                            <Grid item>{this.state.value[0]}{this.valuePosfix}</Grid>
+                            <Grid item>
+                                <div style={{ width: "200px" }}>
+                                    <Nouislider
+                                        start={[this.state.value[0], this.state.value[1]]}
+                                        connect={[false, true, false]}
+                                        step={1}
+                                        range={{ min: 0, max: this.maxrange * this.valueMultiplier }}
+                                        onChange={changeRange}
+                                        onSet={this.dragEnd}
+                                    />
+                                </div></Grid>
+                            <Grid item>{this.state.value[1]}{this.valuePosfix}</Grid>
+                        </Grid>
+                    </Grid>
+                    {/*                     <Grid item style={{ width: "200px" }}>
                         <InputRange
                             formatLabel={value => `${value}${this.valuePosfix}`}
                             step={1}
                             minValue={0}
-                            maxValue={500*this.valueMultiplier}
+                            maxValue={500 * this.valueMultiplier}
                             value={this.state.value}
                             onChange={changeRange}
                             onChangeComplete={this.dragEnd}
-                            
+
                         />
-                    </Grid>
+                    </Grid> */}
                     <Grid item>
                         <Button onClick={this.reset} variant="raised">
                             <Loc locKey="filtres.reset" />
