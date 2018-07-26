@@ -1,12 +1,10 @@
 import React from 'react'
-import debounce from 'lodash/debounce';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import InputRange from 'react-input-range'
 import TextField from '@material-ui/core/TextField';
 import 'react-input-range/lib/css/index.css';
 import Nouislider from 'react-nouislider';
@@ -279,7 +277,7 @@ class Filters extends React.Component {
                                     <Nouislider
                                         start={[this.state.value[0], this.state.value[1]]}
                                         connect={[false, true, false]}
-                                        step={1}
+                                        step={5}
                                         range={{ min: 0, max: this.maxrange * this.valueMultiplier }}
                                         onChange={changeRange}
                                         //onSet={this.dragEnd}
@@ -288,18 +286,6 @@ class Filters extends React.Component {
                             <Grid item>{this.state.value[1]}{this.valuePosfix}</Grid>
                         </Grid>
                     </Grid>
-                    {/*                     <Grid item style={{ width: "200px" }}>
-                        <InputRange
-                            formatLabel={value => `${value}${this.valuePosfix}`}
-                            step={1}
-                            minValue={0}
-                            maxValue={500 * this.valueMultiplier}
-                            value={this.state.value}
-                            onChange={changeRange}
-                            onChangeComplete={this.dragEnd}
-
-                        />
-                    </Grid> */}
                     <Grid item>
                         <Button onClick={this.reset} variant="raised">
                             <Loc locKey="filtres.reset" />

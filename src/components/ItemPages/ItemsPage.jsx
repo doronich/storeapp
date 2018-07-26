@@ -16,6 +16,7 @@ export class ItemsPage extends React.Component {
 
     render() {
         //console.log("items",this.props)
+        document.title = "Store"
         return (
             <Grid container className="container" direction="column" justify="flex-start" alignItems="center" style={{height:"100%"}}>
 

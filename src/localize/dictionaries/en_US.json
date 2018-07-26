@@ -1,5 +1,6 @@
 {
     "currency": " $",
+    "notfound": "Page not found.",
     "account": {
         "logout": "Logout",
         "signin": "Sign In",
@@ -146,7 +147,12 @@
             "email":"Email",
             "totalprice":"Total price",
             "status":"Status",
-            "createddate":"Date of create"
+            "createddate":"Date of create",
+            "sub":{
+                "name":"Name",
+                "price":"Price",
+                "amount":"Amount"
+            }
         }
     }
 }

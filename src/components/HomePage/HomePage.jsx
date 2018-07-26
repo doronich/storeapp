@@ -9,9 +9,9 @@ class HomePage extends React.Component {
 
 
     render() {
-        const { currentUser, loggedIn } = this.props;
+        //const { currentUser, loggedIn } = this.props;
         document.title = "Store"
-        document.icon
+        
         return (
             <div style={{overflow:"hidden"}}>
                 <Grid container

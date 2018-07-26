@@ -86,8 +86,8 @@ aside{
     display: none;
 }
 
-.card:hover{
-    cursor: pointer;
+
+.card>div:hover{
     box-shadow: 0px 3px 25px rgb(43, 43, 43);
     transition: box-shadow 0.4s;
 }
@@ -100,44 +100,12 @@ aside{
     background-color: #000;
 }
 
-.input-range__slider {
-    background: #000;
-    border: 1px solid #000;
-    height: 0.6rem;
-    width: 0.6rem;
-    margin-top: -0.4rem;
-}
-
-.input-range__track--active {
-    background: #000; }
-
-.input-range__track {
-    height: 2px;
-    background: #000;
-}
 
 .wordWrap{
     word-wrap: break-word;
     word-break: break-all;
     overflow-wrap: break-word;
 }
-
-/*slickdots*/
-.slick-dots li {
-
-    width:auto;
-    height: auto;
-}
-
-li.slick-active{
-    box-sizing: border-box;
-    border:1px solid gray;
-}
-
-.slick-dots{
-    bottom:-70px;
-}
-
 
 /* cart amount*/
 .cartButton{

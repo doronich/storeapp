@@ -19,11 +19,13 @@ import { cartAcitons } from '../../../actions'
 const styles = {
     card: {
         width: 200,
-        height: 330,
-        margin: "0 15px 15px 15px",
-        borderRadius: "5px",
+        height: "auto",
+        margin: "0 16px 20px",
+        borderRadius: "0px",
+        border:"1px solid #dddddd",
         backgroundColor: "#fff",
-        cursor:"default"
+        cursor:"default",
+        //boxShadow:"none",
     },
     media: {
         height: "200px",
@@ -82,9 +84,9 @@ class Item extends React.Component {
         }
 
         return (
-            <div>
+            <div className="card" >
 
-                <Card style={styles.card} className="card"  >
+                <Card style={styles.card} >
                     <Link to={"/item/" + id}>
                         <CardMedia
                             style={styles.media}

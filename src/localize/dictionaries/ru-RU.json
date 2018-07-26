@@ -1,5 +1,6 @@
 {
     "currency": " BYN",
+    "notfound": "Страница не найдена",
     "account": {
         "logout": "Выйти",
         "signin": "Войти",
@@ -146,7 +147,12 @@
             "email":"Email",
             "totalprice":"Итоговая стоимость",
             "status":"Статус",
-            "createddate":"Дата создания"
+            "createddate":"Дата создания",
+            "sub":{
+                "name":"Название",
+                "price":"Цена",
+                "amount":"Количество"
+            }
         }
     }
 }

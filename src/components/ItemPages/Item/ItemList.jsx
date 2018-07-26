@@ -104,7 +104,7 @@ class ItemList extends React.Component {
                     console.log("ItemList error:", err);
                 })
                 .then(response => {
-                    console.log(response)
+                    //console.log(response)
                     if (response) this.setState({ list: response.data, changed: true })
                 })
         } else {

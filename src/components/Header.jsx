@@ -10,7 +10,7 @@ import { Menu as MenuIcon, ShoppingCart } from '@material-ui/icons';
 //import Badge from '@material-ui/core/Badge'
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography'
-import Person from '@material-ui/icons/Person'
+//import Person from '@material-ui/icons/Person'
 
 import { ListMenu } from './List'
 import LanguageSwitcher from './LanguageSwitcher'
