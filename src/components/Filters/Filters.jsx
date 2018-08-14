@@ -115,7 +115,7 @@ class Filters extends React.Component {
             value[1] = parseInt(value[1], 10);
             if (value[0] >= 0 && value[1] <= this.maxrange) {
                 this.setState({ value })
-                this.dragEnd()
+                //this.dragEnd()
             }
         };
 
@@ -164,7 +164,7 @@ class Filters extends React.Component {
 
                     <Grid item>
                         <FormControl>
-                            <Select  style={{width:"300px"}}
+                            <Select style={{ width: "300px" }}
                                 value={kind}
                                 onChange={this.handleChange("kind")}
                                 name="kind"
@@ -174,11 +174,11 @@ class Filters extends React.Component {
                             <FormHelperText><Loc locKey="filtres.kind" /></FormHelperText>
                         </FormControl>
                     </Grid>
-                    <Grid item style={{width:"300px"}}>
+                    <Grid item style={{ width: "300px" }}>
                         <FormControl>
                             {
                                 kind === 2 &&
-                                <Select  style={{width:"300px"}}
+                                <Select style={{ width: "300px" }}
                                     value={subkind}
                                     onChange={this.handleChange("subkind")}
                                     name="subkind"
@@ -190,7 +190,7 @@ class Filters extends React.Component {
 
                             {
                                 kind === 1 &&
-                                <Select  style={{width:"300px"}}
+                                <Select style={{ width: "300px" }}
                                     value={subkind}
                                     onChange={this.handleChange("subkind")}
                                     name="subkind"
@@ -200,7 +200,7 @@ class Filters extends React.Component {
                             }
                             {
                                 kind === 3 &&
-                                <Select  style={{width:"300px"}}
+                                <Select style={{ width: "300px" }}
                                     value={subkind}
                                     onChange={this.handleChange("subkind")}
                                     name="subkind"
@@ -213,12 +213,12 @@ class Filters extends React.Component {
                         </FormControl>
                     </Grid>
 
-                    <Grid item style={{width:"300px"}}>
+                    <Grid item style={{ width: "300px" }}>
                         <FormControl>
 
                             {
                                 kind === 1 &&
-                                <Select  style={{width:"300px"}}
+                                <Select style={{ width: "300px" }}
                                     value={brand}
                                     onChange={this.handleChange("brand")}
                                     name="brand"
@@ -231,7 +231,7 @@ class Filters extends React.Component {
                             }
                             {
                                 kind === 2 &&
-                                <Select  style={{width:"300px"}}
+                                <Select style={{ width: "300px" }}
                                     value={brand}
                                     onChange={this.handleChange("brand")}
                                     name="brand"
@@ -249,7 +249,7 @@ class Filters extends React.Component {
 
                     <Grid item>
                         <FormControl>
-                            <Select style={{width:"300px"}}
+                            <Select style={{ width: "300px" }}
                                 value={color}
                                 onChange={this.handleChange("color")}
                                 name="color"
@@ -260,7 +260,7 @@ class Filters extends React.Component {
                             <FormHelperText><Loc locKey="filtres.color" /></FormHelperText>
                         </FormControl>
                     </Grid>
-                    <Grid item style={{width:"300px"}}>
+                    <Grid item style={{ width: "300px" }}>
                         <TextField
                             fullWidth
                             value={name}
@@ -270,7 +270,7 @@ class Filters extends React.Component {
                         />
                     </Grid>
                     <Grid item>
-                        <Grid container style={{width:"300px", padding:"10px 5px 0px"}} justify="space-around">
+                        <Grid container style={{ width: "300px", padding: "10px 5px 0px" }} justify="space-around">
                             <Grid item>{this.state.value[0]}{this.valuePosfix}</Grid>
                             <Grid item>
                                 <div style={{ width: "200px" }}>
@@ -279,8 +279,10 @@ class Filters extends React.Component {
                                         connect={[false, true, false]}
                                         step={5}
                                         range={{ min: 0, max: this.maxrange * this.valueMultiplier }}
-                                        onChange={changeRange}
-                                        //onSet={this.dragEnd}
+                                        onSlide={changeRange}
+                                        onEnd={this.dragEnd}
+                                    //onSet={this.dragEnd}
+
                                     />
                                 </div></Grid>
                             <Grid item>{this.state.value[1]}{this.valuePosfix}</Grid>

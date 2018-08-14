@@ -109,39 +109,20 @@ class ItemList extends React.Component {
                 })
         } else {
 
-            let reqString = "";
-            let sex = ""
-            if (this.props.sex === "F") sex = "female";
-            else sex = "male";
-            reqString = `sex=${sex}`;
-            if (this.props.kind !== "none") {
-
-                reqString += "&kind=" + this.props.kind;
-            }
-            if (this.props.subkind !== "none") {
-
-                reqString += "&subkind=" + this.props.subkind;
-            }
-            if (this.props.brand !== "none") {
-                reqString += "&brand=" + this.props.brand
-            }
-            if (this.props.color !== "none") {
-                reqString += "&color=" + this.props.color
-            }
-            if (this.props.name) {
-                reqString += "&name=" + this.props.name;
+            const params = {
+                pageIndex: this.state.currentPage,
+                pageSize: this.state.pageSize,
+                sex: this.props.sex === "F" ? "female" : "male",
+                kind: this.props.kind === "none" ? null : this.props.kind,
+                subkind: this.props.subkind === "none" ? null : this.props.subkind,
+                brand: this.props.brand === "none" ? null : this.props.brand,
+                color: this.props.color === "none" ? null : this.props.color,
+                name: this.props.name,
+                startPrice: this.props.priceStart,
+                endPrice: this.props.priceEnd
             }
 
-            reqString += "&startPrice=" + this.props.priceStart;
-            reqString += "&endPrice=" + this.props.priceEnd;
-
-            const page = this.state.currentPage;
-            reqString += "&pageIndex=" + page;
-            reqString += "&pageSize=" + this.state.pageSize;
-
-            console.log("string", reqString);
-
-            itemService.getReqItems(reqString)
+            itemService.getReqItems(params)
                 .catch(err => {
                     console.log("reqItemList:", err)
                 })
@@ -198,8 +179,8 @@ class ItemList extends React.Component {
             <Grid item style={{ margin: "20px 0", width: "100%" }}>
                 <Grid container justify="center" alignItems="center">
                     <Grid item>
-                        <Button variant="raised" style={{ minWidth: "40px",padding:"0" }} size="small" disabled={!this.state.prev} onClick={this.prevPage} color="primary">
-                            <KeyboardArrowLeft/>
+                        <Button variant="raised" style={{ minWidth: "40px", padding: "0" }} size="small" disabled={!this.state.prev} onClick={this.prevPage} color="primary">
+                            <KeyboardArrowLeft />
                         </Button>
                     </Grid>
                     <Grid item>
@@ -222,7 +203,7 @@ class ItemList extends React.Component {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <Button variant="raised" style={{ minWidth: "40px",padding:"0" }} size="small" disabled={!this.state.next} onClick={this.nextPage} color="primary">
+                        <Button variant="raised" style={{ minWidth: "40px", padding: "0" }} size="small" disabled={!this.state.next} onClick={this.nextPage} color="primary">
                             <KeyboardArrowRight />
                         </Button>
                     </Grid>

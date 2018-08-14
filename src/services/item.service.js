@@ -14,47 +14,47 @@ export const itemService = {
     getCartList
 }
 
-function addItem(obj){
+function addItem(obj) {
     const user = getUser();
-    return axios.post(`${api.url}/api/item`, obj,user&&{headers:{"Authorization":"Bearer "+user.acces_token}})
+    return axios.post(`${api.url}/api/item`, obj, user && { headers: { "Authorization": "Bearer " + user.acces_token } })
 }
 
-function getItem(id){
+function getItem(id) {
     return axios.get(`${api.url}/api/item/${id}`)
 }
 
-function updateItem(obj){
+function updateItem(obj) {
     const user = getUser();
-    return axios.put(`${api.url}/api/item`, obj,user&&{headers:{"Authorization":"Bearer "+user.acces_token}});
+    return axios.put(`${api.url}/api/item`, obj, user && { headers: { "Authorization": "Bearer " + user.acces_token } });
 }
 
-function getAllItems(){
+function getAllItems() {
     return axios.get(`${api.url}/api/item/all`)
 }
 
-function getReqItems(str){
-    
-    return axios.get(`${api.url}/api/item/q?${str}`)
+function getReqItems(params) {
+
+    return axios.get(`${api.url}/api/item/q?`, { params })
 }
 
-function getUser(){
+function getUser() {
     return JSON.parse(localStorage.getItem("user"));
 }
 
-function deleteItem(id){
+function deleteItem(id) {
     const user = getUser();
-    return axios.delete(`${api.url}/api/item/${id}`,user&&{headers:{"Authorization":"Bearer "+user.acces_token}})
+    return axios.delete(`${api.url}/api/item/${id}`, user && { headers: { "Authorization": "Bearer " + user.acces_token } })
 }
 
-function getLast(n=5){
+function getLast(n = 5) {
     return axios.get(`${api.url}/api/item/last?amount=${n}`)
 }
 
-function getRandom(n=6){
+function getRandom(n = 6) {
     return axios.get(`${api.url}/api/item/random?amount=${n}`)
 }
 
-function getCartList(arr){
-    const url=`${api.url}/api/item/cart`;
-    return axios.get(`${url}?${qs.stringify({itemsId:arr})}`);
+function getCartList(arr) {
+    const url = `${api.url}/api/item/cart`;
+    return axios.get(`${url}?${qs.stringify({ itemsId: arr })}`);
 }

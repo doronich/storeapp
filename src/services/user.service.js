@@ -7,6 +7,7 @@ export const userService = {
     checkToken
 }
 
+
 function login(username, password) {
     const obj = {
         login: username,
@@ -22,9 +23,9 @@ function login(username, password) {
         })
 }
 
-function checkToken(){
+function checkToken() {
     const user = JSON.parse(localStorage.getItem('user'))
-    return axios.post(`${api.url}/api/checkToken`, user?user.username:"da", user&&{headers:{"Authorization":"Bearer "+user.acces_token}});
+    return axios.post(`${api.url}/api/checkToken`, user ? user.username : "da", user && { headers: { "Authorization": "Bearer " + user.acces_token } });
 }
 
 function register(creds) {
@@ -34,8 +35,8 @@ function register(creds) {
             //return err;
         })
         .then(response => {
-            if(response)return response.data;
-            
+            if (response) return response.data;
+
         })
 
 }

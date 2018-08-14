@@ -1,15 +1,9 @@
 import { userConstants } from '../constants'
 //import { userActions } from '../actions';
-import { userService } from '../services/'
+//import { userService } from '../services/'
 
-userService.checkToken().catch(err=>{
-    if(err.message.indexOf("401")>=0){
-        localStorage.removeItem('user');
-    }
-})
-
-const user = JSON.parse(localStorage.getItem('user'));            
-const initialState = { loggedIn: user? true: false, currentUser: user, token: null, inProgress: false };
+const user = JSON.parse(localStorage.getItem('user'));
+const initialState = { loggedIn: user ? true : false, currentUser: user, token: null, inProgress: false };
 
 export function authentication(state = initialState, action) {
     switch (action.type) {

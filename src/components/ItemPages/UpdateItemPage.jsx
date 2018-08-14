@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { itemService } from '../../services'
+import { itemService, userService } from '../../services'
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -17,6 +17,7 @@ import { ValidatorForm } from 'react-material-ui-form-validator'
 import { FormControlLabel } from '@material-ui/core';
 
 
+
 function mapStateToProps(state) {
     const { currentUser } = state.authentication;
     return {
@@ -24,10 +25,10 @@ function mapStateToProps(state) {
     };
 }
 
- class UpdateItemPage extends React.Component {
+class UpdateItemPage extends React.Component {
 
     state = {
-        data:null,
+        data: null,
         id: null,
         name: "",
         description: "",
@@ -52,21 +53,25 @@ function mapStateToProps(state) {
         image3: "",
     }
 
+    componentWillMount() {
+        userService.checkToken();
+    }
+
     componentDidMount() {
         const id = parseInt(this.props.match.params.number, 10);
         itemService.getItem(id)
             .catch(err => {
-                console.log("err", err)
+                //console.log("err", err)
                 this.setState({ found: false })
                 return;
             })
             .then(response => {
                 if (response) {
-                    console.log("response Update", response)
+                    //console.log("response Update", response)
                     const data = response.data;
-                    
+
                     this.setState({
-                        data:response.data,
+                        data: response.data,
                         id: data.id,
                         checkedActive: data.active,
                         name: data.name,
@@ -82,9 +87,9 @@ function mapStateToProps(state) {
                         status: data.status,
                         subkind: data.subkind,
                         image: data.previewImagePath,
-                        image1:data.imagePath1,
-                        image2:data.imagePath2,
-                        image3:data.imagePath3
+                        image1: data.imagePath1,
+                        image2: data.imagePath2,
+                        image3: data.imagePath3
                     });
                 }
             })
@@ -100,34 +105,34 @@ function mapStateToProps(state) {
     handleSubmit = event => {
         event.preventDefault();
         this.setState({ loading: true })
-        const { id, name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size, image, image1, image2, image3,data } = this.state;
+        const { id, name, description, checkedActive, color, brand, price, discount, kind, subkind, sex, status, amount, size, image, image1, image2, image3, data } = this.state;
         const obj = {
-            Username:this.props.currentUser.username,
+            Username: this.props.currentUser.username,
             id,
             name: name.trim(),
-            description:description.trim(),
+            description: description.trim(),
             Active: checkedActive,
-            color:color.trim(),
-            brand:brand.trim(),
+            color: color.trim(),
+            brand: brand.trim(),
             price,
             discount,
             kind,
-            subkind:subkind.trim(),
+            subkind: subkind.trim(),
             sex,
             status,
             amount,
             size,
-            previewImagePath: image!==data.previewImagePath ? image:null,
-            imagePath1: image1!==data.imagePath1 ? image1: null,
-            imagePath2: image2!==data.imagePath2 ? image2: null,
-            imagePath3: image3!==data.imagePath3 ? image3: null
+            previewImagePath: image !== data.previewImagePath ? image : null,
+            imagePath1: image1 !== data.imagePath1 ? image1 : null,
+            imagePath2: image2 !== data.imagePath2 ? image2 : null,
+            imagePath3: image3 !== data.imagePath3 ? image3 : null
         }
         console.log(obj);
 
         itemService.updateItem(obj)
             .catch(err => {
                 this.setState({ errorMessage: err.toString(), loading: false })
-                this.loadTimeout=setTimeout(() => {
+                this.loadTimeout = setTimeout(() => {
                     this.setState({ errorMessage: "" })
                 }, 5000);
 
@@ -135,7 +140,7 @@ function mapStateToProps(state) {
             })
             .then(response => {
                 this.setState({ okMessage: response.statusText, loading: false })
-                this.loadTimeout=setTimeout(() => {
+                this.loadTimeout = setTimeout(() => {
                     this.setState({ okMessage: "" })
                 }, 5000);
 
@@ -145,7 +150,7 @@ function mapStateToProps(state) {
     }
 
     loadTimeout;//задержка сообщения ответа от сервера
-    componentWillUnmount(){
+    componentWillUnmount() {
 
         this.loadTimeout && clearTimeout(this.loadTimeout);
     }
