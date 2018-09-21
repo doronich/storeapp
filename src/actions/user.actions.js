@@ -1,5 +1,5 @@
 import { userConstants } from '../constants'
-import { userService} from '../services'
+import { userService } from '../services'
 import { history } from '../helpers'
 
 export const userActions = {
@@ -9,51 +9,51 @@ export const userActions = {
 }
 
 
-function login(username, password){
+function login(username, password) {
     return dispatch => {
-        dispatch(request({username}));
+        dispatch(request({ username }));
 
         userService.login(username, password)
-            .then(user =>{
+            .then(user => {
                 dispatch(success(user));
                 history.push('/');
             },
-            error => {
-                console.log('failure');
-                dispatch(failure(error));
-            }
-        )
+                error => {
+                    console.log('failure');
+                    dispatch(failure(error));
+                }
+            )
     }
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user }}
+    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
-function register(creds){
+function register(creds) {
     return dispatch => {
         dispatch(request(creds));
 
         userService.register(creds)
-            .then( user => {
+            .then(user => {
                 console.log('success');
                 dispatch(success(user));
                 history.push('/');
             },
-            error => {
-                console.log('failure');
-                dispatch(failure(error));
-                //dispatch(alertActions.error(error));
-            }
-        )
+                error => {
+                    console.log('failure');
+                    dispatch(failure(error));
+                    //dispatch(alertActions.error(error));
+                }
+            )
     }
 
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user}}
+    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
-function logout(){
+function logout() {
     userService.logout();
     return { type: userConstants.LOGOUT };
 }

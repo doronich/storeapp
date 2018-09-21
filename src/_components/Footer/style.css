@@ -1,0 +1,29 @@
+.footer_font{
+    font-family: "Didact Gothic", sans-serif;
+    color: white;
+}
+
+.footer-block{
+    margin: 10px 15px;
+}
+
+.footer-block>h3{
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+
+.footer-block li {
+    list-style-type: none;
+    font-size: 16px;
+    border: none;
+}
+
+.footer-link:visited,
+.footer-link:link,
+.footer-link:active{
+    color:white;
+}
+
+.footer-link:hover{
+    color:rgb(133, 133, 133);
+}

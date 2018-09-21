@@ -2,9 +2,18 @@ import axios from 'axios'
 import api from '../api';
 
 export const cartService = {
-    order
+    order,
+    checkForCode
 }
 
-function order(obj){
+function checkForCode(code) {
+    return axios.get(`${api.url}/api/order/checkcode`, {
+        params: {
+            code
+        }
+    })
+}
+
+function order(obj) {
     return axios.post(`${api.url}/api/order`, obj);
 }

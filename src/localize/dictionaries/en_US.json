@@ -10,15 +10,32 @@
         "emailreq": "Email is not valid.",
         "loginreq": "Login must have atleast 6 characters.",
         "pass": "Password",
-        "passreq": "Password must have contains at least 6 characters; one lowercase character; one upperrcase character; one digit from 0-9.",
+        "curpass": "Current password",
+        "newpass": "New password",
+        "passreq": "At least 6 characters; 1 lowercase and 1 upperrcase character; 1 digit from 0-9.",
         "confpass": "Repeat password",
         "passmism": "Password dismatch",
+        "okpass": "The password successfully changed",
+        "errpass": "Incorrect password",
         "fname": "First name",
         "lname": "Last name",
         "needReg": "Need an account?",
         "needLog": "Have an account?",
         "errsignin": "Incorrect login or password.",
-        "profile":"Profile"
+        "profile": "Profile",
+        "resetpass": "Reset password",
+        "changepass": "Change password",
+        "info": {
+            "title": "Account Info",
+            "email": "E-mail",
+            "login": "Login",
+            "fname": "First name",
+            "lname": "Last name",
+            "tel": "Phone number",
+            "change": "Change"
+        },
+        "okdata": "Your data has been successfully changed",
+        "errdata": "Failed to change the data"
     },
     "header": {
         "women": "Women",
@@ -26,6 +43,23 @@
         "contacts": "Contacts",
         "about": "About us",
         "delivery": "Delivery"
+    },
+    "footer": {
+        "info": {
+            "info": "Information",
+            "contacts": "Contacts",
+            "about": "About us",
+            "delivery": "Delivery"
+        },
+        "additional": {
+            "additional": "Additional"
+        },
+        "acc": {
+            "acc": "Account info",
+            "reg": "Sign up",
+            "log": "Sign in",
+            "favs": "Favorites"
+        }
     },
     "aside": {
         "categories": "Categories",
@@ -38,36 +72,41 @@
             "name": "Account",
             "allitems": "All products",
             "additem": "Add a product",
-            "orders":"Orders",
-            "profile":"Profile"
+            "orders": "Orders",
+            "profile": "Profile",
+            "favs": "Favorites"
         }
     },
     "titles": {
         "products": "Products",
         "contacts": "Contacts",
-        "shopCart":"Shopping cart",
-        "latest":"Latest products"
+        "shopCart": "Shopping cart",
+        "latest": "Latest products",
+        "profile": "Profile",
+        "favs": "Favorites"
     },
-    "shopcart":{
-        "empty":"Your shopping cart is empty",
-        "header":{
-            "name":"Name",
-            "price":"Price",
-            "amount":"Amount"
+    "shopcart": {
+        "empty": "Your shopping cart is empty",
+        "header": {
+            "name": "Name",
+            "price": "Price",
+            "amount": "Amount"
         },
-        "footer":{
-            "total":"Total"
+        "footer": {
+            "total": "Total"
         },
-        "form":{
-            "title":"Contact details",
-            "name":"First name",
-            "address":"Address",
-            "phoneNumber":"Phone number",
-            "comment":"Comment to the order",
-            "confirm":"Checkout"
+        "form": {
+            "title": "Contact details",
+            "name": "First name",
+            "address": "Address",
+            "phoneNumber": "Phone number",
+            "comment": "Comment to the order",
+            "confirm": "Checkout",
+            "code": "Coupon code"
         },
-        "response":"Order successfully added",
-        "error":"Error!"
+        "response": "Order successfully added",
+        "error": "Error!",
+        "codeerror": "Invalid code."
     },
     "filtres": {
         "none": "None",
@@ -138,21 +177,34 @@
         "notAv": "Not available",
         "cancel": "Cancel"
     },
-    "orders":{
-        "table":{
-            "name":"Name",
-            "phone":"Phone number",
-            "comment":"Comment",
-            "address":"Address",
-            "email":"Email",
-            "totalprice":"Total price",
-            "status":"Status",
-            "createddate":"Date of create",
-            "sub":{
-                "name":"Name",
-                "price":"Price",
-                "amount":"Amount"
+    "orders": {
+        "table": {
+            "name": "Name",
+            "phone": "Phone number",
+            "comment": "Comment",
+            "address": "Address",
+            "email": "Email",
+            "totalprice": "BYN Total price",
+            "status": "Status",
+            "createddate": "Date of create",
+            "code": "Coupon code",
+            "discount": "Discount %",
+            "yourorders": "Your orders",
+            "username": "Username",
+            "sub": {
+                "name": "Name",
+                "price": "Price BYN",
+                "amount": "Amount"
+            },
+            "statuses": {
+                "queue": "In the queue",
+                "execute": "Executing",
+                "paid": "Paid",
+                "canceled": "Canceled"
             }
         }
+    },
+    "favs": {
+        "empty": "Empty"
     }
 }

@@ -12,6 +12,18 @@ html,body,#app{
     height: auto;
 }
 
+.hr-animation{
+    animation-name: hr-increasing;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+}
+
+.hr_black{
+    border-top-color: black;
+    border-bottom: none;
+}
+
 .card-scale:hover{
     transform: translateY(-18px) scale(1.15);
     transition: all 0.5s;
@@ -21,7 +33,7 @@ html,body,#app{
     width:100%;
     box-shadow: 0px 0px 3px black;
     background-color:  #ffffff;
-    margin-bottom: 2px;
+    z-index: 100;
 }
 
 .nav{
@@ -50,9 +62,12 @@ html,body,#app{
 }
 
 .content {
+    padding-top: 48px;
+    padding-bottom: 48px;
     flex: 1 0 auto;
     display: flex;
     overflow: hidden;
+    /* background:linear-gradient(to left, #888 0%, #fff 15%, #fff 85%, #888 100%); */
 }
 
 .container{
@@ -151,6 +166,15 @@ aside{
 
 .cartButton-container::selection{
     background-color: transparent;
+}
+
+/* react-slick */
+
+.slick-dots li{
+    width: auto;
+}
+.slick-active>.dot-img{
+    border: 3px solid #494949
 }
 
 /*small pagi buttons*/

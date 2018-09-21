@@ -1,0 +1,139 @@
+.card_size{
+    min-height: 380px;
+}
+
+.card-message{
+    height: 25px;
+    font-size: 12px;
+    text-align: center;
+}
+.card-message>span{
+    display: block;
+}
+
+.card-message_error{
+    color:rgb(246, 58, 58);
+}
+
+.card-message_ok{
+    color:rgb(0, 212, 96);
+}
+
+.profile-button_primary{
+    background: black;
+    color:white;
+    border:1px solid black;
+}
+
+.profile-button_primary:hover{
+    cursor: pointer;
+    background: white;
+    color:black;
+    transition: background 0.4s;
+}
+
+.profile-button_secondary{
+    background-color: white;
+    border:1px solid transparent;
+}
+
+.profile-button_secondary:hover{
+    cursor: pointer;
+    border: 1px solid black;
+    transition: border 0.4s;
+}
+
+.profile-button_small{
+    height: 25px;
+}
+
+.profile-button_big{
+    height: 40px;
+    padding: 0 40px;
+    outline: inherit;
+}
+
+.profile-title_min{
+    font-size:0.8em;
+    text-align: center;
+    margin:8px 0;
+    letter-spacing: 0.25em;
+    word-spacing: 0.2em;
+}
+
+.profile-title{
+    font-size: 4em;
+    text-align: center;
+    margin:0;
+    letter-spacing: 0.1em;
+}
+
+.account-label{
+    font-weight: bold;
+    padding-right: 5px;
+    white-space: nowrap;
+}
+
+.account-label,.account-label_value{
+    font-size: 20px;
+}
+
+.account-font *{
+    font-family: "Didact Gothic", sans-serif;
+}
+
+.account-row{
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+
+.account-button-row{
+    padding:0 20px;
+}
+
+.account-row:hover{
+    border:1px solid black;
+    transition: all 0.5s;
+}
+
+.account-input{
+    display: block;
+    box-sizing: border-box;
+    outline: none;
+    height: 28px;
+    border:1px solid transparent;
+    width: 100%;
+    font-size: inherit;
+}
+
+.account-input:hover{
+    border-bottom: 1px solid black;
+}
+
+
+
+@media (max-width:600px){
+    .profile-title{
+        font-size: 3em;
+    }
+
+}
+
+@media(max-width:900px) {
+    .account-label, .account-label_value{
+        font-size: 18px;
+    }
+}
+
+
+@keyframes hr-increasing{
+    from {
+        width:50px;
+    }
+    to{
+        width:100%;
+    }
+}

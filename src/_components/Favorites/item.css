@@ -1,0 +1,68 @@
+.favitem-container{
+    width: 200px;
+    min-width: 160px;
+    border:1px solid transparent;
+    margin: 10px 15px;
+    display: flex;
+    flex-direction: column;
+
+    height: 300px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.favitem-container:hover {
+    border:1px solid black;
+    transition: border 0.4s; 
+}
+
+.favitem-container h5{
+    margin:0;
+    color:black;
+    padding: 5px;
+    border:1px solid black;
+    margin:0 2px;
+}
+
+.favitem-delete{
+    text-align: right;
+}
+
+.favitem-delete > svg{
+    cursor: pointer;
+}
+
+
+.favitem-container img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    display: block;
+    object-fit: cover;
+}
+
+@media (max-width:500px){
+    .favitem-container {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 90vw;
+        height: auto;
+        border:1px solid black;
+    }
+    
+    .favitem-pic {
+        border:1px solid black;
+    }
+
+    .favitem-container img {
+        width: 150px;
+        height: auto;
+        max-height: 200px;
+        display: block;
+        object-fit: cover;
+    }
+
+    .favitem-delete{
+        order: 3;
+    }
+}
