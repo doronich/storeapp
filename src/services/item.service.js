@@ -15,8 +15,7 @@ export const itemService = {
 }
 
 function addItem(obj) {
-    const user = getUser();
-    return axios.post(`${api.url}/api/item`, obj, user && { headers: { "Authorization": "Bearer " + user.acces_token } })
+    return axios.post(`${api.url}/api/item`, obj)
 }
 
 function getItem(id) {
@@ -24,8 +23,7 @@ function getItem(id) {
 }
 
 function updateItem(obj) {
-    const user = getUser();
-    return axios.put(`${api.url}/api/item`, obj, user && { headers: { "Authorization": "Bearer " + user.acces_token } });
+    return axios.put(`${api.url}/api/item`, obj);
 }
 
 function getAllItems() {
@@ -33,17 +31,11 @@ function getAllItems() {
 }
 
 function getReqItems(params) {
-
-    return axios.get(`${api.url}/api/item/q?`, { params })
-}
-
-function getUser() {
-    return JSON.parse(localStorage.getItem("user"));
+    return axios.get(`${api.url}/api/item/q`, { params })
 }
 
 function deleteItem(id) {
-    const user = getUser();
-    return axios.delete(`${api.url}/api/item/${id}`, user && { headers: { "Authorization": "Bearer " + user.acces_token } })
+    return axios.delete(`${api.url}/api/item/${id}`)
 }
 
 function getLast(n = 5) {

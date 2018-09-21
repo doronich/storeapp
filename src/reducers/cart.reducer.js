@@ -1,24 +1,28 @@
 import { cartConstants } from '../constants'
-const initialState = { items: [] }
+const initialState = { items: [180, 191, 189] }
 
 export function cart(state = initialState, action) {
-    const items = initialState.items;
+    const items = state.items;
+    const { data } = action;
     switch (action.type) {
         case cartConstants.ADD_ITEM:
-            //console.log("add id", action.data)
-            items.push(action.data)
-            //console.log("ADDED", items)
+            if (!items.includes(data)) {
+                items.push(data)
+            }
             return {
                 ...state,
                 items
             }
         case cartConstants.REMOVE_ITEM:
-            //console.log("rem id", action.data)
-            items.splice(items.indexOf(action.data), 1)
-            //console.log("REMOVED", items)
+            items.splice(items.indexOf(data), 1)
             return {
                 ...state,
                 items
+            }
+        case cartConstants.CLEAR:
+            return {
+                ...state,
+                items: []
             }
         default:
             return {

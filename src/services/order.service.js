@@ -3,19 +3,34 @@ import api from '../api';
 
 export const orderService = {
     getAll,
-    getOrderItems
+    getOrderItems,
+    getUsersOrders,
+    removeOrder,
+    getOrder,
+    updateOrder
 }
 
-function getAll(){
-    const user = getUser();
-    return axios.get(`${api.url}/api/order/orders`,{headers:{"Authorization":"Bearer "+user.acces_token}});
+function getAll() {
+    return axios.get(`${api.url}/api/order/orders`);
 }
 
-function getOrderItems(id){
-    const user = getUser();
-    return axios.get(`${api.url}/api/order/${id}`,{headers:{"Authorization":"Bearer "+user.acces_token}})
+function getOrderItems(id) {
+    return axios.get(`${api.url}/api/order/${id}`)
 }
 
-function getUser(){
-    return JSON.parse(localStorage.getItem("user"));
+function getUsersOrders(id) {
+    return axios.get(`${api.url}/api/order/userorders?id=${id}`)
+}
+
+function removeOrder(id) {
+    return axios.delete(`${api.url}/api/order/${id}`)
+}
+
+function getOrder(id) {
+    return axios.get(`${api.url}/api/order/order?id=${id}`)
+}
+
+
+function updateOrder(obj) {
+    return axios.put(`${api.url}/api/order`, obj)
 }

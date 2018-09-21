@@ -1,7 +1,25 @@
 import { itemConstants } from '../constants'
 const sex = localStorage.getItem('sex');
 
-const initialState = { sex: sex ? sex : "F", kind: "none", subkind: "none", brand: "none", color: "none", priceEnd: 250, priceStart: 0, name: "" };
+const initialState = {
+    sex: sex ? sex : "F",
+    kind: "none",
+    subkind: "none",
+    brand: "none",
+    color: "none",
+    priceEnd: 250,
+    priceStart: 0,
+    name: "",
+    items: [],
+    total: 0,
+    hasNext: false,
+    hasPrev: false,
+    index: 0,
+    loading: false,
+    request: {
+
+    }
+};
 
 export function item(state = initialState, action) {
     switch (action.type) {
@@ -67,6 +85,33 @@ export function item(state = initialState, action) {
             return {
                 ...state,
                 currency: action.data
+            }
+        case itemConstants.GET_ITEMS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case itemConstants.GET_ITEMS_SUCCESS:
+            console.log(action.data)
+            return {
+                ...state,
+                loading: false,
+                hasNext: action.data.hasNext,
+                hasPrev: action.data.hasPrev,
+                index: action.data.index,
+                total: action.data.total,
+                items: action.data.res
+            }
+        case itemConstants.GET_ITEMS_FAILURE:
+            return {
+                ...state,
+                loading: false
+            }
+
+        case itemConstants.CHANGE_PROP:
+            return {
+                ...state,
+                [action.name]: action.value
             }
 
         default: return state
